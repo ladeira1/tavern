@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Container, Bb } from './styles';
+import { Container, Wrapper, LeftColumn, Bag } from './styles';
 
 import Header from '../../components/Header';
+import PopularItems from '../../components/PopularItems';
 
 interface Item {
   id: number;
@@ -18,7 +19,13 @@ const Home: React.FC = () => {
   return (
     <Container>
       <Header />
-      <h1>Home</h1>
+      <Wrapper>
+        <LeftColumn>
+          <PopularItems />
+        </LeftColumn>
+
+        <Bag />
+      </Wrapper>
     </Container>
   );
 };
