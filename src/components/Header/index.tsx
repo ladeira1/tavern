@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Container, Wrapper, Title, Buttons } from './styles';
+import { Container, Wrapper, Empty, Title, Buttons } from './styles';
 
 const Header: React.FC = () => {
   const handleLogout = () => {
@@ -10,7 +10,7 @@ const Header: React.FC = () => {
   return (
     <Container>
       <Wrapper>
-        <div />
+        <Empty />
         <Title>TAVERN</Title>
         <Buttons>
           <Link to="/user">Profile</Link>
