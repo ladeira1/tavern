@@ -48,7 +48,7 @@ export const Title = styled.h1`
   color: ${colors.text};
 `;
 
-export const Buttons = styled.section`
+export const Buttons = styled.section<{ logged: boolean }>`
   flex: 1;
   display: flex;
   flex-direction: row;
@@ -70,7 +70,7 @@ export const Buttons = styled.section`
   }
 
   button {
-    color: ${colors.red};
+    color: ${props => (props.logged ? colors.red : colors.green)};
     font-family: 'Ubuntu';
     font-size: 1.6em;
 
