@@ -1,11 +1,11 @@
 import React from 'react';
-import Home from './pages/Home';
 
 import GlobalStyles from './assets/GlobalStyles';
+import Routes from './routes/index';
 
 const App: React.FC = () => (
   <>
-    <Home />
+    <Routes />
     <GlobalStyles />
   </>
 );
