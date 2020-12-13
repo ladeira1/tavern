@@ -2,10 +2,11 @@ import styled from 'styled-components';
 import colors from '../../assets/colors';
 
 export const Container = styled.div`
-  background: var(--red);
   height: 100%;
   min-height: 100vh;
   width: 100%;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const Wrapper = styled.main`
