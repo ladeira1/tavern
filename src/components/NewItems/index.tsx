@@ -13,7 +13,7 @@ import {
 import NewItem from '../NewItem';
 
 const NewItems: React.FC<{ items: Item[] }> = ({ items }) => {
-  const [scrollX, setScrollX] = useState(-15);
+  const [scrollX, setScrollX] = useState(-30);
 
   const handleLeftArrow = () => {
     const width = Math.round(window.innerWidth * 0.7);

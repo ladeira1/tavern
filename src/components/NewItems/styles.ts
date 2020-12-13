@@ -18,10 +18,11 @@ export const Wrapper = styled.section`
   justify-content: center;
   align-items: center;
   border-radius: 10px;
+  overflow-x: hidden;
 `;
 export const ItemsContainer = styled.div`
-  overflow-x: hidden;
-  width: 100%;
+  width: 95%;
+  margin: auto;
 `;
 export const ItemsWrapper = styled.div<{ marginLeft: number; width: number }>`
   margin-left: ${props => props.marginLeft}px;

@@ -18,7 +18,9 @@ export const Wrapper = styled.body`
   transition: all ease 0.2s;
 
   :hover {
-    transform: scale(1);
+    transform: scale(1.1);
+    z-index: 10;
+    opacity: 0.8;
   }
 `;
 export const Image = styled.div<{ imageUrl: string }>`
