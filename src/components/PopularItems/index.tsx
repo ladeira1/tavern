@@ -25,11 +25,13 @@ const PopularItems: React.FC<{ items: Item[] }> = ({ items }) => {
   };
 
   const handleRightArrow = () => {
-    let x = scrollX - Math.round((window.innerWidth * 0.725) / 2);
-    const listW = items.length * 200;
+    const width = window.innerWidth * 0.7;
 
-    if (window.innerWidth * 0.725 - listW > x) {
-      x = window.innerWidth * 0.725 - listW - 80;
+    let x = scrollX - Math.round(width / 2);
+    const listW = items.length * 350;
+
+    if (width - listW > x) {
+      x = width - listW;
     }
     setScrollX(x);
   };

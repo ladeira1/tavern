@@ -21,8 +21,9 @@ export const Wrapper = styled.main`
 
 export const LeftColumn = styled.article`
   flex: 2;
+  max-width: 70%;
 `;
 
 export const Bag = styled.aside`
-  flex: 1;
+  min-width: 30%;
 `;

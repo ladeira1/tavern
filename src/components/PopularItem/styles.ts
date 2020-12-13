@@ -3,8 +3,8 @@ import { FiPlus } from 'react-icons/fi';
 import colors from '../../assets/colors';
 
 export const Wrapper = styled.body`
-  min-width: 350px;
-  height: 400px;
+  min-width: 300px;
+  height: 350px;
   display: flex;
   flex-direction: column;
   background-color: ${colors.primary};
@@ -28,6 +28,7 @@ export const Image = styled.div<{ imageUrl: string }>`
   border-radius: 10px;
   background: url(${props => props.imageUrl}) no-repeat;
   background-size: 100% 100%;
+  background-color: ${colors.primary};
 `;
 export const Main = styled.main`
   margin-top: 10px;

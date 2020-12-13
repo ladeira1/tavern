@@ -5,6 +5,8 @@ import colors from '../../assets/colors';
 export const Container = styled.div`
   width: 95%;
   margin: 20px auto 40px auto;
+  display: flex;
+  flex-direction: column;
 `;
 export const Title = styled.h1`
   font-family: 'Oswald', sans-serif;
@@ -36,15 +38,13 @@ export const LeftButton = styled(FiChevronLeft).attrs({
 })`
   z-index: 2;
   transform: scale(0.9);
-  transition: all ease 0.2s;
   background: ${colors.primary};
-  opacity: 0.7;
-  min-height: 225px;
-
+  opacity: 0.5;
+  min-height: 350px;
   margin-right: -27px;
 
   :hover {
-    transform: scale(1);
+    opacity: 0.7;
   }
 `;
 export const RightButton = styled(FiChevronRight).attrs({
@@ -54,12 +54,11 @@ export const RightButton = styled(FiChevronRight).attrs({
   z-index: 2;
   margin-left: -27px;
   transform: scale(0.9);
-  transition: all ease 0.2s;
   background: ${colors.primary};
-  opacity: 0.7;
-  min-height: 225px;
+  opacity: 0.5;
+  min-height: 350px;
 
   :hover {
-    transform: scale(1);
+    opacity: 0.7;
   }
 `;
