@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Item from '../../models/Item';
+import ItemInterface from '../../models/ItemInterface';
 import {
   Container,
   Title,
@@ -12,7 +12,7 @@ import {
 } from './styles';
 import NewItem from '../NewItem';
 
-const NewItems: React.FC<{ items: Item[] }> = ({ items }) => {
+const NewItems: React.FC<{ items: ItemInterface[] }> = ({ items }) => {
   const [scrollX, setScrollX] = useState(-30);
 
   const handleLeftArrow = () => {

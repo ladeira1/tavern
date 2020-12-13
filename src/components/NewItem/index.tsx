@@ -1,5 +1,5 @@
 import React from 'react';
-import Item from '../../models/Item';
+import ItemInterface from '../../models/ItemInterface';
 
 import {
   Wrapper,
@@ -12,7 +12,7 @@ import {
   Price,
 } from './styles';
 
-const NewItem: React.FC<{ item: Item }> = ({ item }) => (
+const NewItem: React.FC<{ item: ItemInterface }> = ({ item }) => (
   <Wrapper>
     <Image imageUrl={item?.imageUrl} />
     <Main>

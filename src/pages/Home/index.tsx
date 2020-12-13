@@ -3,14 +3,17 @@ import { Container, Wrapper, LeftColumn, Bag } from './styles';
 
 import Header from '../../components/Header';
 import NewItems from '../../components/NewItems';
+import Items from '../../components/Items';
 
-import Item from '../../models/Item';
+import ItemInterface from '../../models/ItemInterface';
 
 import api from '../../services/api';
 
 const Home: React.FC = () => {
-  const [items, setItems] = useState<Item[]>({} as Item[]);
-  const [newItems, setNewItems] = useState<Item[]>({} as Item[]);
+  const [items, setItems] = useState<ItemInterface[]>({} as ItemInterface[]);
+  const [newItems, setNewItems] = useState<ItemInterface[]>(
+    {} as ItemInterface[],
+  );
 
   useEffect(() => {
     async function getItems() {
@@ -30,6 +33,7 @@ const Home: React.FC = () => {
       <Wrapper>
         <LeftColumn>
           <NewItems items={newItems} />
+          <Items items={items} title="Burgers" />
         </LeftColumn>
 
         <Bag />

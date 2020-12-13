@@ -48,7 +48,7 @@ export const Name = styled.h1`
 `;
 export const Details = styled.p`
   font-family: 'Ubuntu';
-  font-size: 1.2em;
+  font-size: 1.4em;
   opacity: 0.6;
 `;
 export const Footer = styled.footer`
