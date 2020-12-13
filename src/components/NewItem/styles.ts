@@ -3,8 +3,9 @@ import { FiPlus } from 'react-icons/fi';
 import colors from '../../assets/colors';
 
 export const Wrapper = styled.body`
-  min-width: 300px;
-  height: 350px;
+  min-width: 250px;
+  max-width: 250px;
+  height: 300px;
   display: flex;
   flex-direction: column;
   background-color: ${colors.primary};
@@ -40,12 +41,12 @@ export const Main = styled.main`
 export const Name = styled.h1`
   flex: 1;
   font-family: 'Ubuntu', sans-serif;
-  font-size: 2.2em;
+  font-size: 1.8em;
   margin-bottom: 3%;
 `;
 export const Details = styled.p`
   font-family: 'Ubuntu';
-  font-size: 1.6em;
+  font-size: 1.2em;
   opacity: 0.6;
 `;
 export const Footer = styled.footer`
@@ -58,7 +59,7 @@ export const Footer = styled.footer`
   flex: 1;
 `;
 export const AddButton = styled(FiPlus).attrs({
-  size: 24,
+  size: 18,
   color: colors.background,
 })`
   background-color: ${colors.text};
@@ -68,7 +69,7 @@ export const AddButton = styled(FiPlus).attrs({
 export const Price = styled.h1`
   margin-bottom: 0;
   font-family: 'Roboto Slab', serif;
-  font-size: 1.8em;
+  font-size: 1.6em;
   color: ${colors.price};
   display: flex;
   align-items: flex-end;

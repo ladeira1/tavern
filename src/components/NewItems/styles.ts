@@ -11,11 +11,10 @@ export const Container = styled.div`
 export const Title = styled.h1`
   font-family: 'Oswald', sans-serif;
   color: ${colors.text};
-  margin-bottom: 30px;
 `;
 export const Wrapper = styled.section`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   border-radius: 10px;
@@ -31,20 +30,22 @@ export const ItemsWrapper = styled.div<{ marginLeft: number; width: number }>`
   flex-direction: row;
   transition: all ease 0.5s;
 `;
-
+export const ButtonsWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
 export const LeftButton = styled(FiChevronLeft).attrs({
   size: 30,
   color: colors.white,
 })`
   z-index: 2;
   transform: scale(0.9);
-  background: ${colors.primary};
   opacity: 0.5;
-  min-height: 350px;
-  margin-right: -27px;
+  transition: all ease 0.2s;
 
   :hover {
     opacity: 0.7;
+    transform: scale(1);
   }
 `;
 export const RightButton = styled(FiChevronRight).attrs({
@@ -52,13 +53,12 @@ export const RightButton = styled(FiChevronRight).attrs({
   color: colors.white,
 })`
   z-index: 2;
-  margin-left: -27px;
   transform: scale(0.9);
-  background: ${colors.primary};
   opacity: 0.5;
-  min-height: 350px;
+  transition: all ease 0.2s;
 
   :hover {
     opacity: 0.7;
+    transform: scale(1);
   }
 `;

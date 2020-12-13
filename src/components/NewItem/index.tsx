@@ -12,7 +12,7 @@ import {
   Price,
 } from './styles';
 
-const PopularItem: React.FC<{ item: Item }> = ({ item }) => (
+const NewItem: React.FC<{ item: Item }> = ({ item }) => (
   <Wrapper>
     <Image imageUrl={item?.imageUrl} />
     <Main>
@@ -26,4 +26,4 @@ const PopularItem: React.FC<{ item: Item }> = ({ item }) => (
   </Wrapper>
 );
 
-export default PopularItem;
+export default NewItem;
