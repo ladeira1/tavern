@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { FiPlus } from 'react-icons/fi';
 import colors from '../../assets/colors';
 
-export const Wrapper = styled.body`
+export const Wrapper = styled.main`
   min-width: 250px;
   max-width: 250px;
   height: 300px;
@@ -11,7 +11,7 @@ export const Wrapper = styled.body`
   background-color: ${colors.primary};
   border-radius: 10px;
   margin: 15px auto;
-  padding: 10px;
+  padding: 8px;
   font-size: 10px;
   color: ${colors.text};
   transform: scale(0.9);
@@ -43,7 +43,7 @@ export const Main = styled.main`
 export const Name = styled.h1`
   flex: 1;
   font-family: 'Ubuntu', sans-serif;
-  font-size: 1.8em;
+  font-size: 2em;
   margin-bottom: 3%;
 `;
 export const Details = styled.p`
@@ -61,7 +61,7 @@ export const Footer = styled.footer`
   flex: 1;
 `;
 export const AddButton = styled(FiPlus).attrs({
-  size: 18,
+  size: 20,
   color: colors.background,
 })`
   background-color: ${colors.text};
@@ -71,7 +71,7 @@ export const AddButton = styled(FiPlus).attrs({
 export const Price = styled.h1`
   margin-bottom: 0;
   font-family: 'Roboto Slab', serif;
-  font-size: 1.6em;
+  font-size: 1.8em;
   color: ${colors.price};
   display: flex;
   align-items: flex-end;

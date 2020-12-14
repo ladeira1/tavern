@@ -2,6 +2,7 @@ export default {
   black: '#080808',
   background: '#0a0909',
   primary: '#121214',
+  line: '#242227',
   text: '#eeffee',
   price: '#d8811b',
   white: '#fff',
