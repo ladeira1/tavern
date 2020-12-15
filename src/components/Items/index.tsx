@@ -1,31 +1,57 @@
 /* eslint-disable prettier/prettier */
 import React, { useState } from 'react';
-import ItemInterface from '../../models/ItemInterface';
-import Item from '../Item';
-import { Container, Title, ItemsWrapper, Footer, ButtonDown, ButtonUp } from './styles';
 
-const Items: React.FC<{ items: ItemInterface[]; title: string }> = ({
+import ItemInterface from '../../models/ItemInterface';
+
+import Item from '../Item';
+import { Container, Title, FixedItemsWrapper, ItemsWrapper, Footer, ButtonDown, ButtonUp } from './styles';
+
+interface ItemsProps {
+  items: ItemInterface[];
+  title: string;
+}
+
+const Items: React.FC<ItemsProps> = ({
   items,
   title,
 }) => {
   const [expand, setExpand] = useState(false);
 
-  const handleExpandShrink = () => {
+  const handleExpandCollapse = () => {
     setExpand(!expand);
   };
 
   return (
     <Container>
       <Title>{title}</Title>
-      <ItemsWrapper>
+      <FixedItemsWrapper isExpanded={expand} >
         {items.length &&
-          (expand
-            ? items.map(item => <Item item={item} key={item.id} />)
-            : items.slice(0, 4).map(item => <Item item={item} key={item.id} />))}
+          items.slice(0, 4).map(item => <Item item={item} key={item.id} />)
+        }
+      </FixedItemsWrapper>
+      {expand &&
+        <ItemsWrapper
+          key="content"
+          initial="collapsed"
+          animate="open"
+          exit="collapsed"
+          variants={{
+            open: { opacity: 1, height: 'auto' },
+            collapsed: { opacity: 0, height: 0 },
+          }}
+          transition={{ duration: 0.4,
+            ease: [0.04, 0.62, 0.23, 0.98],
+          }}
+        >
+        {items.length &&
+          items.slice(4).map(item => <Item item={item} key={item.id} />)
+        }
       </ItemsWrapper>
+      }
+
       <Footer />
-      {expand ? <ButtonUp onClick={handleExpandShrink} /> :
-      <ButtonDown onClick={handleExpandShrink}/>}
+      {expand ? <ButtonUp onClick={handleExpandCollapse} /> :
+      <ButtonDown onClick={handleExpandCollapse}/>}
     </Container>
   );
 };

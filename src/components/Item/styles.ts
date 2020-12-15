@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import { FiPlus } from 'react-icons/fi';
+import { motion } from 'framer-motion';
 import colors from '../../assets/colors';
 
-export const Container = styled.div`
+export const Container = styled(motion.div)`
   background: ${colors.primary};
   width: 390px;
   height: 150px;

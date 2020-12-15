@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
+import { motion } from 'framer-motion';
 import colors from '../../assets/colors';
 
 export const Container = styled.article`
@@ -15,12 +16,20 @@ export const Title = styled.h1`
   color: ${colors.text};
   margin-bottom: 3.5%;
 `;
-export const ItemsWrapper = styled.section`
+export const FixedItemsWrapper = styled.section<{ isExpanded: boolean }>`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   grid-column-gap: 17px;
   grid-row-gap: 30px;
-  height: 100%;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: ${props => (props.isExpanded ? '30px' : '0')};
+`;
+export const ItemsWrapper = styled(motion.section)`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-column-gap: 17px;
+  grid-row-gap: 30px;
   width: 100%;
   justify-content: space-between;
 `;
