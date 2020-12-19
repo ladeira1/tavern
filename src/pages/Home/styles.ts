@@ -24,6 +24,6 @@ export const LeftColumn = styled.article`
   max-width: 70%;
 `;
 
-export const Bag = styled.aside`
+export const RightColumn = styled.article`
   min-width: 30%;
 `;

@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Wrapper, LeftColumn, Bag } from './styles';
-
+import { Container, Wrapper, LeftColumn, RightColumn } from './styles';
+import { useBag } from '../../contexts/bag';
 import Header from '../../components/Header';
 import NewItems from '../../components/NewItems';
 import Items from '../../components/Items';
+import Bag from '../../components/Bag';
 
 import ItemInterface from '../../models/ItemInterface';
 
 import api from '../../services/api';
 
 const Home: React.FC = () => {
+  const { bagItems, readStoragedItems } = useBag();
   const [items, setItems] = useState<ItemInterface[]>({} as ItemInterface[]);
   const [newItems, setNewItems] = useState<ItemInterface[]>(
     {} as ItemInterface[],
   );
-
   useEffect(() => {
     async function getItems() {
       const result = await api.getItems();
@@ -25,6 +26,7 @@ const Home: React.FC = () => {
     }
 
     getItems();
+    readStoragedItems();
   }, []);
 
   return (
@@ -38,7 +40,10 @@ const Home: React.FC = () => {
           <Items items={items} title="Drinks" />
         </LeftColumn>
 
-        <Bag />
+        <RightColumn>
+          <Bag />
+          {bagItems.length > 0 && bagItems?.map(bagItem => <h1>asa</h1>)}
+        </RightColumn>
       </Wrapper>
     </Container>
   );
