@@ -39,6 +39,7 @@ export const Main = styled.main`
   margin-right: 2%;
   overflow: hidden;
   flex: 2;
+  z-index: 2;
 `;
 export const Name = styled.h1`
   flex: 1;

@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React, { useState } from 'react';
-
+import { AnimatePresence } from 'framer-motion';
 import ItemInterface from '../../models/ItemInterface';
 
 import Item from '../Item';
@@ -29,25 +29,28 @@ const Items: React.FC<ItemsProps> = ({
           items.slice(0, 4).map(item => <Item item={item} key={item.id} />)
         }
       </FixedItemsWrapper>
-      {expand &&
-        <ItemsWrapper
-          key="content"
-          initial="collapsed"
-          animate="open"
-          exit="collapsed"
-          variants={{
-            open: { opacity: 1, height: 'auto' },
-            collapsed: { opacity: 0, height: 0 },
-          }}
-          transition={{ duration: 0.4,
-            ease: [0.04, 0.62, 0.23, 0.98],
-          }}
-        >
-        {items.length &&
-          items.slice(4).map(item => <Item item={item} key={item.id} />)
+      <AnimatePresence initial={false}>
+        {expand &&
+          <ItemsWrapper
+            key="content"
+            initial="collapsed"
+            animate="open"
+            exit="collapsed"
+            variants={{
+              open: { opacity: 1, height: 'auto' },
+              collapsed: { opacity: 0, height: 0 },
+            }}
+            transition={{
+              duration: 0.3,
+              ease: [0.04, 0.62, 0.23, 0.98],
+            }}
+          >
+            {items.length &&
+              items.slice(4).map(item => <Item item={item} key={item.id} />)
+            }
+          </ItemsWrapper>
         }
-      </ItemsWrapper>
-      }
+      </AnimatePresence>
 
       <Footer />
       {expand ? <ButtonUp onClick={handleExpandCollapse} /> :

@@ -10,6 +10,8 @@ export const Container = styled(motion.div)`
   border-radius: 10px;
   display: flex;
   font-size: 10px;
+  transform-origin: top center;
+  z-index: 2;
 `;
 export const ContentWrapper = styled.div`
   padding: 2.5%;
