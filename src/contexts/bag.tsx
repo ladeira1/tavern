@@ -1,8 +1,9 @@
 import React, { createContext, useContext, useState } from 'react';
 import ItemInterface from '../models/ItemInterface';
+import BagItemInterface from '../models/BagItemInterface';
 
 interface BagContextData {
-  bagItems: ItemInterface[];
+  bagItems: BagItemInterface[];
   addItemToBag: (item: ItemInterface) => void;
   readStoragedItems: () => void;
 }
@@ -10,18 +11,50 @@ interface BagContextData {
 const BagContext = createContext<BagContextData>({} as BagContextData);
 
 const BagProvider: React.FC = ({ children }) => {
-  const [bagItems, setBagItems] = useState<ItemInterface[]>(
-    [] as ItemInterface[],
+  const [bagItems, setBagItems] = useState<BagItemInterface[]>(
+    [] as BagItemInterface[],
   );
 
-  const saveStoragedItems = (item: ItemInterface) => {
-    const newStoragedItems = bagItems.concat(item);
+  const saveStoragedItems = (
+    sourceItems: BagItemInterface[],
+    item: BagItemInterface,
+  ) => {
+    const newStoragedItems = sourceItems.concat(item);
     localStorage.setItem('@item:bagItem', JSON.stringify(newStoragedItems));
   };
 
   const addItemToBag = (item: ItemInterface) => {
-    setBagItems([...bagItems, item]);
-    saveStoragedItems(item);
+    const data = {
+      item,
+      quantity: 1,
+    };
+    let existsInBag: BagItemInterface | null = null;
+
+    bagItems.forEach(bagItem => {
+      if (bagItem.item.id === item.id) {
+        existsInBag = {
+          item: bagItem.item,
+          quantity: bagItem.quantity + 1,
+        };
+      }
+    });
+
+    if (existsInBag) {
+      const updatedItems: BagItemInterface[] = [];
+
+      bagItems.forEach(bagItem => {
+        if (bagItem.item.id !== item.id) {
+          updatedItems.push(bagItem);
+        }
+      });
+
+      setBagItems([...updatedItems, existsInBag]);
+      // localStorage.setItem('@item:bagItem', JSON.stringify(bagItems));
+      saveStoragedItems(updatedItems, existsInBag);
+    } else {
+      setBagItems([...bagItems, data]);
+      saveStoragedItems(bagItems, data);
+    }
   };
 
   const readStoragedItems = () => {

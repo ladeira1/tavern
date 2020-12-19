@@ -11,7 +11,7 @@ import ItemInterface from '../../models/ItemInterface';
 import api from '../../services/api';
 
 const Home: React.FC = () => {
-  const { bagItems, readStoragedItems } = useBag();
+  const { readStoragedItems } = useBag();
   const [items, setItems] = useState<ItemInterface[]>({} as ItemInterface[]);
   const [newItems, setNewItems] = useState<ItemInterface[]>(
     {} as ItemInterface[],
@@ -42,7 +42,6 @@ const Home: React.FC = () => {
 
         <RightColumn>
           <Bag />
-          {bagItems.length > 0 && bagItems?.map(bagItem => <h1>asa</h1>)}
         </RightColumn>
       </Wrapper>
     </Container>
