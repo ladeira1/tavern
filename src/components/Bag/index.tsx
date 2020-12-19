@@ -6,7 +6,6 @@ import {
   Title,
   ItemsWrapper,
   ItemContainer,
-  ItemWrapper,
   ItemHeader,
   ItemTitle,
   CommentIcon,
@@ -20,11 +19,12 @@ import {
   Footer,
   Price,
   CheckoutButton,
+  CheckoutTitle,
 } from './styles';
 
 const Bag: React.FC = () => {
   const { bagItems } = useBag();
-  console.log(bagItems);
+
   return (
     <Container>
       <Wrapper>
@@ -33,29 +33,29 @@ const Bag: React.FC = () => {
           {bagItems.length &&
             bagItems.map(bagItem => (
               <ItemContainer key={bagItem.item?.id}>
-                <ItemWrapper>
-                  <ItemHeader>
-                    <ItemTitle>{bagItem?.item?.name}</ItemTitle>
-                    <CommentIcon />
-                  </ItemHeader>
-                  <ItemDetails>{bagItem?.item?.details}</ItemDetails>
-                  <ItemFooter>
-                    <ItemQuantity>
-                      <MinusIcon />
-                      <ItemCurrentQuantity>
-                        {bagItem?.quantity}
-                      </ItemCurrentQuantity>
-                      <PlusIcon />
-                    </ItemQuantity>
-                    <ItemPrice>{bagItem?.item?.price}</ItemPrice>
-                  </ItemFooter>
-                </ItemWrapper>
+                <ItemHeader>
+                  <ItemTitle>{bagItem?.item?.name}</ItemTitle>
+                  <CommentIcon />
+                </ItemHeader>
+                <ItemDetails>{bagItem?.item?.details}</ItemDetails>
+                <ItemFooter>
+                  <ItemQuantity>
+                    <MinusIcon />
+                    <ItemCurrentQuantity>
+                      {bagItem?.quantity}
+                    </ItemCurrentQuantity>
+                    <PlusIcon />
+                  </ItemQuantity>
+                  <ItemPrice>{bagItem?.item?.price}</ItemPrice>
+                </ItemFooter>
               </ItemContainer>
             ))}
         </ItemsWrapper>
         <Footer>
           <Price>200.96</Price>
-          <CheckoutButton>Checkout</CheckoutButton>
+          <CheckoutButton>
+            <CheckoutTitle>Checkout</CheckoutTitle>
+          </CheckoutButton>
         </Footer>
       </Wrapper>
     </Container>

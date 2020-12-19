@@ -3,7 +3,7 @@ import colors from '../../assets/colors';
 
 export const Container = styled.main`
   width: 100vw;
-  height: 10vh;
+  height: 12vh;
   background-color: ${colors.primary};
   overflow: hidden;
 `;

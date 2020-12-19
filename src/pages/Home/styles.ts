@@ -20,10 +20,10 @@ export const Wrapper = styled.main`
 `;
 
 export const LeftColumn = styled.article`
-  flex: 2;
+  flex: 7;
   max-width: 70%;
 `;
 
 export const RightColumn = styled.article`
-  min-width: 30%;
+  flex: 2;
 `;

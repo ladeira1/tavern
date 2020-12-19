@@ -16,11 +16,12 @@ export const Wrapper = styled.main`
   color: ${colors.text};
   transform: scale(0.9);
   transition: all ease 0.2s;
+  opacity: 0.8;
 
   :hover {
-    transform: scale(1.1);
+    transform: scale(0.95);
     z-index: 10;
-    opacity: 0.8;
+    opacity: 1;
   }
 `;
 export const Image = styled.div<{ imageUrl: string }>`
