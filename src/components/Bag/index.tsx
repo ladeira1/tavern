@@ -1,5 +1,6 @@
 import React from 'react';
 import { useBag } from '../../contexts/bag';
+import BagItemInterface from '../../models/BagItemInterface';
 import {
   Container,
   Wrapper,
@@ -23,7 +24,22 @@ import {
 } from './styles';
 
 const Bag: React.FC = () => {
-  const { bagItems } = useBag();
+  const {
+    bagItems,
+    totalPrice,
+    lowerBagItemQuantity,
+    increaseBagItemQuantity,
+  } = useBag();
+
+  const handleLowerQuantity = (item: BagItemInterface) => {
+    if (item.quantity > 0) {
+      lowerBagItemQuantity(item);
+    }
+  };
+
+  const handleIncreaseQuantity = (item: BagItemInterface) => {
+    increaseBagItemQuantity(item);
+  };
 
   return (
     <Container>
@@ -40,19 +56,21 @@ const Bag: React.FC = () => {
                 <ItemDetails>{bagItem?.item?.details}</ItemDetails>
                 <ItemFooter>
                   <ItemQuantity>
-                    <MinusIcon />
+                    <MinusIcon onClick={() => handleLowerQuantity(bagItem)} />
                     <ItemCurrentQuantity>
                       {bagItem?.quantity}
                     </ItemCurrentQuantity>
-                    <PlusIcon />
+                    <PlusIcon onClick={() => handleIncreaseQuantity(bagItem)} />
                   </ItemQuantity>
-                  <ItemPrice>{bagItem?.item?.price}</ItemPrice>
+                  <ItemPrice>
+                    {(bagItem?.item?.price * bagItem.quantity).toFixed(2)}
+                  </ItemPrice>
                 </ItemFooter>
               </ItemContainer>
             ))}
         </ItemsWrapper>
         <Footer>
-          <Price>200.96</Price>
+          <Price>{totalPrice.toFixed(2)}</Price>
           <CheckoutButton>
             <CheckoutTitle>Checkout</CheckoutTitle>
           </CheckoutButton>

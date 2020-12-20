@@ -5,8 +5,9 @@ import colors from '../../assets/colors';
 export const Container = styled.div`
   background: ${colors.bag};
   max-width: 25vw;
-  min-height: 50vh;
-  max-height: 50vh;
+  min-height: 52vh;
+  max-height: 52vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
   border-radius: 5px;
@@ -29,9 +30,10 @@ export const ItemsWrapper = styled.section`
   flex: 3;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   overflow-y: scroll;
-  max-height: 50vh;
+  min-height: 40vh;
+  max-height: 40vh;
 
   ::-webkit-scrollbar {
     display: none;
@@ -40,7 +42,7 @@ export const ItemsWrapper = styled.section`
 export const ItemContainer = styled.div`
   background: ${colors.primary};
   margin-bottom: 4%;
-  padding: 2.5%;
+  padding: 2% 4%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
