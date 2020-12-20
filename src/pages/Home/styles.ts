@@ -17,6 +17,7 @@ export const Wrapper = styled.main`
   border-radius: 10px;
   display: flex;
   flex-direction: row;
+  margin-top: 8vh;
 `;
 
 export const LeftColumn = styled.article`

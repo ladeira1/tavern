@@ -6,6 +6,7 @@ export const Container = styled.div`
   background: ${colors.bag};
   max-width: 25vw;
   min-height: 50vh;
+  max-height: 50vh;
   display: flex;
   flex-direction: column;
   border-radius: 5px;
@@ -29,7 +30,12 @@ export const ItemsWrapper = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  overflow: hidden;
+  overflow-y: scroll;
+  max-height: 50vh;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 export const ItemContainer = styled.div`
   background: ${colors.primary};

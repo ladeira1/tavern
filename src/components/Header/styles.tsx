@@ -3,9 +3,11 @@ import colors from '../../assets/colors';
 
 export const Container = styled.main`
   width: 100vw;
-  height: 12vh;
+  height: 8vh;
   background-color: ${colors.primary};
   overflow: hidden;
+  position: fixed;
+  z-index: 10;
 `;
 
 export const Wrapper = styled.article`

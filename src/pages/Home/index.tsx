@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Wrapper, LeftColumn, RightColumn } from './styles';
 import { useBag } from '../../contexts/bag';
+
 import Header from '../../components/Header';
 import NewItems from '../../components/NewItems';
 import Items from '../../components/Items';
@@ -30,21 +31,23 @@ const Home: React.FC = () => {
   }, []);
 
   return (
-    <Container>
+    <>
       <Header />
-      <Wrapper>
-        <LeftColumn>
-          <NewItems items={newItems} />
-          <Items items={items} title="Burgers" />
-          <Items items={items} title="Side dishes" />
-          <Items items={items} title="Drinks" />
-        </LeftColumn>
+      <Container>
+        <Wrapper>
+          <LeftColumn>
+            <NewItems items={newItems} />
+            <Items items={items} title="Burgers" />
+            <Items items={items} title="Side dishes" />
+            <Items items={items} title="Drinks" />
+          </LeftColumn>
 
-        <RightColumn>
-          <Bag />
-        </RightColumn>
-      </Wrapper>
-    </Container>
+          <RightColumn>
+            <Bag />
+          </RightColumn>
+        </Wrapper>
+      </Container>
+    </>
   );
 };
 
