@@ -18,10 +18,24 @@ export const Wrapper = styled.main`
   transition: all ease 0.2s;
   opacity: 0.95;
 
-  :hover {
-    transform: scale(0.95);
-    z-index: 9;
-    opacity: 1;
+  @media screen and (min-width: 650px) {
+    :hover {
+      transform: scale(0.95);
+      z-index: 9;
+      opacity: 1;
+    }
+  }
+
+  @media screen and (max-width: 650px) {
+    font-size: 9px;
+    transform: scale(1);
+    max-height: 240px;
+    min-width: 230px;
+  }
+
+  @media screen and (max-width: 550px) {
+    max-height: 220px;
+    min-width: 180px;
   }
 `;
 export const Image = styled.div<{ imageUrl: string }>`
@@ -33,6 +47,11 @@ export const Image = styled.div<{ imageUrl: string }>`
   background: url(${props => props.imageUrl}) no-repeat;
   background-size: 100% 100%;
   background-color: ${colors.primary};
+
+  @media screen and (max-width: 550px) {
+    flex: 5;
+    max-height: 55%;
+  }
 `;
 export const Main = styled.main`
   margin-top: 10px;

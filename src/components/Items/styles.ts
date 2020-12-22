@@ -9,6 +9,10 @@ export const Container = styled.article`
   width: 95%;
   margin: 0 auto;
   font-size: 10px;
+
+  @media screen and (max-width: 650px) {
+    font-size: 9px;
+  }
 `;
 export const Title = styled.h1`
   font-family: 'Oswald', sans-serif;
@@ -42,13 +46,15 @@ export const Footer = styled.footer`
 export const ButtonDown = styled(FiChevronDown).attrs({
   size: 30,
   color: colors.text,
-})`
+})<{ length: number }>`
   opacity: 1;
   transform: scale(0.9);
   transition: all ease 0.2s;
   margin: -2% auto 0 auto;
   background: ${colors.background};
   border-radius: 50%;
+  display: ${props => (props.length > 4 ? 'block' : 'none')};
+
   :hover {
     transform: scale(1);
   }

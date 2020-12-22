@@ -5,13 +5,24 @@ import colors from '../../assets/colors';
 
 export const Container = styled(motion.div)`
   background: transparent;
-  width: 390px;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
   height: 150px;
   display: flex;
   font-size: 10px;
   transform-origin: top center;
   z-index: 2;
   overflow: inherit;
+
+  @media screen and (max-width: 794px) {
+    height: 200px;
+    font-size: 11px;
+  }
+
+  @media screen and (max-width: 550px) {
+    height: 150px;
+  }
 `;
 export const ContentWrapper = styled.div`
   padding: 2.5%;
@@ -22,9 +33,16 @@ export const ContentWrapper = styled.div`
   transform: scale(0.98);
   transition: all ease 0.2s;
 
-  :hover {
-    transform: scale(1.025);
-    opacity: 1;
+  @media screen and (min-width: 650px) {
+    :hover {
+      transform: scale(1.025);
+      z-index: 10;
+      opacity: 1;
+    }
+  }
+
+  @media screen and (max-width: 650px) {
+    transform: scale(1);
   }
 `;
 export const ImageWrapper = styled.section`

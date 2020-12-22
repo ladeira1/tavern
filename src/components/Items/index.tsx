@@ -54,7 +54,7 @@ const Items: React.FC<ItemsProps> = ({
 
       <Footer />
       {expand ? <ButtonUp onClick={handleExpandCollapse} /> :
-        items.length > 4 && <ButtonDown onClick={handleExpandCollapse}/>}
+        <ButtonDown onClick={handleExpandCollapse} length={items.length}/>}
     </Container>
   );
 };

@@ -4,6 +4,7 @@ export default {
   bag: '#0d0c0c',
   primary: '#121214',
   line: '#242227',
+  scrollHover: '#303030',
   text: '#eeffee',
   price: '#d8811b',
   white: '#fff',

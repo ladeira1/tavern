@@ -4,8 +4,8 @@ import colors from '../../assets/colors';
 export const Container = styled.div`
   background: ${colors.bag};
   max-width: 350px;
+  width: 90%;
   max-height: 630px;
-  width: 100%;
   display: flex;
   flex-direction: column;
   border-radius: 5px;
@@ -36,7 +36,18 @@ export const ItemsWrapper = styled.section`
   max-height: 40vh;
 
   ::-webkit-scrollbar {
-    display: none;
+    width: 3px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: ${colors.line};
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: ${colors.scrollHover};
   }
 `;
 export const Footer = styled.footer`
