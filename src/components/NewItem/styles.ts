@@ -16,7 +16,7 @@ export const Wrapper = styled.main`
   color: ${colors.text};
   transform: scale(0.9);
   transition: all ease 0.2s;
-  opacity: 0.8;
+  opacity: 0.95;
 
   :hover {
     transform: scale(0.95);

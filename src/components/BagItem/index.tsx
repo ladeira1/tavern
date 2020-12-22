@@ -16,6 +16,23 @@ import {
   CommentTextArea,
 } from './styles';
 
+const variants = {
+  enter: (direction: number) => ({
+    x: direction > 0 ? 1000 : -1000,
+    opacity: 0,
+  }),
+  center: {
+    zIndex: 1,
+    x: 0,
+    opacity: 1,
+  },
+  exit: (direction: number) => ({
+    zIndex: 0,
+    x: direction < 0 ? 1000 : -1000,
+    opacity: 0,
+  }),
+};
+
 const BagItem: React.FC<{ bagItem: BagItemInterface }> = ({ bagItem }) => {
   const {
     addCommentToItem,
@@ -36,13 +53,21 @@ const BagItem: React.FC<{ bagItem: BagItemInterface }> = ({ bagItem }) => {
   };
 
   const handleAddComment = (text: string) => {
-    if (text !== '') {
-      addCommentToItem(text, bagItem);
-    }
+    addCommentToItem(text, bagItem);
   };
 
   return (
-    <ItemContainer key={bagItem.item?.id}>
+    <ItemContainer
+      key={bagItem.item?.id}
+      variants={variants}
+      initial="enter"
+      animate="center"
+      exit="exit"
+      transition={{
+        x: { type: 'spring', stiffness: 300, damping: 30 },
+        opacity: { duration: 0.2 },
+      }}
+    >
       <ItemHeader>
         <ItemTitle>{bagItem?.item?.name}</ItemTitle>
         <CommentIcon onClick={() => setCommentPopup(!commentPopup)} />

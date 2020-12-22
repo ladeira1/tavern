@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import { FiMessageSquare, FiMinus, FiPlus } from 'react-icons/fi';
+import { motion } from 'framer-motion';
 import colors from '../../assets/colors';
 
-export const ItemContainer = styled.div`
+export const ItemContainer = styled(motion.div)`
   background: ${colors.primary};
   margin-bottom: 4%;
   padding: 2% 4%;

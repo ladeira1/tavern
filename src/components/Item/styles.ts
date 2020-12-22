@@ -4,18 +4,28 @@ import { motion } from 'framer-motion';
 import colors from '../../assets/colors';
 
 export const Container = styled(motion.div)`
-  background: ${colors.primary};
+  background: transparent;
   width: 390px;
   height: 150px;
-  border-radius: 10px;
   display: flex;
   font-size: 10px;
   transform-origin: top center;
   z-index: 2;
+  overflow: inherit;
 `;
 export const ContentWrapper = styled.div`
   padding: 2.5%;
+  background: ${colors.primary};
+  border-radius: 10px;
   display: flex;
+  opacity: 0.95;
+  transform: scale(0.98);
+  transition: all ease 0.2s;
+
+  :hover {
+    transform: scale(1.025);
+    opacity: 1;
+  }
 `;
 export const ImageWrapper = styled.section`
   border-radius: 10px;

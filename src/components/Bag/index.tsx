@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 // eslint-disable implicit-arrow-linebreak
 import React from 'react';
+import { AnimatePresence } from 'framer-motion';
 import { useBag } from '../../contexts/bag';
 import {
   Container,
@@ -27,10 +28,12 @@ const Bag: React.FC = () => {
       <Wrapper>
         <Title>Your bag</Title>
         <ItemsWrapper>
-          {bagItems.length &&
-            sortBagItems().map(bagItem => (
-              <BagItem bagItem={bagItem} />
-            ))}
+          <AnimatePresence initial={false}>
+            {bagItems.length &&
+              sortBagItems().map(bagItem => (
+                <BagItem bagItem={bagItem} />
+              ))}
+          </AnimatePresence>
         </ItemsWrapper>
         <Footer>
           <Price>{totalPrice.toFixed(2)}</Price>

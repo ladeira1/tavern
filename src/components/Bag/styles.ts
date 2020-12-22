@@ -3,9 +3,8 @@ import colors from '../../assets/colors';
 
 export const Container = styled.div`
   background: ${colors.bag};
-  max-width: 25vw;
-  min-height: 52vh;
-  max-height: 52vh;
+  max-width: 350px;
+  max-height: 630px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -19,6 +18,8 @@ export const Container = styled.div`
 export const Wrapper = styled.div`
   flex: 1;
   margin: 3%;
+  display: flex;
+  flex-direction: column;
 `;
 export const Title = styled.h1`
   font-family: 'Oswald', sans-serif;
