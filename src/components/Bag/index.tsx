@@ -31,6 +31,10 @@ const Bag: React.FC = () => {
     increaseBagItemQuantity,
   } = useBag();
 
+  const sortBagItems = () =>
+    // eslint-disable-next-line implicit-arrow-linebreak
+    bagItems.sort((a, b) => (a.item.name > b.item.name ? 1 : -1));
+
   const handleLowerQuantity = (item: BagItemInterface) => {
     if (item.quantity > 0) {
       lowerBagItemQuantity(item);
@@ -47,7 +51,7 @@ const Bag: React.FC = () => {
         <Title>Your bag</Title>
         <ItemsWrapper>
           {bagItems.length &&
-            bagItems.map(bagItem => (
+            sortBagItems().map(bagItem => (
               <ItemContainer key={bagItem.item?.id}>
                 <ItemHeader>
                   <ItemTitle>{bagItem?.item?.name}</ItemTitle>
