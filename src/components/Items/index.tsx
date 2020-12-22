@@ -18,7 +18,7 @@ const Items: React.FC<ItemsProps> = ({
   const [expand, setExpand] = useState(false);
 
   const handleExpandCollapse = () => {
-    setExpand(!expand);
+    if (items.length > 4) setExpand(!expand);
   };
 
   return (
@@ -54,7 +54,7 @@ const Items: React.FC<ItemsProps> = ({
 
       <Footer />
       {expand ? <ButtonUp onClick={handleExpandCollapse} /> :
-      <ButtonDown onClick={handleExpandCollapse}/>}
+        items.length > 4 && <ButtonDown onClick={handleExpandCollapse}/>}
     </Container>
   );
 };

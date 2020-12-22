@@ -13,15 +13,24 @@ import api from '../../services/api';
 
 const Home: React.FC = () => {
   const { readStoragedItems } = useBag();
-  const [items, setItems] = useState<ItemInterface[]>({} as ItemInterface[]);
+  const [burgers, setBurgers] = useState<ItemInterface[]>(
+    {} as ItemInterface[],
+  );
+  const [sideDishes, setSideDishes] = useState<ItemInterface[]>(
+    {} as ItemInterface[],
+  );
+  const [drinks, setDrinks] = useState<ItemInterface[]>({} as ItemInterface[]);
   const [newItems, setNewItems] = useState<ItemInterface[]>(
     {} as ItemInterface[],
   );
+
   useEffect(() => {
     async function getItems() {
       const result = await api.getItems();
       if (result) {
-        setItems(result);
+        setBurgers(result.filter(item => item.type === 'burger'));
+        setSideDishes(result.filter(item => item.type === 'sideDish'));
+        setDrinks(result.filter(item => item.type === 'drink'));
         setNewItems(result.slice(0, 8));
       }
     }
@@ -37,9 +46,9 @@ const Home: React.FC = () => {
         <Wrapper>
           <LeftColumn>
             <NewItems items={newItems} />
-            <Items items={items} title="Burgers" />
-            <Items items={items} title="Side dishes" />
-            <Items items={items} title="Drinks" />
+            <Items items={burgers} title="Burgers" />
+            <Items items={sideDishes} title="Side dishes" />
+            <Items items={drinks} title="Drinks" />
           </LeftColumn>
 
           <RightColumn>
