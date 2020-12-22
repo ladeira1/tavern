@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import React, { createContext, useContext, useState } from 'react';
 import ItemInterface from '../models/ItemInterface';
 import BagItemInterface from '../models/BagItemInterface';
@@ -6,6 +7,7 @@ interface BagContextData {
   bagItems: BagItemInterface[];
   totalPrice: number;
   addItemToBag: (item: ItemInterface) => void;
+  addCommentToItem: (comment: string, item: BagItemInterface) => void;
   readStoragedItems: () => void;
   lowerBagItemQuantity: (item: BagItemInterface) => void;
   increaseBagItemQuantity: (item: BagItemInterface) => void;
@@ -40,6 +42,7 @@ const BagProvider: React.FC = ({ children }) => {
     const data = {
       item,
       quantity: 1,
+      comment: '',
     };
     let existsInBag: BagItemInterface | null = null;
 
@@ -48,6 +51,7 @@ const BagProvider: React.FC = ({ children }) => {
         existsInBag = {
           item: bagItem.item,
           quantity: bagItem.quantity + 1,
+          comment: bagItem.comment,
         };
       }
     });
@@ -69,6 +73,33 @@ const BagProvider: React.FC = ({ children }) => {
     }
 
     updateTotalPrice(item.price);
+  };
+
+  const addCommentToItem = (comment: string, item: BagItemInterface) => {
+    const temp: BagItemInterface[] = [];
+
+    bagItems.forEach(bagItem => {
+      if (bagItem === item) {
+        const newData = {
+          item: {
+            id: item.item.id,
+            name: item.item.name,
+            price: item.item.price,
+            details: item.item.details,
+            imageUrl: item.item.imageUrl,
+            type: item.item.type,
+          },
+          quantity: item.quantity,
+          comment,
+        };
+        temp.push(newData);
+      } else {
+        temp.push(bagItem);
+      }
+    });
+
+    setBagItems(temp);
+    saveStoragedItems(temp, null);
   };
 
   const readStoragedItems = () => {
@@ -93,6 +124,7 @@ const BagProvider: React.FC = ({ children }) => {
       const temp = {
         item: item.item,
         quantity: item.quantity - 1,
+        comment: item.comment,
       };
 
       setBagItems([...updatedItems, temp]);
@@ -117,6 +149,7 @@ const BagProvider: React.FC = ({ children }) => {
     const temp = {
       item: item.item,
       quantity: item.quantity + 1,
+      comment: item.comment,
     };
 
     setBagItems([...updatedItems, temp]);
@@ -130,6 +163,7 @@ const BagProvider: React.FC = ({ children }) => {
         bagItems,
         totalPrice,
         addItemToBag,
+        addCommentToItem,
         readStoragedItems,
         lowerBagItemQuantity,
         increaseBagItemQuantity,

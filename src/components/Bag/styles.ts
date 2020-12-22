@@ -48,6 +48,7 @@ export const ItemContainer = styled.div`
   justify-content: space-between;
   border-radius: 5px;
   height: 130px;
+  position: relative;
 `;
 export const ItemHeader = styled.header`
   flex: 1;
@@ -165,4 +166,16 @@ export const CheckoutTitle = styled.h1`
   font-family: 'Oswald', sans-serif;
   font-size: 2em;
   font-weight: 400;
+`;
+export const CommentTextArea = styled.textarea`
+  position: absolute;
+  background: ${colors.white};
+  right: 10%;
+  top: 25%;
+  border-radius: 5px 0 5px 5px;
+  min-height: 100px;
+  min-width: 200px;
+  z-index: 3;
+  padding: 8px;
+  font-family: 'Roboto Slab', sans-serif;
 `;
