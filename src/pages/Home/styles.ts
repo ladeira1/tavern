@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import colors from '../../assets/colors';
 
 export const Container = styled.div`
   height: 100%;
@@ -21,18 +20,7 @@ export const Wrapper = styled.main`
   overflow-x: hidden;
 
   ::-webkit-scrollbar {
-    width: 8px;
-  }
-  ::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: ${colors.line};
-    border-radius: 10px;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: ${colors.scrollHover};
+    display: none;
   }
 
   @media screen and (max-width: 1144px) {
