@@ -9,7 +9,6 @@ export const Container = styled.div`
   padding-bottom: 1.5%;
   border-bottom: 2px solid ${colors.line};
   font-size: 10px;
-
   @media screen and (max-width: 650px) {
     font-size: 9px;
   }

@@ -36,6 +36,10 @@ export const ItemsWrapper = styled(motion.section)`
   grid-row-gap: 30px;
   width: 100%;
   justify-content: space-between;
+
+  @media screen and (max-width: 360px) {
+    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+  }
 `;
 export const Footer = styled.footer`
   width: 100%;

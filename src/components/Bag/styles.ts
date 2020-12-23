@@ -72,7 +72,7 @@ export const CheckoutButton = styled.div`
   justify-content: center;
   align-items: center;
 `;
-export const CheckoutTitle = styled.h1`
+export const CheckoutTitle = styled.h2`
   color: ${colors.black};
   font-family: 'Oswald', sans-serif;
   font-size: 2em;

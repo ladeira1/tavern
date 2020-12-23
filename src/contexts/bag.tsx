@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable no-param-reassign */
 import React, { createContext, useContext, useState } from 'react';
 import ItemInterface from '../models/ItemInterface';
@@ -6,6 +7,7 @@ import BagItemInterface from '../models/BagItemInterface';
 interface BagContextData {
   bagItems: BagItemInterface[];
   totalPrice: number;
+  sortBagItems: () => BagItemInterface[];
   addItemToBag: (item: ItemInterface) => void;
   addCommentToItem: (comment: string, item: BagItemInterface) => void;
   readStoragedItems: () => void;
@@ -29,6 +31,8 @@ const BagProvider: React.FC = ({ children }) => {
       item !== null ? sourceItems.concat(item) : sourceItems;
     localStorage.setItem('@bag:bagItem', JSON.stringify(newStoragedItems));
   };
+
+  const sortBagItems = () => bagItems.sort((a, b) => (a.item.name > b.item.name ? 1 : -1));
 
   const updateTotalPrice = (price: number) => {
     localStorage.setItem(
@@ -162,6 +166,7 @@ const BagProvider: React.FC = ({ children }) => {
       value={{
         bagItems,
         totalPrice,
+        sortBagItems,
         addItemToBag,
         addCommentToItem,
         readStoragedItems,

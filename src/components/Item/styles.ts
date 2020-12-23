@@ -23,6 +23,10 @@ export const Container = styled(motion.div)`
   @media screen and (max-width: 550px) {
     height: 150px;
   }
+
+  @media screen and (max-width: 360px) {
+    width: 90%;
+  }
 `;
 export const ContentWrapper = styled.div`
   padding: 2.5%;

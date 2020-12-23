@@ -6,6 +6,7 @@ import Header from '../../components/Header';
 import NewItems from '../../components/NewItems';
 import Items from '../../components/Items';
 import Bag from '../../components/Bag';
+import MobileBag from '../../components/MobileBag';
 
 import ItemInterface from '../../models/ItemInterface';
 
@@ -55,6 +56,7 @@ const Home: React.FC = () => {
             <Bag />
           </RightColumn>
         </Wrapper>
+        <MobileBag />
       </Container>
     </>
   );

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import colors from '../../assets/colors';
 
 export const Container = styled.div`
   height: 100%;
@@ -17,13 +18,25 @@ export const Wrapper = styled.main`
   display: flex;
   flex-direction: row;
   margin-top: 8vh;
+  overflow-x: hidden;
 
-  @media screen and (max-width: 1144px) {
-    width: 100%;
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: ${colors.line};
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: ${colors.scrollHover};
   }
 
   @media screen and (max-width: 1144px) {
-    width: 95%;
+    width: 100%;
   }
 `;
 

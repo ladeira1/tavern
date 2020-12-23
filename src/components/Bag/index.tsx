@@ -19,9 +19,8 @@ const Bag: React.FC = () => {
   const {
     bagItems,
     totalPrice,
+    sortBagItems,
   } = useBag();
-
-  const sortBagItems = () => bagItems.sort((a, b) => (a.item.name > b.item.name ? 1 : -1));
 
   return (
     <Container>
@@ -31,7 +30,7 @@ const Bag: React.FC = () => {
           <AnimatePresence initial={false}>
             {bagItems.length &&
               sortBagItems().map(bagItem => (
-                <BagItem bagItem={bagItem} />
+                <BagItem bagItem={bagItem} key={bagItem.item.id} />
               ))}
           </AnimatePresence>
         </ItemsWrapper>
