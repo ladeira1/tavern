@@ -32,6 +32,10 @@ export const LeftColumn = styled.article`
   flex: 7;
   max-width: 70%;
 
+  .empty {
+    min-height: 80px;
+  }
+
   @media screen and (max-width: 1144px) {
     max-width: 100%;
   }

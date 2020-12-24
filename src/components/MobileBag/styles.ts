@@ -28,7 +28,7 @@ export const Container = styled.div`
     right: 10%;
   }
 
-  @media scren and (min-width: 780px) {
+  @media screen and (min-width: 600px) {
     width: 50%;
     left: 25%;
     right: 25%;

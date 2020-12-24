@@ -50,6 +50,7 @@ const Home: React.FC = () => {
             <Items items={burgers} title="Burgers" />
             <Items items={sideDishes} title="Side dishes" />
             <Items items={drinks} title="Drinks" />
+            <div className="empty" />
           </LeftColumn>
 
           <RightColumn>
