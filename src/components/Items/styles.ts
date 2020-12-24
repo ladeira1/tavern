@@ -77,3 +77,6 @@ export const ButtonUp = styled(FiChevronUp).attrs({
     transform: scale(1);
   }
 `;
+export const Empty = styled.div`
+  min-width: calc(50% + 10px);
+`;

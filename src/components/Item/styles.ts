@@ -7,7 +7,6 @@ export const Container = styled(motion.div)`
   background: transparent;
   width: 100%;
   max-width: 500px;
-  margin: 0 auto;
   height: 150px;
   display: flex;
   font-size: 10px;
@@ -18,6 +17,10 @@ export const Container = styled(motion.div)`
   @media screen and (max-width: 794px) {
     height: 200px;
     font-size: 11px;
+  }
+
+  @media screen and (max-width: 755px) {
+    margin: 0 auto;
   }
 
   @media screen and (max-width: 550px) {

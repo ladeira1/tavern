@@ -49,7 +49,6 @@ const BagProvider: React.FC = ({ children }) => {
       comment: '',
     };
     let existsInBag: BagItemInterface | null = null;
-
     bagItems.forEach(bagItem => {
       if (bagItem.item.id === item.id) {
         existsInBag = {

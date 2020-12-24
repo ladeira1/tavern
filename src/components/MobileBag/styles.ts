@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
 import { FiShoppingBag } from 'react-icons/fi';
 import colors from '../../assets/colors';
 

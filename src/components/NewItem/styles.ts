@@ -38,15 +38,13 @@ export const Wrapper = styled.main`
     min-width: 180px;
   }
 `;
-export const Image = styled.div<{ imageUrl: string }>`
+export const Image = styled.img`
   width: 100%;
   max-height: 50%;
   flex: 3;
   display: flex;
   border-radius: 10px;
-  background: url(${props => props.imageUrl}) no-repeat;
-  background-size: 100% 100%;
-  background-color: ${colors.primary};
+  width: 100%;
 
   @media screen and (max-width: 550px) {
     flex: 5;

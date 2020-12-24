@@ -22,7 +22,7 @@ const NewItem: React.FC<{ item: ItemInterface }> = ({ item }) => {
 
   return (
     <Wrapper>
-      <Image imageUrl={item?.imageUrl} />
+      <Image src={item?.imageUrl} alt="Item" />
       <Main>
         <Name>{item?.name}</Name>
         <Details>{item?.details}</Details>

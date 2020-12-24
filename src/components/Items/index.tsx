@@ -4,7 +4,7 @@ import { AnimatePresence } from 'framer-motion';
 import ItemInterface from '../../models/ItemInterface';
 
 import Item from '../Item';
-import { Container, Title, FixedItemsWrapper, ItemsWrapper, Footer, ButtonDown, ButtonUp } from './styles';
+import { Container, Title, FixedItemsWrapper, ItemsWrapper, Footer, ButtonDown, ButtonUp, Empty } from './styles';
 
 interface ItemsProps {
   items: ItemInterface[];
@@ -45,9 +45,19 @@ const Items: React.FC<ItemsProps> = ({
               ease: [0.04, 0.62, 0.23, 0.98],
             }}
           >
-            {items.length &&
-              items.slice(4).map(item => <Item item={item} key={item.id} />)
+            {items.slice(4).length && (
+              items.slice(4).map(item => (
+              <div key={item.id} style={{ display: 'flex' }}>
+                <Item item={item} />
+                {
+                  items.slice(4).length === 1 &&
+                  <Empty />
+                }
+              </div>
+              ))
+            )
             }
+            {}
           </ItemsWrapper>
         }
       </AnimatePresence>
