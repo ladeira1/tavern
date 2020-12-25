@@ -31,6 +31,8 @@ export const Wrapper = styled.main`
     transform: scale(1);
     max-height: 240px;
     min-width: 230px;
+    margin-left: 5px;
+    margin-right: 5px;
   }
 
   @media screen and (max-width: 550px) {

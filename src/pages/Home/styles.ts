@@ -27,7 +27,6 @@ export const Wrapper = styled.main`
     width: 100%;
   }
 `;
-
 export const LeftColumn = styled.article`
   flex: 7;
   max-width: 70%;

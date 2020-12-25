@@ -10,7 +10,7 @@ import MobileBag from '../../components/MobileBag';
 
 import ItemInterface from '../../models/ItemInterface';
 
-import api from '../../services/api';
+import firebase from '../../services/firebase';
 
 const Home: React.FC = () => {
   const { readStoragedItems } = useBag();
@@ -27,12 +27,13 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     async function getItems() {
-      const result = await api.getItems();
-      if (result) {
-        setBurgers(result.filter(item => item.type === 'burger'));
-        setSideDishes(result.filter(item => item.type === 'sideDish'));
-        setDrinks(result.filter(item => item.type === 'drink'));
-        setNewItems(result.slice(0, 8));
+      const items = await firebase.getItems();
+
+      if (items.length) {
+        setBurgers(items.filter(item => item.type === 'burger'));
+        setSideDishes(items.filter(item => item.type === 'sideDish'));
+        setDrinks(items.filter(item => item.type === 'drink'));
+        setNewItems(items.slice(0, 8));
       }
     }
 
