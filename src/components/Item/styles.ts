@@ -6,7 +6,7 @@ import colors from '../../assets/colors';
 export const Container = styled(motion.div)`
   background: transparent;
   width: 100%;
-  max-width: 500px;
+  max-width: 390px;
   height: 150px;
   display: flex;
   font-size: 10px;
@@ -39,6 +39,7 @@ export const ContentWrapper = styled.div`
   opacity: 0.95;
   transform: scale(0.98);
   transition: all ease 0.2s;
+  width: 100%;
 
   @media screen and (min-width: 650px) {
     :hover {
