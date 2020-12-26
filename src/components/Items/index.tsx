@@ -28,6 +28,7 @@ const Items: React.FC<ItemsProps> = ({
         {items.length &&
           items.slice(0, 4).map(item => <Item item={item} key={item.id} />)
         }
+        {(items.length === 1 || items.length === 3) && <Empty />}
       </FixedItemsWrapper>
       <AnimatePresence initial={false}>
         {expand &&
@@ -47,17 +48,11 @@ const Items: React.FC<ItemsProps> = ({
           >
             {items.slice(4).length && (
               items.slice(4).map(item => (
-              <div key={item.id} style={{ display: 'flex' }}>
                 <Item item={item} />
-                {
-                  items.slice(4).length === 1 &&
-                  <Empty />
-                }
-              </div>
               ))
             )
             }
-            {}
+            {(items.length > 4 && items.length % 2 !== 0) && <Empty />}
           </ItemsWrapper>
         }
       </AnimatePresence>
