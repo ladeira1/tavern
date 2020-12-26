@@ -1,11 +1,10 @@
 const firebaseConfig = {
-  apiKey: 'AIzaSyCCb2C1atl2LsoXTOtethQ8W1AHedJ0Fsc',
-  authDomain: 'tavern-api.firebaseapp.com',
-  projectId: 'tavern-api',
-  storageBucket: 'tavern-api.appspot.com',
-  messagingSenderId: '786783080882',
-  appId: '1:786783080882:web:64ba0b908ef724c1a754ab',
-  measurementId: 'G-4K2C7X3C4Q',
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
+  measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 };
-
 export default firebaseConfig;

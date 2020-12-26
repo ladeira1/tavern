@@ -28,7 +28,6 @@ const Home: React.FC = () => {
   useEffect(() => {
     async function getItems() {
       const items = await firebase.getItems();
-      console.log(items);
       if (items.length) {
         setBurgers(items.filter(item => item.type === 'burger'));
         setSideDishes(items.filter(item => item.type === 'sideDish'));

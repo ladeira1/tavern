@@ -15,19 +15,16 @@ export default {
     details: string,
     price: number,
     type: string,
-    image: any,
+    image: File,
   ): Promise<void> => {
     // create item
-    await db
-      .collection('items')
-      .add({
-        name,
-        details,
-        price,
-        imageUrl: '',
-        type,
-      })
-      .catch(err => alert(err));
+    await db.collection('items').add({
+      name,
+      details,
+      price,
+      imageUrl: '',
+      type,
+    });
 
     // get item
     const items: ItemInterface[] = [];
@@ -48,16 +45,13 @@ export default {
     await storageRef.put(image);
 
     // update item image
-    await storageRef
-      .getDownloadURL()
-      .then(async storagedImage => {
-        items.forEach(async item => {
-          await db.collection('items').doc(item.id).update({
-            imageUrl: storagedImage,
-          });
+    await storageRef.getDownloadURL().then(async storagedImage => {
+      items.forEach(async item => {
+        await db.collection('items').doc(item.id).update({
+          imageUrl: storagedImage,
         });
-      })
-      .catch(err => alert(err));
+      });
+    });
   },
 
   getItems: async (): Promise<ItemInterface[]> => {

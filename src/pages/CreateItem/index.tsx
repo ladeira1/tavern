@@ -12,7 +12,9 @@ const CreateItem: React.FC = () => {
 
   const handleCreateItem = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    firebase.createItem(name, details, price, type, image);
+    if (image !== null) {
+      firebase.createItem(name, details, price, type, image);
+    }
   };
 
   const handleSetImage = (event: React.ChangeEvent<HTMLInputElement>) => {
