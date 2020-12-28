@@ -3,6 +3,8 @@ export default {
   background: '#0a0909',
   bag: '#0d0c0c',
   primary: '#121214',
+  textInput: '#1d1d1e',
+  formSecondary: '#545356',
   line: '#242227',
   scrollHover: '#303030',
   text: '#eeffee',
