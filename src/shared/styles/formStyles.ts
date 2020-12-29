@@ -20,6 +20,11 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   margin: 0 auto;
+  padding-top: 15vh;
+
+  @media screen and (min-height: 800px) {
+    padding-top: 5vh;
+  }
 `;
 export const Content = styled.section`
   width: 90%;
@@ -27,7 +32,6 @@ export const Content = styled.section`
   flex-direction: column-reverse;
   align-items: center;
   max-width: 1200px;
-
   @media screen and (min-width: 1080px) {
     flex-direction: row;
   }
@@ -117,6 +121,7 @@ export const Title = styled.h1`
   text-align: center;
   margin-bottom: 20px;
   max-height: 10%;
+  z-index: 10;
 
   @media screen and (min-width: 370px) {
     font-size: 40px;
