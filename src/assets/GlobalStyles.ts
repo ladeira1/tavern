@@ -35,4 +35,14 @@ export default createGlobalStyle`
     border: 0;
     background: none;
   }
+
+  button, a {
+    :hover {
+      cursor: pointer;
+    }
+  }
+
+  input:hover {
+    cursor: column;
+  }
 `;

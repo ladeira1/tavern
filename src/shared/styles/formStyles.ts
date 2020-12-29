@@ -10,22 +10,31 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0 auto;
 `;
 export const Content = styled.section`
-  width: 60%;
-  height: 60%;
+  width: 90%;
   display: flex;
+  flex-direction: column-reverse;
   align-items: center;
   max-width: 1200px;
+
+  @media screen and (min-width: 1080px) {
+    flex-direction: row;
+  }
 `;
 export const Form = styled.form`
   background: ${colors.primary};
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  flex: 1;
   padding: 4%;
-  min-width: 450px;
+  width: 100%;
+
+  @media screen and (min-width: 620px) {
+    width: 90%;
+    max-width: 600px;
+  }
 `;
 export const InputWrapper = styled.div<{ selected: boolean }>`
   display: flex;
@@ -120,7 +129,27 @@ export const SubmitButton = styled.button`
 `;
 export const Title = styled.h1`
   font-family: 'Oswald', sans-serif;
-  font-size: 90px;
-  margin-left: 30px;
-  flex: 1;
+  font-size: 34px;
+  text-align: center;
+  margin-bottom: 20px;
+  max-height: 10%;
+
+  @media screen and (min-width: 370px) {
+    font-size: 40px;
+  }
+
+  @media screen and (min-width: 650px) {
+    font-size: 50px;
+  }
+
+  @media screen and (min-width: 1080px) {
+    font-size: 80px;
+    margin-left: 50px;
+    margin-bottom: 0;
+    max-height: fit-content;
+  }
+
+  @media screen and (min-width: 1180px) {
+    font-size: 90px;
+  }
 `;

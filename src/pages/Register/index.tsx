@@ -11,7 +11,7 @@ import {
   LockIcon,
   SubmitButton,
   Title,
-} from '../../shared/Form/styles';
+} from '../../shared/styles/formStyles';
 
 const Register: React.FC = () => {
   const [userSelected, setUserSelected] = useState(false);
@@ -34,12 +34,16 @@ const Register: React.FC = () => {
     setState(false);
   };
 
+  const handleCreateAccount = () => {
+    console.log('to do');
+  };
+
   return (
     <>
       <Header />
       <Container>
         <Content>
-          <Form>
+          <Form onSubmit={handleCreateAccount}>
             <InputWrapper
               onClick={() => handleInputClick(setUserSelected)}
               onBlur={() => handleInputBlur(setUserSelected)}
