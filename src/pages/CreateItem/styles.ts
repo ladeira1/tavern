@@ -1,34 +1,127 @@
+/* eslint-disable prettier/prettier */
 import styled from 'styled-components';
+import { FiX } from 'react-icons/fi';
+import colors from '../../assets/colors';
 
-export const Container = styled.article`
-  height: 800px;
-  width: 400px;
-  background: red;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-`;
-export const Form = styled.form`
-  background: blue;
+export const Content = styled.section`
+  width: 90%;
   display: flex;
   flex-direction: column;
-  width: 100%;
-`;
-export const Label = styled.label`
-  color: black;
-  font-size: 20px;
+  align-items: center;
+  max-width: 1200px;
+
+  @media screen and (min-width: 1080px) {
+    flex-direction: row;
+  }
 `;
 export const Input = styled.input`
-  width: 100%;
+  display: none;
+`;
+export const ImageLabel = styled.label<{ hasImage: boolean }>`
   height: 60px;
-  background: brown;
-`;
-export const Select = styled.select`
-  height: 50px;
-  background: yellow;
-`;
-export const Submit = styled.button`
-  background: green;
   width: 100%;
-  font-size: 30px;
+  background: ${colors.textInput};
+  margin-bottom: ${props => (props.hasImage ? 0 : '15px')};
+  display: flex;
+  align-items: center;
+  border-radius: 5px 5px ${props => (props.hasImage ? 0 : '5px')} ${props => (props.hasImage ? 0 : '5px')};
+
+  span {
+    color: ${colors.formSecondary};
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 18px;
+    margin-left: 10px;
+  }
+
+  :hover {
+    cursor: pointer;
+  }
+`;
+export const ImageContainer = styled.div`
+  position: relative;
+  width: 100%;
+  background: ${colors.textInput};
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  padding: 0 5% 5% 5%;
+  position: relative;
+`;
+export const Image = styled.img`
+  width: 100%;
+`;
+export const XIcon = styled(FiX).attrs({
+  size: 36,
+})`
+  color: ${colors.red};
+  opacity: 0.8;
+  z-index: 2;
+  position: absolute;
+  top: 5%;
+  right: 10%;
+
+  :hover {
+    cursor: pointer;
+  }
+`;
+export const Label = styled.label<{selected: boolean, height: string}>`
+  width: 100%;
+  height: ${props => props.height};
+  background: ${colors.textInput};
+  margin-bottom: 15px;
+  display: flex;
+  border-radius: 5px;
+  border: ${props => (props.selected ? '3px' : 0)} solid ${props => (props.selected ? colors.white : 'transparent')};
+`;
+export const DetailsInput = styled.textarea<{selected: boolean}>`
+  width: 100%;
+  min-height: 60px;
+  padding: 2.5% 2%;
+  color: ${props => (props.selected ? colors.white : colors.formSecondary)};
+  font-size: 18px;
+  font-family: 'Ubuntu', sans-serif;
+
+  ::-webkit-input-placeholder {
+    color: ${props => (props.selected ? colors.white : colors.formSecondary)};
+    font-size: 18px;
+    font-family: 'Ubuntu', sans-serif;
+  }
+
+  ::-moz-placeholder {
+    color: ${props => (props.selected ? colors.white : colors.formSecondary)};
+    font-size: 18px;
+    font-family: 'Ubuntu', sans-serif;
+  }
+  :-ms-input-placeholder {
+    color: ${props => (props.selected ? colors.white : colors.formSecondary)};
+    font-size: 18px;
+    font-family: 'Ubuntu', sans-serif;
+  }
+  :-moz-placeholder {
+    color: ${props => (props.selected ? colors.white : colors.formSecondary)};
+    font-size: 18px;
+    font-family: 'Ubuntu', sans-serif;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  :focus {
+    outline-width: 0;
+  }
+`;
+export const Select = styled.select<{selected: boolean}>`
+  background: ${colors.textInput};
+  width: 100%;
+  color: ${props => (props.selected ? colors.white : colors.formSecondary)};
+  font-size: 18px;
+  border-radius: 5px;
+  margin-right: 10px;
+
+  :focus {
+    outline-width: 0;
+  }
 `;

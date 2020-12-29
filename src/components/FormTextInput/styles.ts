@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import colors from '../../assets/colors';
 
-export const InputWrapper = styled.div<{ selected: boolean }>`
+export const InputWrapper = styled.label<{ selected: boolean }>`
   display: flex;
   align-items: center;
   background: ${colors.textInput};

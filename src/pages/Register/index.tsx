@@ -4,8 +4,6 @@ import {
   Container,
   Content,
   Form,
-  // InputWrapper,
-  // Input,
   UserIcon,
   MailIcon,
   LockIcon,
@@ -30,17 +28,33 @@ const Register: React.FC = () => {
       <Container>
         <Content>
           <Form onSubmit={handleCreateAccount}>
-            <FormTextInput Icon={UserIcon} text={user} setText={setUser} />
-            <FormTextInput Icon={MailIcon} text={email} setText={setEmail} />
+            <FormTextInput
+              Icon={UserIcon}
+              text={user}
+              setText={setUser}
+              placeholder="Name"
+              type="text"
+            />
+            <FormTextInput
+              Icon={MailIcon}
+              text={email}
+              setText={setEmail}
+              placeholder="E-mail"
+              type="email"
+            />
             <FormTextInput
               Icon={LockIcon}
               text={password}
               setText={setPassword}
+              placeholder="Password"
+              type="password"
             />
             <FormTextInput
               Icon={LockIcon}
               text={passwordConfirmation}
               setText={setPasswordConfirmation}
+              placeholder="Confirm your password"
+              type="password"
             />
             <SubmitButton type="submit">
               <h2 className="buttonText">Create Account</h2>
