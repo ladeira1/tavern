@@ -4,6 +4,7 @@ import colors from '../../assets/colors';
 export const Container = styled.main`
   width: 100vw;
   height: 8vh;
+  min-height: 70px;
   background-color: ${colors.primary};
   overflow: hidden;
   position: fixed;
@@ -67,7 +68,7 @@ export const Buttons = styled.nav<{ logged: boolean }>`
     }
 
     @media screen and (max-width: 400px) {
-      margin-right: 2em;
+      margin-right: 1em;
     }
   }
 
