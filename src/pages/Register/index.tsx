@@ -12,26 +12,39 @@ import {
 } from '../../shared/styles/formStyles';
 import FormTextInput from '../../components/FormTextInput';
 
+import { useAuth } from '../../contexts/auth';
+
 const Register: React.FC = () => {
-  const [user, setUser] = useState('');
+  const { user, register } = useAuth();
+
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
 
-  const handleCreateAccount = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleCreateAccount = async (
+    event: React.FormEvent<HTMLFormElement>,
+  ) => {
     event.preventDefault();
+
+    await register(email, name, password, passwordConfirmation);
+    setEmail('');
+    setName('');
+    setPassword('');
+    setPasswordConfirmation('');
   };
 
   return (
     <>
       <Header />
+      <h1>{user?.name}</h1>
       <Container>
         <Content>
           <Form onSubmit={handleCreateAccount}>
             <FormTextInput
               Icon={UserIcon}
-              text={user}
-              setText={setUser}
+              text={name}
+              setText={setName}
               placeholder="Name"
               type="text"
             />

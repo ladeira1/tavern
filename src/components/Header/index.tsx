@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Wrapper, Empty, Title, Buttons } from './styles';
+import { useAuth } from '../../contexts/auth';
 
 const Header: React.FC = () => {
-  const user = false;
+  const { isLogged } = useAuth();
 
   // const handleLogout = () => {
   // };
@@ -13,9 +14,11 @@ const Header: React.FC = () => {
       <Wrapper>
         <Empty />
         <Title>TAVERN</Title>
-        <Buttons logged={user}>
+        <Buttons logged={isLogged}>
           <Link to="/user">Profile</Link>
-          <button type="button">{user ? 'Logout' : 'Login'}</button>
+          <Link to="/register" className="auth">
+            {isLogged ? 'Logout' : 'Login'}
+          </Link>
         </Buttons>
       </Wrapper>
     </Container>

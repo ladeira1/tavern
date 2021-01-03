@@ -1,5 +1,7 @@
+/* eslint-disable import/no-duplicates */
 import firebase from 'firebase/app';
 import 'firebase/firebase-firestore';
+import 'firebase/auth';
 import 'firebase/storage';
 
 import firebaseConfig from './firebaseConfig';
@@ -8,6 +10,7 @@ import ItemInterface from '../models/ItemInterface';
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 const db = firebaseApp.firestore();
 const storage = firebase.storage();
+const auth = firebase.auth();
 
 export default {
   createItem: async (
@@ -70,5 +73,27 @@ export default {
     });
 
     return items;
+  },
+
+  createAccount: async (
+    email: string,
+    name: string,
+    password: string,
+  ): Promise<{ uid: string; name: string; email: string } | null> => {
+    const result = auth
+      .createUserWithEmailAndPassword(email, password)
+      .then(async r => {
+        if (r.user === null) {
+          return null;
+        }
+
+        const { uid } = r.user;
+
+        await db.collection('users').doc(uid).set({ name });
+        return { uid, name, email };
+      })
+      .catch(() => null);
+
+    return result;
   },
 };
