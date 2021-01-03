@@ -16,6 +16,7 @@ const Header: React.FC = () => {
         <Title>TAVERN</Title>
         <Buttons logged={isLogged}>
           <Link to="/user">Profile</Link>
+          <Link to="/item">Create Item</Link>
           <Link to="/register" className="auth">
             {isLogged ? 'Logout' : 'Login'}
           </Link>
