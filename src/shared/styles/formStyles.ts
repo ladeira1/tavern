@@ -20,7 +20,6 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   margin: 0 auto;
-  padding-top: 15vh;
 
   @media screen and (min-height: 800px) {
     padding-top: 5vh;
@@ -32,10 +31,12 @@ export const Content = styled.section`
   flex-direction: column-reverse;
   align-items: center;
   max-width: 1200px;
+
   @media screen and (min-width: 1080px) {
     flex-direction: row;
   }
 `;
+
 export const Form = styled.form`
   background: ${colors.primary};
   border-radius: 10px;
@@ -43,6 +44,7 @@ export const Form = styled.form`
   flex-direction: column;
   padding: 4%;
   width: 100%;
+  max-height: 70vh;
 
   @media screen and (min-width: 620px) {
     width: 90%;
@@ -100,7 +102,7 @@ export const ListIcon = styled(FiList).attrs({
 `;
 export const SubmitButton = styled.button`
   background: ${colors.white};
-  height: 60px;
+  min-height: 60px;
   margin-top: 50px;
   border-radius: 5px;
   transition: all ease 0.2s;

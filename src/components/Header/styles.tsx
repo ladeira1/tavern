@@ -7,7 +7,7 @@ export const Container = styled.main`
   min-height: 70px;
   background-color: ${colors.primary};
   overflow: hidden;
-  position: fixed;
+  position: static;
   z-index: 10;
 `;
 
