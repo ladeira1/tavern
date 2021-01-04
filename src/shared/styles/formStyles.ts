@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import {
   FiUser,
   FiMail,
@@ -31,6 +32,10 @@ export const Content = styled.section`
   flex-direction: column-reverse;
   align-items: center;
   max-width: 1200px;
+
+  a {
+    text-decoration: none;
+  }
 
   @media screen and (min-width: 1080px) {
     flex-direction: row;
@@ -142,5 +147,21 @@ export const Title = styled.h1`
 
   @media screen and (min-width: 1180px) {
     font-size: 90px;
+  }
+`;
+export const LinkElement = styled(Link)`
+  color: ${colors.white};
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+  font-family: 'Ubunt', sans-serif;
+  text-align: center;
+  margin-top: 25px;
+  opacity: 0.8;
+  transition: all ease 0.2s;
+
+  :hover {
+    transform: scale(1.05);
+    opacity: 1;
   }
 `;

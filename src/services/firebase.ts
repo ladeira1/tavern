@@ -96,4 +96,29 @@ export default {
 
     return result;
   },
+
+  login: async (
+    email: string,
+    password: string,
+  ): Promise<{ uid: string; name: string; email: string } | null> => {
+    const result = auth
+      .signInWithEmailAndPassword(email, password)
+      .then(async r => {
+        if (r.user === null) {
+          return null;
+        }
+
+        const { uid } = r.user;
+
+        const user = await db.collection('users').doc(uid).get();
+        if (!user) {
+          return null;
+        }
+
+        return { uid, name: user.data.name, email };
+      })
+      .catch(() => null);
+
+    return result;
+  },
 };

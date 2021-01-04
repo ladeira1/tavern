@@ -15,10 +15,11 @@ interface AuthInterface {
     name: string,
     password: string,
     passwordConfirmation: string,
-  ) => Promise<RegisterReturnInterface>;
+  ) => Promise<AuthReturnInterface>;
+  login: (email: string, password: string) => Promise<AuthReturnInterface>;
 }
 
-interface RegisterReturnInterface {
+interface AuthReturnInterface {
   result: 'SUCCESS' | 'ERROR';
   message?: string;
 }
@@ -33,7 +34,7 @@ const AuthProvider: React.FC = ({ children }) => {
     name: string,
     password: string,
     passwordConfirmation: string,
-  ): Promise<RegisterReturnInterface> => {
+  ): Promise<AuthReturnInterface> => {
     if (password !== passwordConfirmation) {
       return { result: 'ERROR', message: 'Passwords must match' };
     }
@@ -47,12 +48,33 @@ const AuthProvider: React.FC = ({ children }) => {
     return { result: 'SUCCESS' };
   };
 
+  const login = async (
+    email: string,
+    password: string,
+  ): Promise<AuthReturnInterface> => {
+    if (email === '') {
+      return { result: 'ERROR', message: 'You must type a valid e-mail' };
+    }
+    if (password === '') {
+      return { result: 'ERROR', message: 'You must type a valid password' };
+    }
+
+    const result = await firebase.login(email, password);
+    if (!result) {
+      return { result: 'ERROR', message: 'Failed to log in to your account' };
+    }
+
+    setUser(result);
+    return { result: 'SUCCESS' };
+  };
+
   return (
     <AuthContext.Provider
       value={{
         isLogged: !!user,
         user,
         register,
+        login,
       }}
     >
       {children}

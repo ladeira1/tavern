@@ -17,7 +17,7 @@ const Header: React.FC = () => {
         <Buttons logged={isLogged}>
           <Link to="/user">Profile</Link>
           <Link to="/item">Create Item</Link>
-          <Link to="/register" className="auth">
+          <Link to="/login" className="auth">
             {isLogged ? 'Logout' : 'Login'}
           </Link>
         </Buttons>

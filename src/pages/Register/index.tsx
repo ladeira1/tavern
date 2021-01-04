@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import Header from '../../components/Header';
 import {
   Container,
@@ -9,13 +10,18 @@ import {
   LockIcon,
   SubmitButton,
   Title,
+  LinkElement,
 } from '../../shared/styles/formStyles';
 import FormTextInput from '../../components/FormTextInput';
 
 import { useAuth } from '../../contexts/auth';
 
 const Register: React.FC = () => {
-  const { user, register } = useAuth();
+  const { isLogged, register } = useAuth();
+
+  if (isLogged) {
+    return <Redirect to="/" />;
+  }
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -27,7 +33,14 @@ const Register: React.FC = () => {
   ) => {
     event.preventDefault();
 
-    await register(email, name, password, passwordConfirmation);
+    const response = await register(
+      email,
+      name,
+      password,
+      passwordConfirmation,
+    );
+    // eslint-disable-next-line no-console
+    console.log(response);
     setEmail('');
     setName('');
     setPassword('');
@@ -37,7 +50,6 @@ const Register: React.FC = () => {
   return (
     <>
       <Header />
-      <h1>{user?.name}</h1>
       <Container>
         <Content>
           <Form onSubmit={handleCreateAccount}>
@@ -72,6 +84,9 @@ const Register: React.FC = () => {
             <SubmitButton type="submit">
               <h2 className="buttonText">Create Account</h2>
             </SubmitButton>
+            <LinkElement to="/login">
+              Already have an account? Log in!
+            </LinkElement>
           </Form>
           <Title>Create your account</Title>
         </Content>
