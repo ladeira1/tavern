@@ -1,6 +1,6 @@
 import React from 'react';
 import ItemInterface from '../../models/ItemInterface';
-import { useBag } from '../../contexts/bag';
+import { useBag } from '../../contexts/Bag';
 import {
   Container,
   ContentWrapper,

@@ -14,7 +14,7 @@ import {
 } from '../../shared/styles/formStyles';
 import FormTextInput from '../../components/FormTextInput';
 
-import { useAuth } from '../../contexts/auth';
+import { useAuth } from '../../contexts/Auth';
 
 const Login: React.FC = () => {
   const { isLogged, login } = useAuth();

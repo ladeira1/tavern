@@ -76,6 +76,7 @@ export const Buttons = styled.nav<{ logged: boolean }>`
     color: ${props => (props.logged ? colors.red : colors.green)};
     font-family: 'Ubuntu';
     font-size: 1.6em;
+    width: ${props => (props.logged ? '19%' : 'auto')};
 
     :hover {
       cursor: pointer;

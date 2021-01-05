@@ -15,8 +15,8 @@ import colors from '../../assets/colors';
 
 export const Container = styled.div`
   width: 100vw;
-  height: 100%;
-  min-height: 100vh;
+  height: 90%;
+  min-height: 92vh;
   display: flex;
   justify-content: center;
   align-items: center;

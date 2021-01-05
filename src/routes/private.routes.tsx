@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
 
-import { useAuth } from '../contexts/auth';
+import { useAuth } from '../contexts/Auth';
 
 interface RouteInterface {
   path: string;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Wrapper, LeftColumn, RightColumn } from './styles';
-import { useBag } from '../../contexts/bag';
+import { useBag } from '../../contexts/Bag';
 
 import Header from '../../components/Header';
 import NewItems from '../../components/NewItems';

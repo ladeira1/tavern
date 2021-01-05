@@ -2,7 +2,7 @@
 // eslint-disable implicit-arrow-linebreak
 import React from 'react';
 import { AnimatePresence } from 'framer-motion';
-import { useBag } from '../../contexts/bag';
+import { useBag } from '../../contexts/Bag';
 import {
   Container,
   Wrapper,

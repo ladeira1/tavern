@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import BagItem from '../BagItem';
-import { useBag } from '../../contexts/bag';
+import { useBag } from '../../contexts/Bag';
 import {
   Container,
   Header,

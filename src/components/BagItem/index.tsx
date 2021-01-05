@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import BagItemInterface from '../../models/BagItemInterface';
-import { useBag } from '../../contexts/bag';
+import { useBag } from '../../contexts/Bag';
 import {
   ItemContainer,
   ItemHeader,

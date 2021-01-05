@@ -14,7 +14,7 @@ import {
 } from '../../shared/styles/formStyles';
 import FormTextInput from '../../components/FormTextInput';
 
-import { useAuth } from '../../contexts/auth';
+import { useAuth } from '../../contexts/Auth';
 
 const Register: React.FC = () => {
   const { isLogged, register } = useAuth();

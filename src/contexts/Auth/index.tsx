@@ -1,28 +1,11 @@
 import React, { useContext, useState, createContext } from 'react';
-import firebase from '../services/firebase';
+import firebase from '../../services/firebase';
 
-interface UserInterface {
-  uid: string;
-  name: string;
-  email: string;
-}
-
-interface AuthInterface {
-  isLogged: boolean;
-  user: UserInterface | null;
-  register: (
-    email: string,
-    name: string,
-    password: string,
-    passwordConfirmation: string,
-  ) => Promise<AuthReturnInterface>;
-  login: (email: string, password: string) => Promise<AuthReturnInterface>;
-}
-
-interface AuthReturnInterface {
-  result: 'SUCCESS' | 'ERROR';
-  message?: string;
-}
+import {
+  AuthInterface,
+  UserInterface,
+  AuthReturnInterface,
+} from './interfaces';
 
 const AuthContext = createContext<AuthInterface>({} as AuthInterface);
 
@@ -68,6 +51,10 @@ const AuthProvider: React.FC = ({ children }) => {
     return { result: 'SUCCESS' };
   };
 
+  const logout = () => {
+    setUser(null);
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -75,6 +62,7 @@ const AuthProvider: React.FC = ({ children }) => {
         user,
         register,
         login,
+        logout,
       }}
     >
       {children}

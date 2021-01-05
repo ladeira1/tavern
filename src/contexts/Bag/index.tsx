@@ -1,19 +1,9 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-param-reassign */
 import React, { createContext, useContext, useState } from 'react';
-import ItemInterface from '../models/ItemInterface';
-import BagItemInterface from '../models/BagItemInterface';
-
-interface BagContextData {
-  bagItems: BagItemInterface[];
-  totalPrice: number;
-  sortBagItems: () => BagItemInterface[];
-  addItemToBag: (item: ItemInterface) => void;
-  addCommentToItem: (comment: string, item: BagItemInterface) => void;
-  readStoragedItems: () => void;
-  lowerBagItemQuantity: (item: BagItemInterface) => void;
-  increaseBagItemQuantity: (item: BagItemInterface) => void;
-}
+import ItemInterface from '../../models/ItemInterface';
+import BagItemInterface from '../../models/BagItemInterface';
+import { BagContextData } from './interfaces';
 
 const BagContext = createContext<BagContextData>({} as BagContextData);
 
