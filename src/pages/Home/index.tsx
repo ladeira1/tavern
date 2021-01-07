@@ -41,25 +41,23 @@ const Home: React.FC = () => {
   }, []);
 
   return (
-    <>
+    <Container>
       <Header />
-      <Container>
-        <Wrapper>
-          <LeftColumn>
-            <NewItems items={newItems} />
-            <Items items={burgers} title="Burgers" />
-            <Items items={sideDishes} title="Side dishes" />
-            <Items items={drinks} title="Drinks" />
-            <div className="empty" />
-          </LeftColumn>
+      <Wrapper>
+        <LeftColumn>
+          <NewItems items={newItems} />
+          <Items items={burgers} title="Burgers" />
+          <Items items={sideDishes} title="Side dishes" />
+          <Items items={drinks} title="Drinks" />
+          <div className="empty" />
+        </LeftColumn>
 
-          <RightColumn>
-            <Bag />
-          </RightColumn>
-        </Wrapper>
-        <MobileBag />
-      </Container>
-    </>
+        <RightColumn>
+          <Bag />
+        </RightColumn>
+      </Wrapper>
+      <MobileBag />
+    </Container>
   );
 };
 

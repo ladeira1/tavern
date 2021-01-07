@@ -14,6 +14,14 @@ import { IoFastFoodOutline } from 'react-icons/io5';
 import colors from '../../assets/colors';
 
 export const Container = styled.div`
+  height: 100%;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: hidden;
+`;
+export const Wrapper = styled.div`
   width: 100vw;
   height: 90%;
   min-height: 92vh;

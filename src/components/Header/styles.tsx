@@ -8,7 +8,7 @@ export const Container = styled.main<{ logged: boolean }>`
   background-color: ${colors.primary};
   overflow: hidden;
   position: static;
-  z-index: 10;
+  z-index: 99;
 
   .auth {
     color: ${props => (props.logged ? colors.red : colors.green)};
@@ -96,9 +96,11 @@ export const Buttons = styled.nav`
 `;
 
 export const Menu = styled.nav<{ isClicked: boolean }>`
-  z-index: 99;
+  z-index: 98;
   width: 25px;
   max-width: 25px;
+
+  position: static;
 
   margin-right: 10px;
 
@@ -134,18 +136,15 @@ export const Menu = styled.nav<{ isClicked: boolean }>`
   }
 `;
 export const Settings = styled.div<{ isClicked: boolean }>`
-  transform: translate(${props => (props.isClicked ? '0' : '100%')});
-
-  position: ${props => (props.isClicked ? 'absolute' : 'relative')};
+  position: ${props => (props.isClicked ? 'fixed' : 'relative')};
+  margin-right: transform(${props => (props.isClicked ? '0' : '-100%')});
   top: 0;
   right: 0;
   height: 100%;
   width: 80%;
-  max-width: 300px;
 
-  background: ${colors.background};
-  opacity: 0.7;
-  transition: all linear 0.2s;
+  background: rgb(10, 9, 9, 0.7);
+  transition: all ease-in-out 0.2s;
 
   z-index: 90;
 `;
@@ -164,7 +163,7 @@ export const ButtonArea = styled.div<{ isLogged: boolean }>`
   padding-right: 10px;
 
   a {
-    background-color: ${colors.primary};
+    background-color: transparent;
     color: ${colors.text};
     margin-top: 4%;
     text-decoration: none;
@@ -172,7 +171,7 @@ export const ButtonArea = styled.div<{ isLogged: boolean }>`
   }
 
   .auth {
-    background-color: ${colors.primary};
+    background-color: transparent;
     margin-top: 4%;
     text-decoration: none;
     font-size: 2em;

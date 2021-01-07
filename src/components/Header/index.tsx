@@ -31,7 +31,9 @@ const Header: React.FC = () => {
     <Container logged={isLogged}>
       <Wrapper>
         <Empty />
-        <Title>TAVERN</Title>
+        <Link to="/">
+          <Title>TAVERN</Title>
+        </Link>
         <Buttons>
           <Link to="/user">Profile</Link>
           <Link to="/item">Create Item</Link>

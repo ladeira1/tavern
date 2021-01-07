@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import Header from '../../components/Header';
 import {
   Container,
+  Wrapper,
   Content,
   Form,
   UserIcon,
@@ -48,9 +49,9 @@ const Register: React.FC = () => {
   };
 
   return (
-    <>
+    <Container>
       <Header />
-      <Container>
+      <Wrapper>
         <Content>
           <Form onSubmit={handleCreateAccount}>
             <FormTextInput
@@ -90,8 +91,8 @@ const Register: React.FC = () => {
           </Form>
           <Title>Create your account</Title>
         </Content>
-      </Container>
-    </>
+      </Wrapper>
+    </Container>
   );
 };
 

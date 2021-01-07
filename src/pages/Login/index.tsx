@@ -5,6 +5,7 @@ import Header from '../../components/Header';
 import {
   Container,
   Content,
+  Wrapper,
   Form,
   MailIcon,
   LockIcon,
@@ -37,9 +38,9 @@ const Login: React.FC = () => {
   };
 
   return (
-    <>
-      <Header />
-      <Container>
+    <Container>
+      <Header />\
+      <Wrapper>
         <Content>
           <Form onSubmit={handleLogin}>
             <FormTextInput
@@ -65,8 +66,8 @@ const Login: React.FC = () => {
           </Form>
           <Title>Log in to your account</Title>
         </Content>
-      </Container>
-    </>
+      </Wrapper>
+    </Container>
   );
 };
 

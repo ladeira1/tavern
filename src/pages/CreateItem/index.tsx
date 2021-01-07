@@ -3,6 +3,7 @@ import Header from '../../components/Header';
 import FormTextInput from '../../components/FormTextInput';
 import {
   Container,
+  Wrapper,
   Title,
   Form,
   SubmitButton,
@@ -57,9 +58,9 @@ const CreateItem: React.FC = () => {
   };
 
   return (
-    <>
+    <Container>
       <Header />
-      <Container>
+      <Wrapper>
         <Content>
           <Title>Create a new item</Title>
           <Form onSubmit={handleCreateItem}>
@@ -133,8 +134,8 @@ const CreateItem: React.FC = () => {
             </SubmitButton>
           </Form>
         </Content>
-      </Container>
-    </>
+      </Wrapper>
+    </Container>
   );
 };
 
