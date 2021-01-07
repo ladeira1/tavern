@@ -22,7 +22,7 @@ export const Container = styled.main<{ logged: boolean }>`
 `;
 
 export const Wrapper = styled.article`
-  width: 80%;
+  width: 98%;
   max-width: 1200px;
   height: 100%;
   margin: 0 auto;
@@ -30,26 +30,27 @@ export const Wrapper = styled.article`
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
-  font-size: 10px;
+  font-size: 7px;
 
-  @media screen and (max-width: 810px) {
+  @media screen and (min-width: 810px) {
+    font-size: 10px;
+  }
+
+  @media screen and (min-width: 540px) {
     width: 95%;
   }
 
-  @media screen and (max-width: 540px) {
+  @media screen and (min-width: 380px) {
     font-size: 8px;
-  }
-
-  @media screen and (max-width: 380px) {
-    font-size: 7px;
   }
 `;
 
 export const Empty = styled.div`
   flex: 1;
 
-  @media screen and (max-width: 810px) {
+  @media screen and (min-width: 810px) {
     display: none;
+    background: red;
   }
 `;
 
@@ -71,30 +72,30 @@ export const Buttons = styled.nav`
     color: ${colors.text};
     font-family: 'Ubuntu';
     font-size: 1.6em;
-    margin-right: 3em;
+    margin-left: 3em;
+    display: none;
 
     :hover {
       cursor: pointer;
     }
 
-    @media screen and (max-width: 400px) {
-      margin-right: 1em;
-    }
-
-    @media screen and (max-width: 810px) {
-      display: none;
+    @media screen and (min-width: 810px) {
+      display: block;
     }
   }
 
   .auth {
-    @media screen and (max-width: 810px) {
-      display: none;
+    display: none;
+
+    @media screen and (min-width: 810px) {
+      display: block;
+      font-size: 1.6em;
+      margin-left: 3em;
     }
   }
 `;
 
 export const Menu = styled.nav<{ isClicked: boolean }>`
-  display: none;
   z-index: 99;
   width: 25px;
   max-width: 25px;
@@ -128,8 +129,8 @@ export const Menu = styled.nav<{ isClicked: boolean }>`
     transform: ${props => (props.isClicked ? 'rotate(-45deg)' : 'rotate(0)')};
   }
 
-  @media screen and (max-width: 810px) {
-    display: block;
+  @media screen and (min-width: 810px) {
+    display: none;
   }
 `;
 export const Settings = styled.div<{ isClicked: boolean }>`
