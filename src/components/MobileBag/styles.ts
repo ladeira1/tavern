@@ -10,7 +10,7 @@ export const Container = styled.div`
   max-height: 80%;
   left: 0;
   bottom: 0;
-  z-index: 99;
+  z-index: 89;
   font-size: 10px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
