@@ -55,7 +55,7 @@ const Header: React.FC = () => {
           <Settings isClicked={isOpen}>
             <ButtonArea isLogged={isLogged}>
               <Link to="/profile">Edit Profile</Link>
-              <Link to="/cart">Cart</Link>
+              <Link to="/item">Create Item</Link>
               {isLogged ? (
                 <button type="button" onClick={handleLogout} className="auth">
                   Logout
