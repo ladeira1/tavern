@@ -47,30 +47,29 @@ const Header: React.FC = () => {
             </Link>
           )}
         </Buttons>
+
         <Menu onClick={toggleMenu} isClicked={isOpen}>
           <div />
           <div />
           <div />
         </Menu>
-
-        {isOpen && (
-          <Settings isClicked={isOpen}>
-            <ButtonArea isLogged={isLogged}>
-              <Link to="/profile">Edit Profile</Link>
-              <Link to="/item">Create Item</Link>
-              {isLogged ? (
-                <button type="button" onClick={handleLogout} className="auth">
-                  Logout
-                </button>
-              ) : (
-                <Link to="/login" className="auth">
-                  login
-                </Link>
-              )}
-            </ButtonArea>
-          </Settings>
-        )}
       </Wrapper>
+
+      <Settings isClicked={isOpen}>
+        <ButtonArea isLogged={isLogged}>
+          <Link to="/profile">Edit Profile</Link>
+          <Link to="/item">Create Item</Link>
+          {isLogged ? (
+            <button type="button" onClick={handleLogout} className="auth">
+              Logout
+            </button>
+          ) : (
+            <Link to="/login" className="auth">
+              login
+            </Link>
+          )}
+        </ButtonArea>
+      </Settings>
     </Container>
   );
 };

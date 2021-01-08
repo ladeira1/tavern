@@ -4,12 +4,12 @@ import colors from '../../assets/colors';
 export const Container = styled.main<{ logged: boolean }>`
   width: 100vw;
   height: 8vh;
+  max-height: 8vh;
   min-height: 70px;
   background-color: ${colors.primary};
   overflow: hidden;
-  position: static;
+  position: absolute;
   z-index: 99;
-
   .auth {
     color: ${props => (props.logged ? colors.red : colors.green)};
     font-family: 'Ubuntu';
@@ -29,8 +29,9 @@ export const Wrapper = styled.article`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   font-size: 7px;
+  text-align: center;
 
   @media screen and (min-width: 810px) {
     font-size: 10px;
@@ -50,7 +51,6 @@ export const Empty = styled.div`
 
   @media screen and (min-width: 810px) {
     display: none;
-    background: red;
   }
 `;
 
@@ -60,6 +60,7 @@ export const Title = styled.h1`
   font-weight: normal;
   font-family: 'Fredericka the Great', cursive;
   color: ${colors.text};
+  margin: 0 auto;
 `;
 
 export const Buttons = styled.nav`
@@ -90,7 +91,7 @@ export const Buttons = styled.nav`
     @media screen and (min-width: 810px) {
       display: block;
       font-size: 1.6em;
-      margin-left: 3em;
+      margin-right: 3em;
     }
   }
 `;
@@ -100,9 +101,8 @@ export const Menu = styled.nav<{ isClicked: boolean }>`
   width: 25px;
   max-width: 25px;
 
-  position: static;
-
-  margin-right: 10px;
+  position: absolute;
+  right: 15px;
 
   cursor: pointer;
 
@@ -137,24 +137,26 @@ export const Menu = styled.nav<{ isClicked: boolean }>`
 `;
 export const Settings = styled.div<{ isClicked: boolean }>`
   position: ${props => (props.isClicked ? 'fixed' : 'relative')};
-  margin-right: transform(${props => (props.isClicked ? '0' : '-100%')});
   top: 0;
   right: 0;
   height: 100%;
+  max-height: 100vh;
   width: 80%;
-
   background: rgb(10, 9, 9, 0.7);
-  transition: all ease-in-out 0.2s;
+  transition: all ease-in-out 0.3s;
 
   z-index: 90;
+
+  transform: translate(${props => (props.isClicked ? '0' : '150%')});
+  margin-right: ${props => (props.isClicked ? '0' : '-100%')};
 `;
 export const ButtonArea = styled.div<{ isLogged: boolean }>`
   margin-right: 10px;
   margin-top: 20%;
-  display: flex;
   flex-direction: column;
   align-items: flex-end;
-
+  display: flex;
+  flex-direction: column;
   font-size: 1.2em;
   font-family: 'Oswald', sans-serif;
   color: ${colors.text};
@@ -167,19 +169,12 @@ export const ButtonArea = styled.div<{ isLogged: boolean }>`
     color: ${colors.text};
     margin-top: 4%;
     text-decoration: none;
-    font-size: 2em;
   }
 
   .auth {
+    font-size: 1em;
     background-color: transparent;
     margin-top: 4%;
     text-decoration: none;
-    font-size: 2em;
-  }
-
-  span {
-    font-size: 1rem;
-    margin-top: 10px;
-    color: ${colors.white};
   }
 `;

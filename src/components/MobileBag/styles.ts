@@ -5,7 +5,7 @@ import colors from '../../assets/colors';
 export const Container = styled.div`
   background: ${colors.primary};
   padding: 0 10px;
-  position: fixed;
+  position: absolute;
   width: 100%;
   max-height: 80%;
   left: 0;
