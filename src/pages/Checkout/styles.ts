@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import colors from '../../assets/colors';
 
 export const Content = styled.div`
   max-width: 1200px;
