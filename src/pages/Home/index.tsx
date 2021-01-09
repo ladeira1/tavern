@@ -47,7 +47,7 @@ const Home: React.FC = () => {
         <LeftColumn>
           <NewItems items={newItems} />
           <Items items={burgers} title="Burgers" />
-          <Items items={sideDishes} title="Side dishes" />
+          <Items items={sideDishes} title="Sides" />
           <Items items={drinks} title="Drinks" />
           <div className="empty" />
         </LeftColumn>

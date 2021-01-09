@@ -10,6 +10,7 @@ export const Content = styled.div`
   display: flex;
   flex-direction: row;
   overflow-x: hidden;
+  margin-top: 2%;
 
   ::-webkit-scrollbar {
     display: none;
@@ -36,6 +37,7 @@ export const LeftColumn = styled.article`
 
 export const RightColumn = styled.article`
   flex: 2;
+  padding-top: 1.5%;
 
   @media screen and (max-width: 1144px) {
     display: none;

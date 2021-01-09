@@ -5,13 +5,12 @@ export const Container = styled.div`
   background: ${colors.bag};
   max-width: 350px;
   width: 90%;
-  max-height: 630px;
+  max-height: 70vh;
   display: flex;
   flex-direction: column;
   border-radius: 5px;
   border-left: 2px solid ${colors.line};
   position: fixed;
-  margin-top: 2%;
 
   font-size: 10px;
 `;
@@ -33,7 +32,7 @@ export const ItemsWrapper = styled.section`
   justify-content: flex-start;
   overflow-y: scroll;
   min-height: 40vh;
-  max-height: 40vh;
+  max-height: 500px;
 
   ::-webkit-scrollbar {
     width: 3px;
