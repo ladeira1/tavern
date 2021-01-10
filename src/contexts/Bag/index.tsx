@@ -1,5 +1,4 @@
 /* eslint-disable prettier/prettier */
-/* eslint-disable no-param-reassign */
 import React, { createContext, useContext, useState } from 'react';
 import ItemInterface from '../../models/ItemInterface';
 import BagItemInterface from '../../models/BagItemInterface';
@@ -14,15 +13,10 @@ const BagProvider: React.FC = ({ children }) => {
   const [totalPrice, setTotalPrice] = useState<number>(0);
 
   const saveStoragedItems = (
-    sourceItems: BagItemInterface[],
-    item: BagItemInterface | null,
+    items: BagItemInterface[],
   ) => {
-    const newStoragedItems =
-      item !== null ? sourceItems.concat(item) : sourceItems;
-    localStorage.setItem('@bag:bagItem', JSON.stringify(newStoragedItems));
+    localStorage.setItem('@bag:bagItem', JSON.stringify(items));
   };
-
-  const sortBagItems = () => bagItems.sort((a, b) => (a.item.name > b.item.name ? 1 : -1));
 
   const updateTotalPrice = (price: number) => {
     localStorage.setItem(
@@ -33,66 +27,36 @@ const BagProvider: React.FC = ({ children }) => {
   };
 
   const addItemToBag = (item: ItemInterface) => {
-    const data = {
-      item,
-      quantity: 1,
-      comment: '',
-    };
-    let existsInBag: BagItemInterface | null = null;
-    bagItems.forEach(bagItem => {
+    let flag = false;
+    const updatedBag = bagItems.map(bagItem => {
       if (bagItem.item.id === item.id) {
-        existsInBag = {
-          item: bagItem.item,
-          quantity: bagItem.quantity + 1,
-          comment: bagItem.comment,
-        };
+        flag = true;
+        return { ...bagItem, quantity: bagItem.quantity + 1 };
       }
+
+      return bagItem;
     });
 
-    if (existsInBag) {
-      const updatedItems: BagItemInterface[] = [];
-
-      bagItems.forEach(bagItem => {
-        if (bagItem.item.id !== item.id) {
-          updatedItems.push(bagItem);
-        }
-      });
-
-      setBagItems([...updatedItems, existsInBag]);
-      saveStoragedItems(updatedItems, existsInBag);
-    } else {
-      setBagItems([...bagItems, data]);
-      saveStoragedItems(bagItems, data);
+    if (!flag) {
+      updatedBag.push({ item, quantity: 1, comment: '' });
     }
 
+    setBagItems(updatedBag);
+    saveStoragedItems(updatedBag);
     updateTotalPrice(item.price);
   };
 
   const addCommentToItem = (comment: string, item: BagItemInterface) => {
-    const temp: BagItemInterface[] = [];
-
-    bagItems.forEach(bagItem => {
+    const updatedBag = bagItems.map(bagItem => {
       if (bagItem === item) {
-        const newData = {
-          item: {
-            id: item.item.id,
-            name: item.item.name,
-            price: item.item.price,
-            details: item.item.details,
-            imageUrl: item.item.imageUrl,
-            type: item.item.type,
-          },
-          quantity: item.quantity,
-          comment,
-        };
-        temp.push(newData);
-      } else {
-        temp.push(bagItem);
+        return { ...bagItem, comment };
       }
+
+      return bagItem;
     });
 
-    setBagItems(temp);
-    saveStoragedItems(temp, null);
+    setBagItems(updatedBag);
+    saveStoragedItems(updatedBag);
   };
 
   const readStoragedItems = () => {
@@ -105,49 +69,23 @@ const BagProvider: React.FC = ({ children }) => {
   };
 
   const lowerBagItemQuantity = (item: BagItemInterface) => {
-    const updatedItems: BagItemInterface[] = [];
-
-    bagItems.forEach(bagItem => {
-      if (bagItem.item.id !== item.item.id) {
-        updatedItems.push(bagItem);
-      }
-    });
+    let updatedBag: BagItemInterface[] = [];
 
     if (item.quantity > 1) {
-      const temp = {
-        item: item.item,
-        quantity: item.quantity - 1,
-        comment: item.comment,
-      };
+      updatedBag = bagItems.map(bagItem => {
+        if (bagItem.item.id === item.item.id) {
+          return { ...item, quantity: item.quantity - 1 };
+        }
 
-      setBagItems([...updatedItems, temp]);
-      saveStoragedItems(updatedItems, temp);
+        return bagItem;
+      });
     } else {
-      setBagItems(updatedItems);
-      saveStoragedItems(updatedItems, null);
+      updatedBag = bagItems.filter(bagItem => bagItem.item.id !== item.item.id);
     }
 
+    setBagItems(updatedBag);
+    saveStoragedItems(updatedBag);
     updateTotalPrice(-item.item.price);
-  };
-
-  const increaseBagItemQuantity = (item: BagItemInterface) => {
-    const updatedItems: BagItemInterface[] = [];
-
-    bagItems.forEach(bagItem => {
-      if (bagItem.item.id !== item.item.id) {
-        updatedItems.push(bagItem);
-      }
-    });
-
-    const temp = {
-      item: item.item,
-      quantity: item.quantity + 1,
-      comment: item.comment,
-    };
-
-    setBagItems([...updatedItems, temp]);
-    saveStoragedItems(updatedItems, temp);
-    updateTotalPrice(item.item.price);
   };
 
   return (
@@ -155,12 +93,10 @@ const BagProvider: React.FC = ({ children }) => {
       value={{
         bagItems,
         totalPrice,
-        sortBagItems,
         addItemToBag,
         addCommentToItem,
         readStoragedItems,
         lowerBagItemQuantity,
-        increaseBagItemQuantity,
       }}
     >
       {children}

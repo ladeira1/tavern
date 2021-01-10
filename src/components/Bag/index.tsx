@@ -20,7 +20,6 @@ const Bag: React.FC = () => {
   const {
     bagItems,
     totalPrice,
-    sortBagItems,
   } = useBag();
 
   const history = useHistory();
@@ -36,7 +35,7 @@ const Bag: React.FC = () => {
         <ItemsWrapper>
           <AnimatePresence initial={false}>
             {bagItems.length &&
-              sortBagItems().map(bagItem => (
+              bagItems.map(bagItem => (
                 <BagItem bagItem={bagItem} key={bagItem.item.id} />
               ))}
           </AnimatePresence>

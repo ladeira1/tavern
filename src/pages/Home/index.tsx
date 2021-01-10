@@ -29,6 +29,7 @@ const Home: React.FC = () => {
     async function getItems() {
       const items = await firebase.getItems();
       if (items.length) {
+        // must change these useStates for useReducer
         setBurgers(items.filter(item => item.type === 'burger'));
         setSideDishes(items.filter(item => item.type === 'sideDish'));
         setDrinks(items.filter(item => item.type === 'drink'));

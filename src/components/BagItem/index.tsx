@@ -34,11 +34,7 @@ const variants = {
 };
 
 const BagItem: React.FC<{ bagItem: BagItemInterface }> = ({ bagItem }) => {
-  const {
-    addCommentToItem,
-    lowerBagItemQuantity,
-    increaseBagItemQuantity,
-  } = useBag();
+  const { addCommentToItem, lowerBagItemQuantity, addItemToBag } = useBag();
 
   const [commentPopup, setCommentPopup] = useState(false);
 
@@ -49,7 +45,7 @@ const BagItem: React.FC<{ bagItem: BagItemInterface }> = ({ bagItem }) => {
   };
 
   const handleIncreaseQuantity = () => {
-    increaseBagItemQuantity(bagItem);
+    addItemToBag(bagItem.item);
   };
 
   const handleAddComment = (text: string) => {

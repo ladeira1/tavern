@@ -13,7 +13,7 @@ import {
 } from './styles';
 
 const MobileBag: React.FC = () => {
-  const { bagItems, sortBagItems, totalPrice } = useBag();
+  const { bagItems, totalPrice } = useBag();
   const [show, setShow] = useState(false);
 
   const handleShowOrCollapseBag = () => {
@@ -37,7 +37,7 @@ const MobileBag: React.FC = () => {
         <AnimatePresence initial={false}>
           <ItemsWrapper>
             {bagItems.length &&
-              sortBagItems().map(bagItem => (
+              bagItems.map(bagItem => (
                 <BagItem bagItem={bagItem} key={bagItem.item.id} />
               ))}
           </ItemsWrapper>
