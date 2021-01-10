@@ -56,7 +56,7 @@ export const Empty = styled.div`
 
 export const Title = styled.h1`
   flex: 1;
-  font-size: 6em;
+  font-size: 8em;
   font-weight: normal;
   font-family: 'Fredericka the Great', cursive;
   color: ${colors.text};

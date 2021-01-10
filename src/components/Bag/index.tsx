@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 // eslint-disable implicit-arrow-linebreak
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { useBag } from '../../contexts/Bag';
 import {
@@ -22,6 +23,12 @@ const Bag: React.FC = () => {
     sortBagItems,
   } = useBag();
 
+  const history = useHistory();
+
+  const handleCheckout = () => {
+    history.push('/checkout');
+  };
+
   return (
     <Container>
       <Wrapper>
@@ -36,7 +43,7 @@ const Bag: React.FC = () => {
         </ItemsWrapper>
         <Footer>
           <Price>{totalPrice.toFixed(2)}</Price>
-          <CheckoutButton>
+          <CheckoutButton onClick={handleCheckout}>
             <CheckoutTitle>Checkout</CheckoutTitle>
           </CheckoutButton>
         </Footer>

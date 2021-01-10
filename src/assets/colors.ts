@@ -14,4 +14,5 @@ export default {
   buttonGreen: '#328544',
   buttonHoverGreen: '#2e9f47',
   red: '#c51010',
+  paymentOptions: '#1b1b1d',
 };
