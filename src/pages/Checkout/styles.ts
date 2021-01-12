@@ -18,14 +18,15 @@ export const Container = styled.div`
 export const Wrapper = styled.main`
   max-width: 1200px;
   width: 95%;
-  min-height: 90%;
   margin: 0 auto;
   border-radius: 10px;
   display: flex;
   flex-direction: row;
   overflow-x: hidden;
+  overflow-y: scroll;
   margin-top: calc(8vh + 2%);
   font-size: 10px;
+  margin-bottom: 80px;
 
   ::-webkit-scrollbar {
     display: none;
@@ -235,7 +236,4 @@ export const RightColumn = styled.article`
   @media screen and (max-width: 1144px) {
     display: none;
   }
-`;
-export const Empty = styled.footer`
-  min-height: 40px;
 `;

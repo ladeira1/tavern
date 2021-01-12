@@ -17,7 +17,6 @@ import {
   CheckoutButton,
   CheckoutTitle,
   RightColumn,
-  Empty,
 } from './styles';
 import { useBag } from '../../contexts/Bag';
 
@@ -122,7 +121,6 @@ const Checkout: React.FC = () => {
             <CheckoutButton type="submit">
               <CheckoutTitle>Checkout</CheckoutTitle>
             </CheckoutButton>
-            <Empty />
           </Form>
         </LeftColumn>
         <RightColumn>

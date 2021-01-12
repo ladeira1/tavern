@@ -6,7 +6,7 @@ import colors from '../../assets/colors';
 export const Container = styled.div<{ isExpanded: boolean }>`
   background: ${colors.primary};
   padding: 0 10px;
-  position: absolute;
+  position: fixed;
   width: 100%;
   max-height: ${props => (props.isExpanded ? '80%' : '70px')};
   left: 0;
