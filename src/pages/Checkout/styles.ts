@@ -195,14 +195,23 @@ export const Text = styled.span`
   .editable:hover {
     cursor: pointer;
   }
+
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 `;
-export const Price = styled.span`
+export const Price = styled.input`
   font-family: 'Oswald', sans-serif;
   font-size: 1em;
   color: ${colors.formSecondary};
+  text-align: center;
   background-color: ${colors.primary};
   padding: 8px;
   border-radius: 5px;
+  margin-left: 10px;
+  width: 10%;
 `;
 export const CheckoutButton = styled.button`
   background: ${colors.text};

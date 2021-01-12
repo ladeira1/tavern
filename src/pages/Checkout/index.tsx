@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import {
   Container,
   Wrapper,
@@ -8,7 +9,7 @@ import {
   Subtitle,
   OptionsContainer,
   Option,
-  MapContainer,
+  // MapContainer,
   PaymentOptionsContainer,
   PaymentOption,
   PaymentInformation,
@@ -25,18 +26,22 @@ import Bag from '../../components/Bag';
 import MobileBag from '../../components/MobileBag';
 import ZipCodeForm from '../../components/ZipCodeForm';
 
+import mapIcon from '../../assets/mapIcon';
+
 type Destination = 'CURRENT_LOCATION' | 'ZIPCODE';
 type PaymentMethod = 'CASH' | 'CREDIT_CARD';
 
 const Checkout: React.FC = () => {
-  const { readStoragedItems } = useBag();
+  const { readStoragedItems, totalPrice } = useBag();
 
+  const [position, setPosition] = useState({ latitude: 0, longitude: 0 });
   const [destinationOption, setDestinationOption] = useState<Destination>(
-    'CURRENT_LOCATION',
+    'ZIPCODE',
   );
   const [paymentMethodOption, setPaymentMethodOption] = useState<PaymentMethod>(
     'CASH',
   );
+  const [change, setChange] = useState(totalPrice);
 
   const handleDestinationChange = (option: Destination) => {
     if (option === destinationOption) {
@@ -53,7 +58,15 @@ const Checkout: React.FC = () => {
     setPaymentMethodOption(option);
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    const getUserLocation = async () => {
+      navigator.geolocation.getCurrentPosition(location => {
+        const { latitude, longitude } = location.coords;
+        setPosition({ latitude, longitude });
+      });
+    };
+
+    getUserLocation();
     readStoragedItems();
   }, []);
 
@@ -68,19 +81,35 @@ const Checkout: React.FC = () => {
               <Subtitle>Select destination</Subtitle>
               <OptionsContainer>
                 <Option
-                  isCurrent={destinationOption === 'CURRENT_LOCATION'}
-                  onClick={() => handleDestinationChange('CURRENT_LOCATION')}
-                >
-                  Current location
-                </Option>
-                <Option
                   isCurrent={destinationOption === 'ZIPCODE'}
                   onClick={() => handleDestinationChange('ZIPCODE')}
                 >
                   Zip code
                 </Option>
+                <Option
+                  isCurrent={destinationOption === 'CURRENT_LOCATION'}
+                  onClick={() => handleDestinationChange('CURRENT_LOCATION')}
+                >
+                  Current location
+                </Option>
               </OptionsContainer>
-              {destinationOption === 'CURRENT_LOCATION' && <MapContainer />}
+              {destinationOption === 'CURRENT_LOCATION' && (
+                <MapContainer
+                  center={[position.latitude, position.longitude]}
+                  zoom={16}
+                  scrollWheelZoom={false}
+                  style={{ width: '100%', height: 247, borderRadius: '5px' }}
+                >
+                  <TileLayer
+                    url={`https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`}
+                  />
+                  <Marker
+                    interactive={false}
+                    icon={mapIcon}
+                    position={[position.latitude, position.longitude]}
+                  />
+                </MapContainer>
+              )}
               {destinationOption === 'ZIPCODE' && <ZipCodeForm />}
             </ItemContainer>
             <ItemContainer>
@@ -103,17 +132,29 @@ const Checkout: React.FC = () => {
               </PaymentOptionsContainer>
               {paymentMethodOption === 'CREDIT_CARD' && (
                 <PaymentInformation>
-                  <Text>Value: 45.90</Text>
+                  <Text>Value: {totalPrice}</Text>
                 </PaymentInformation>
               )}
               {paymentMethodOption === 'CASH' && (
                 <PaymentInformation>
-                  <Text>Value: 50.00</Text>
+                  <Text>Value: {totalPrice}</Text>
                   <Text>
-                    Change for: <Price className="editable">100.00</Price>
+                    Change for:
+                    <Price
+                      className="editable"
+                      type="number"
+                      value={change.toFixed(2)}
+                      onChange={e => setChange(Number(e.target.value))}
+                    />
                   </Text>
                   <Text>
-                    Change: <Price>50.00</Price>
+                    Change:{' '}
+                    <Price
+                      readOnly
+                      value={(change - totalPrice).toFixed(2)}
+                      type="number"
+                      contentEditable={false}
+                    />
                   </Text>
                 </PaymentInformation>
               )}
