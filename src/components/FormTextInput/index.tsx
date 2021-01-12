@@ -16,7 +16,7 @@ const handleInputBlur = (
 };
 
 interface PropsInterface {
-  Icon: StyledComponent<any, any, any>;
+  Icon?: StyledComponent<any, any, any>;
   text: string;
   setText: React.Dispatch<React.SetStateAction<string>>;
   placeholder: string;
@@ -39,8 +39,9 @@ const FormTextInput: React.FC<PropsInterface> = ({
       onBlur={() => handleInputBlur(setSelected)}
       selected={selected}
     >
-      <Icon selected={selected} />
+      {Icon && <Icon selected={selected} />}
       <Input
+        hasIcon={!!Icon}
         id={text}
         type={type}
         placeholder={placeholder}

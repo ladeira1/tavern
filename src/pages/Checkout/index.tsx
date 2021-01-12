@@ -17,11 +17,13 @@ import {
   CheckoutButton,
   CheckoutTitle,
   RightColumn,
+  Empty,
 } from './styles';
 import { useBag } from '../../contexts/Bag';
 
 import Header from '../../components/Header';
 import Bag from '../../components/Bag';
+import MobileBag from '../../components/MobileBag';
 import ZipCodeForm from '../../components/ZipCodeForm';
 
 type Destination = 'CURRENT_LOCATION' | 'ZIPCODE';
@@ -120,12 +122,14 @@ const Checkout: React.FC = () => {
             <CheckoutButton type="submit">
               <CheckoutTitle>Checkout</CheckoutTitle>
             </CheckoutButton>
+            <Empty />
           </Form>
         </LeftColumn>
         <RightColumn>
           <Bag />
         </RightColumn>
       </Wrapper>
+      <MobileBag />
     </Container>
   );
 };

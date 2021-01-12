@@ -27,8 +27,16 @@ export const Wrapper = styled.main`
     display: none;
   }
 
+  @media screen and (max-width: 1180px) {
+    font-size: 9px;
+  }
+
   @media screen and (max-width: 1144px) {
     width: 100%;
+  }
+
+  @media screen and (max-width: 820px) {
+    font-size: 8px;
   }
 `;
 export const LeftColumn = styled.article`
@@ -41,15 +49,35 @@ export const LeftColumn = styled.article`
 
   @media screen and (max-width: 1144px) {
     max-width: 100%;
+    display: flex;
+    justify-content: center;
   }
 `;
 export const Form = styled.form`
   max-width: 80%;
+
   h1 {
     font-size: 6em;
     font-family: 'Oswald', sans-serif;
     color: ${colors.white};
     margin-bottom: 0.5em;
+
+    @media screen and (max-width: 510px) {
+      font-size: 5em;
+    }
+
+    @media screen and (max-width: 440px) {
+      font-size: 4em;
+    }
+  }
+
+  @media screen and (max-width: 1144px) {
+    max-width: 90%;
+    min-width: 90%;
+  }
+
+  @media screen and (max-width: 510px) {
+    max-width: 90%;
   }
 `;
 export const ItemContainer = styled.div`
@@ -63,6 +91,10 @@ export const Subtitle = styled.h2`
   font-size: 3em;
   color: ${colors.text};
   margin-bottom: 0.5em;
+
+  @media screen and (max-width: 410px) {
+    font-size: 2.5em;
+  }
 `;
 export const OptionsContainer = styled.section`
   display: flex;
@@ -82,6 +114,10 @@ export const Option = styled.span<{ isCurrent: boolean }>`
   margin-right: 1em;
   padding-bottom: 0.2em;
   transition: all ease 0.2s;
+
+  @media screen and (max-width: 530px) {
+    min-width: 100px;
+  }
 
   :hover {
     cursor: ${props => (props.isCurrent ? 'auto' : 'pointer')};
@@ -118,6 +154,7 @@ export const PaymentOption = styled.div<{ isCurrent: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all ease 0.4s;
 
   span {
     font-family: 'Roboto Slab', sans-serif;
@@ -127,11 +164,6 @@ export const PaymentOption = styled.div<{ isCurrent: boolean }>`
 
   :hover {
     cursor: ${props => (props.isCurrent ? 'auto' : 'pointer')};
-
-    span {
-      color: ${colors.white};
-      opacity: 0.5;
-    }
   }
 `;
 export const PaymentInformation = styled.div`
@@ -145,6 +177,10 @@ export const Text = styled.span`
   font-size: 2em;
   color: ${colors.formSecondary};
   line-height: 3em;
+
+  @media screen and (max-width: 450px) {
+    font-size: 1.75em;
+  }
 
   .editable:hover {
     cursor: pointer;
@@ -178,11 +214,19 @@ export const CheckoutTitle = styled.h2`
   font-family: 'Oswald', sans-serif;
   font-size: 2em;
   font-weight: 400;
+
+  @media screen and (max-width: 400px) {
+    font-size: 1.8em;
+  }
 `;
 export const RightColumn = styled.article`
   flex: 2;
   padding-top: 2%;
+
   @media screen and (max-width: 1144px) {
     display: none;
   }
+`;
+export const Empty = styled.footer`
+  min-height: 40px;
 `;

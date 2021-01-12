@@ -15,4 +15,5 @@ export default {
   buttonHoverGreen: '#2e9f47',
   red: '#c51010',
   paymentOptions: '#1b1b1d',
+  checkoutComment: '#7b7b7c',
 };

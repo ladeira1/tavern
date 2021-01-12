@@ -21,36 +21,56 @@ export const InputWrapper = styled.label<{ selected: boolean }>`
   user-select: none; /* Non-prefixed version, currently
     supported by Chrome, Edge, Opera and Firefox */
 `;
-export const Input = styled.input<{ selected: boolean }>`
+export const Input = styled.input<{ selected: boolean; hasIcon: boolean }>`
   flex: 1;
   height: 60px;
-  padding: 1%;
+  padding: ${props => (props.hasIcon ? '1%' : '20px')};
   width: 100%;
 
   font-size: 18px;
   font-family: 'Ubuntu', sans-serif;
   color: ${props => (props.selected ? colors.white : colors.formSecondary)};
 
+  @media screen and (max-width: 560px) {
+    font-size: 13px;
+  }
+
   ::-webkit-input-placeholder {
     color: ${props => (props.selected ? colors.white : colors.formSecondary)};
     font-size: 18px;
     font-family: 'Ubuntu', sans-serif;
+
+    @media screen and (max-width: 560px) {
+      font-size: 13px;
+    }
   }
 
   ::-moz-placeholder {
     color: ${props => (props.selected ? colors.white : colors.formSecondary)};
     font-size: 18px;
     font-family: 'Ubuntu', sans-serif;
+
+    @media screen and (max-width: 560px) {
+      font-size: 13px;
+    }
   }
   :-ms-input-placeholder {
     color: ${props => (props.selected ? colors.white : colors.formSecondary)};
     font-size: 18px;
     font-family: 'Ubuntu', sans-serif;
+
+    @media screen and (max-width: 560px) {
+      font-size: 13px;
+    }
   }
   :-moz-placeholder {
     color: ${props => (props.selected ? colors.white : colors.formSecondary)};
     font-size: 18px;
     font-family: 'Ubuntu', sans-serif;
+
+    @media screen and (max-width: 560px) {
+      font-size: 13px;
+    }
   }
 
   :focus {
