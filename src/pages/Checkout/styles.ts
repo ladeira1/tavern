@@ -10,6 +10,10 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   overflow: hidden;
+
+  @media screen and (min-width: 1144px) {
+    min-height: 100vh;
+  }
 `;
 export const Wrapper = styled.main`
   max-width: 1200px;
@@ -42,6 +46,7 @@ export const Wrapper = styled.main`
 export const LeftColumn = styled.article`
   flex: 7;
   max-width: 70%;
+  height: 100%;
 
   .empty {
     min-height: 80px;

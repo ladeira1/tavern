@@ -8,6 +8,10 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   overflow: hidden;
+
+  @media screen and (min-width: 1144px) {
+    min-height: 100vh;
+  }
 `;
 
 export const Wrapper = styled.main`
