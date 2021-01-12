@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 import { FiShoppingBag } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 import colors from '../../assets/colors';
 
-export const Container = styled.div`
+export const Container = styled.div<{ isExpanded: boolean }>`
   background: ${colors.primary};
   padding: 0 10px;
   position: absolute;
   width: 100%;
-  max-height: 80%;
+  max-height: ${props => (props.isExpanded ? '80%' : '70px')};
   left: 0;
   bottom: 0;
   z-index: 89;
@@ -67,7 +68,7 @@ export const Price = styled.h2`
 export const ItemsWrapper = styled.section`
   overflow-y: scroll;
 `;
-export const CheckoutButton = styled.div`
+export const CheckoutButton = styled(Link)`
   background: ${colors.text};
   width: 100%;
   min-height: 40px;

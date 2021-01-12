@@ -67,6 +67,10 @@ export const Form = styled.form`
     color: ${colors.white};
     margin-bottom: 0.5em;
 
+    @media screen and (max-width:1144px) {
+      margin-top: 20px;
+    }
+
     @media screen and (max-width: 510px) {
       font-size: 5em;
     }

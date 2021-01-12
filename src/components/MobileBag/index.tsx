@@ -27,7 +27,7 @@ const MobileBag: React.FC = () => {
   }, [bagItems]);
 
   return (
-    <Container>
+    <Container isExpanded={show}>
       <Header onClick={handleShowOrCollapseBag}>
         <BagIcon />
         <Price>{totalPrice.toFixed(2)}</Price>
@@ -41,7 +41,7 @@ const MobileBag: React.FC = () => {
                 <BagItem bagItem={bagItem} key={bagItem.item.id} />
               ))}
           </ItemsWrapper>
-          <CheckoutButton>
+          <CheckoutButton to="/checkout">
             <CheckoutTitle>Checkout</CheckoutTitle>
           </CheckoutButton>
         </AnimatePresence>
