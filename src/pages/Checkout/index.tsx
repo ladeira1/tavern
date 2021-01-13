@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React, { useLayoutEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import {
@@ -36,7 +37,7 @@ const Checkout: React.FC = () => {
 
   const [position, setPosition] = useState({ latitude: 0, longitude: 0 });
   const [destinationOption, setDestinationOption] = useState<Destination>(
-    'ZIPCODE',
+    'CURRENT_LOCATION',
   );
   const [paymentMethodOption, setPaymentMethodOption] = useState<PaymentMethod>(
     'CASH',
@@ -81,36 +82,40 @@ const Checkout: React.FC = () => {
               <Subtitle>Select destination</Subtitle>
               <OptionsContainer>
                 <Option
-                  isCurrent={destinationOption === 'ZIPCODE'}
-                  onClick={() => handleDestinationChange('ZIPCODE')}
-                >
-                  Zip code
-                </Option>
-                <Option
                   isCurrent={destinationOption === 'CURRENT_LOCATION'}
                   onClick={() => handleDestinationChange('CURRENT_LOCATION')}
                 >
                   Current location
                 </Option>
-              </OptionsContainer>
-              {destinationOption === 'CURRENT_LOCATION' && (
-                <MapContainer
-                  center={[position.latitude, position.longitude]}
-                  zoom={16}
-                  scrollWheelZoom={false}
-                  style={{ width: '100%', height: 247, borderRadius: '5px' }}
+                <Option
+                  isCurrent={destinationOption === 'ZIPCODE'}
+                  onClick={() => handleDestinationChange('ZIPCODE')}
                 >
-                  <TileLayer
-                    url={`https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`}
-                  />
-                  <Marker
-                    interactive={false}
-                    icon={mapIcon}
-                    position={[position.latitude, position.longitude]}
-                  />
-                </MapContainer>
+                  Zip code
+                </Option>
+              </OptionsContainer>
+              {destinationOption === 'CURRENT_LOCATION' &&
+                position.latitude !== 0 &&
+                position.longitude !== 0 && (
+                  <MapContainer
+                    center={[position.latitude, position.longitude]}
+                    zoom={16}
+                    scrollWheelZoom={false}
+                    style={{ width: '100%', height: 247, borderRadius: '5px' }}
+                  >
+                    <TileLayer
+                      url={`https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`}
+                    />
+                    <Marker
+                      interactive={false}
+                      icon={mapIcon}
+                      position={[position.latitude, position.longitude]}
+                    />
+                  </MapContainer>
               )}
-              {destinationOption === 'ZIPCODE' && <ZipCodeForm />}
+              {destinationOption === 'ZIPCODE' && (
+                <ZipCodeForm position={position} />
+              )}
             </ItemContainer>
             <ItemContainer>
               <Subtitle>Payment method</Subtitle>

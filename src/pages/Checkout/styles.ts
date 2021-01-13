@@ -195,12 +195,6 @@ export const Text = styled.span`
   .editable:hover {
     cursor: pointer;
   }
-
-  input[type=number]::-webkit-inner-spin-button,
-  input[type=number]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
 `;
 export const Price = styled.input`
   font-family: 'Oswald', sans-serif;

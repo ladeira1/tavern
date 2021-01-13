@@ -13,10 +13,10 @@ export const Row = styled.div`
   display: flex;
   justify-content: space-between;
 `;
-export const Button = styled.button`
+export const Button = styled.button<{ width: string }>`
   margin-left: 3%;
   height: 60px;
-  width: 30%;
+  width: ${props => props.width};
   border: 1px solid ${colors.white};
   border-radius: 5px;
   background-color: transparent;
@@ -26,8 +26,8 @@ export const Button = styled.button`
   font-size: 2em;
 
   :hover {
-    color: ${colors.text};
     box-shadow: 0 0 5px rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 0.2);
   }
 `;
 export const MapPinIcon = styled(FiMapPin).attrs({
