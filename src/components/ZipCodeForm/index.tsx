@@ -110,6 +110,7 @@ const ZipCodeForm: React.FC<{ position: Position }> = ({ position }) => {
           center={[customPosition.latitude, customPosition.longitude]}
           zoom={16}
           scrollWheelZoom={false}
+          dragging={false}
           style={{ width: '100%', height: 247, borderRadius: '5px' }}
         >
           <TileLayer

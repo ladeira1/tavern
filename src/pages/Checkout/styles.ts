@@ -206,6 +206,7 @@ export const Price = styled.input`
   border-radius: 5px;
   margin-left: 10px;
   width: 10%;
+  min-width: 70px;
 `;
 export const CheckoutButton = styled.button`
   background: ${colors.text};

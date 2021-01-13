@@ -100,6 +100,7 @@ const Checkout: React.FC = () => {
                   <MapContainer
                     center={[position.latitude, position.longitude]}
                     zoom={16}
+                    dragging={false}
                     scrollWheelZoom={false}
                     style={{ width: '100%', height: 247, borderRadius: '5px' }}
                   >
