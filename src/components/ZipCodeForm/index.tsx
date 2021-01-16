@@ -1,5 +1,6 @@
 import React, { useState, useLayoutEffect } from 'react';
-import { MapContainer, TileLayer, Marker } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet';
+import Axios from 'axios';
 import {
   Container,
   Row,
@@ -17,7 +18,16 @@ interface Position {
   longitude: number;
 }
 
-const ZipCodeForm: React.FC<{ position: Position }> = ({ position }) => {
+const ChangeCenter: React.FC<{ position: Position }> = ({ position }) => {
+  const map = useMap();
+  map.setView([position.latitude, position.longitude], 16);
+
+  return null;
+};
+
+const ZipCodeForm: React.FC<{
+  position: Position;
+}> = ({ position }) => {
   const [zipcode, setZipcode] = useState('');
   const [state, setState] = useState('');
   const [street, setStreet] = useState('');
@@ -33,9 +43,20 @@ const ZipCodeForm: React.FC<{ position: Position }> = ({ position }) => {
     console.log('todo');
   };
 
-  const handleSetDestinationData = () => {
+  const handleSetDestinationPosition = async () => {
     // eslint-disable-next-line no-console
     console.log('todo');
+
+    const temp = await Axios.get(
+      `https://api.mapbox.com/geocoding/v5/mapbox.places/San%20Francisco.json?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`,
+    );
+
+    const temp2 = temp.data.features[0].center;
+
+    setCustomPosition({
+      latitude: temp2[1].toFixed(4),
+      longitude: temp2[0].toFixed(4),
+    });
   };
 
   useLayoutEffect(() => {
@@ -100,11 +121,10 @@ const ZipCodeForm: React.FC<{ position: Position }> = ({ position }) => {
           * If the zipcode search does not work, please add the information
           manually
         </Text>
-        <Button width="70%" onClick={handleSetDestinationData}>
+        <Button width="70%" onClick={handleSetDestinationPosition}>
           Confirm
         </Button>
       </Row>
-
       {customPosition.latitude !== 0 && customPosition.longitude !== 0 && (
         <MapContainer
           center={[customPosition.latitude, customPosition.longitude]}
@@ -113,6 +133,7 @@ const ZipCodeForm: React.FC<{ position: Position }> = ({ position }) => {
           dragging={false}
           style={{ width: '100%', height: 247, borderRadius: '5px' }}
         >
+          <ChangeCenter position={customPosition} />
           <TileLayer
             url={`https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`}
           />

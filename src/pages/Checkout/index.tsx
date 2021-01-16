@@ -10,7 +10,6 @@ import {
   Subtitle,
   OptionsContainer,
   Option,
-  // MapContainer,
   PaymentOptionsContainer,
   PaymentOption,
   PaymentInformation,
@@ -35,13 +34,14 @@ type PaymentMethod = 'CASH' | 'CREDIT_CARD';
 const Checkout: React.FC = () => {
   const { readStoragedItems, totalPrice } = useBag();
 
-  const [position, setPosition] = useState({ latitude: 0, longitude: 0 });
   const [destinationOption, setDestinationOption] = useState<Destination>(
     'CURRENT_LOCATION',
   );
   const [paymentMethodOption, setPaymentMethodOption] = useState<PaymentMethod>(
     'CASH',
   );
+
+  const [position, setPosition] = useState({ latitude: 0, longitude: 0 });
   const [change, setChange] = useState(totalPrice);
 
   const handleDestinationChange = (option: Destination) => {
@@ -57,6 +57,15 @@ const Checkout: React.FC = () => {
     }
 
     setPaymentMethodOption(option);
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    // eslint-disable-next-line no-console
+    console.log(`
+      Your food will be delivered at: ${position.latitude}, ${position.longitude}.
+    `);
   };
 
   useLayoutEffect(() => {
@@ -76,7 +85,7 @@ const Checkout: React.FC = () => {
       <Header />
       <Wrapper>
         <LeftColumn>
-          <Form>
+          <Form onSubmit={handleSubmit}>
             <h1>Finish your request</h1>
             <ItemContainer>
               <Subtitle>Select destination</Subtitle>
@@ -115,7 +124,7 @@ const Checkout: React.FC = () => {
                   </MapContainer>
               )}
               {destinationOption === 'ZIPCODE' && (
-                <ZipCodeForm position={position} />
+                <ZipCodeForm position={position}/>
               )}
             </ItemContainer>
             <ItemContainer>
