@@ -1,34 +1,20 @@
 import React, { useState, useLayoutEffect } from 'react';
-import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet';
-import Axios from 'axios';
-import {
-  Container,
-  Row,
-  MapPinIcon,
-  Button,
-  InputWrapper,
-  Text,
-} from './styles';
+import { MapContainer, TileLayer, Marker } from 'react-leaflet';
+import { Container, Row, Button, InputWrapper } from './styles';
 
 import FormTextInput from '../FormTextInput';
 import mapIcon from '../../assets/mapIcon';
 
-interface Position {
-  latitude: number;
-  longitude: number;
-}
+import mapbox from '../../services/mapbox';
 
-const ChangeCenter: React.FC<{ position: Position }> = ({ position }) => {
-  const map = useMap();
-  map.setView([position.latitude, position.longitude], 16);
+import ChangeCenter from '../ChangeCenter';
 
-  return null;
-};
+import { Position } from '../../models/Position';
 
 const ZipCodeForm: React.FC<{
   position: Position;
-}> = ({ position }) => {
-  const [zipcode, setZipcode] = useState('');
+  setPosition: React.Dispatch<React.SetStateAction<Position>>;
+}> = ({ position, setPosition }) => {
   const [state, setState] = useState('');
   const [street, setStreet] = useState('');
   const [cityName, setCityName] = useState('');
@@ -38,25 +24,19 @@ const ZipCodeForm: React.FC<{
     longitude: 0,
   });
 
-  const handleSearchByZipCode = () => {
-    // eslint-disable-next-line no-console
-    console.log('todo');
-  };
-
   const handleSetDestinationPosition = async () => {
-    // eslint-disable-next-line no-console
-    console.log('todo');
+    if (!houseNumber || !street || !cityName || !state) {
+      return;
+    }
 
-    const temp = await Axios.get(
-      `https://api.mapbox.com/geocoding/v5/mapbox.places/San%20Francisco.json?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`,
+    const result = await mapbox.searchByAddress(
+      houseNumber,
+      street,
+      cityName,
+      state,
     );
-
-    const temp2 = temp.data.features[0].center;
-
-    setCustomPosition({
-      latitude: temp2[1].toFixed(4),
-      longitude: temp2[0].toFixed(4),
-    });
+    setCustomPosition(result);
+    setPosition(result);
   };
 
   useLayoutEffect(() => {
@@ -68,18 +48,6 @@ const ZipCodeForm: React.FC<{
 
   return (
     <Container>
-      <Row>
-        <FormTextInput
-          Icon={MapPinIcon}
-          text={zipcode}
-          setText={setZipcode}
-          placeholder="Put your zip code here"
-          type="number"
-        />
-        <Button width="30%" onClick={handleSearchByZipCode}>
-          Search
-        </Button>
-      </Row>
       <Row>
         <InputWrapper width="40%">
           <FormTextInput
@@ -116,22 +84,16 @@ const ZipCodeForm: React.FC<{
           />
         </InputWrapper>
       </Row>
-      <Row style={{ marginBottom: 15 }}>
-        <Text>
-          * If the zipcode search does not work, please add the information
-          manually
-        </Text>
-        <Button width="70%" onClick={handleSetDestinationPosition}>
-          Confirm
-        </Button>
-      </Row>
+      {/* <Row style={{ marginBottom: 15 }}> */}
+      <Button onClick={handleSetDestinationPosition}>Confirm</Button>
+      {/* </Row> */}
       {customPosition.latitude !== 0 && customPosition.longitude !== 0 && (
         <MapContainer
           center={[customPosition.latitude, customPosition.longitude]}
           zoom={16}
           scrollWheelZoom={false}
           dragging={false}
-          style={{ width: '100%', height: 247, borderRadius: '5px' }}
+          style={{ width: '100%', height: 247, borderRadius: '5px', zIndex: 3 }}
         >
           <ChangeCenter position={customPosition} />
           <TileLayer

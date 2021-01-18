@@ -9,7 +9,8 @@ export const Container = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: scroll;
 
   @media screen and (min-width: 1144px) {
     min-height: 100vh;
@@ -18,15 +19,13 @@ export const Container = styled.div`
 export const Wrapper = styled.main`
   max-width: 1200px;
   width: 95%;
-  margin: 0 auto;
+  height: 100%;
   border-radius: 10px;
   display: flex;
   flex-direction: row;
   overflow-x: hidden;
-  overflow-y: scroll;
-  margin-top: calc(8vh + 2%);
+  margin: calc(8vh + 2%) auto 8% auto;
   font-size: 10px;
-  margin-bottom: 80px;
 
   ::-webkit-scrollbar {
     display: none;

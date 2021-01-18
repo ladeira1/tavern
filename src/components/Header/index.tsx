@@ -35,7 +35,6 @@ const Header: React.FC = () => {
           <Title>TAVERN</Title>
         </Link>
         <Buttons>
-          <Link to="/user">Profile</Link>
           <Link to="/item">Create Item</Link>
           {isLogged ? (
             <div className="auth" onClick={handleLogout}>
@@ -57,7 +56,6 @@ const Header: React.FC = () => {
 
       <Settings isClicked={isOpen}>
         <ButtonArea isLogged={isLogged}>
-          <Link to="/profile">Edit Profile</Link>
           <Link to="/item">Create Item</Link>
           {isLogged ? (
             <button type="button" onClick={handleLogout} className="auth">

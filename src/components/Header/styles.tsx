@@ -72,8 +72,7 @@ export const Buttons = styled.nav`
   a {
     color: ${colors.text};
     font-family: 'Ubuntu';
-    font-size: 1.6em;
-    margin-left: 3em;
+    font-size: 2em;
     display: none;
 
     :hover {
@@ -87,10 +86,11 @@ export const Buttons = styled.nav`
 
   .auth {
     display: none;
+    margin-left: 3em;
 
     @media screen and (min-width: 810px) {
       display: block;
-      font-size: 1.6em;
+      font-size: 2em;
       margin-right: 3em;
     }
   }

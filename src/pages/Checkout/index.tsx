@@ -25,10 +25,13 @@ import Header from '../../components/Header';
 import Bag from '../../components/Bag';
 import MobileBag from '../../components/MobileBag';
 import ZipCodeForm from '../../components/ZipCodeForm';
+import ChangeCenter from '../../components/ChangeCenter';
 
 import mapIcon from '../../assets/mapIcon';
 
-type Destination = 'CURRENT_LOCATION' | 'ZIPCODE';
+import { Position } from '../../models/Position';
+
+type Destination = 'CURRENT_LOCATION' | 'ADDRESS';
 type PaymentMethod = 'CASH' | 'CREDIT_CARD';
 
 const Checkout: React.FC = () => {
@@ -41,12 +44,23 @@ const Checkout: React.FC = () => {
     'CASH',
   );
 
-  const [position, setPosition] = useState({ latitude: 0, longitude: 0 });
+  const [position, setPosition] = useState<Position>({ latitude: 0, longitude: 0 });
   const [change, setChange] = useState(totalPrice);
+
+  const getUserLocation = async () => {
+    navigator.geolocation.getCurrentPosition(location => {
+      const { latitude, longitude } = location.coords;
+      setPosition({ latitude, longitude });
+    });
+  };
 
   const handleDestinationChange = (option: Destination) => {
     if (option === destinationOption) {
       return;
+    }
+
+    if (option === 'CURRENT_LOCATION') {
+      getUserLocation();
     }
     setDestinationOption(option);
   };
@@ -69,13 +83,6 @@ const Checkout: React.FC = () => {
   };
 
   useLayoutEffect(() => {
-    const getUserLocation = async () => {
-      navigator.geolocation.getCurrentPosition(location => {
-        const { latitude, longitude } = location.coords;
-        setPosition({ latitude, longitude });
-      });
-    };
-
     getUserLocation();
     readStoragedItems();
   }, []);
@@ -97,10 +104,10 @@ const Checkout: React.FC = () => {
                   Current location
                 </Option>
                 <Option
-                  isCurrent={destinationOption === 'ZIPCODE'}
-                  onClick={() => handleDestinationChange('ZIPCODE')}
+                  isCurrent={destinationOption === 'ADDRESS'}
+                  onClick={() => handleDestinationChange('ADDRESS')}
                 >
-                  Zip code
+                  Address
                 </Option>
               </OptionsContainer>
               {destinationOption === 'CURRENT_LOCATION' &&
@@ -111,8 +118,9 @@ const Checkout: React.FC = () => {
                     zoom={16}
                     dragging={false}
                     scrollWheelZoom={false}
-                    style={{ width: '100%', height: 247, borderRadius: '5px' }}
+                    style={{ width: '100%', height: 247, borderRadius: '5px', zIndex: 3 }}
                   >
+                    <ChangeCenter position={position} />
                     <TileLayer
                       url={`https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`}
                     />
@@ -123,8 +131,8 @@ const Checkout: React.FC = () => {
                     />
                   </MapContainer>
               )}
-              {destinationOption === 'ZIPCODE' && (
-                <ZipCodeForm position={position}/>
+              {destinationOption === 'ADDRESS' && (
+                <ZipCodeForm position={position} setPosition={setPosition}/>
               )}
             </ItemContainer>
             <ItemContainer>
