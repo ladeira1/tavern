@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { FiMapPin } from 'react-icons/fi';
 import colors from '../../assets/colors';
 
 export const Container = styled.div`
