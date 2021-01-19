@@ -1,6 +1,5 @@
 /* eslint-disable prettier/prettier */
 import React, { useLayoutEffect, useState } from 'react';
-import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import {
   Container,
   Wrapper,
@@ -24,11 +23,9 @@ import { useBag } from '../../contexts/Bag';
 import Header from '../../components/Header';
 import Bag from '../../components/Bag';
 import MobileBag from '../../components/MobileBag';
+import Map from '../../components/Map';
 import ZipCodeForm from '../../components/ZipCodeForm';
-import ChangeCenter from '../../components/ChangeCenter';
-
-import mapIcon from '../../assets/mapIcon';
-
+import Popup from '../../components/Popup';
 import { Position } from '../../models/Position';
 
 type Destination = 'CURRENT_LOCATION' | 'ADDRESS';
@@ -43,6 +40,7 @@ const Checkout: React.FC = () => {
   const [paymentMethodOption, setPaymentMethodOption] = useState<PaymentMethod>(
     'CASH',
   );
+  const [popupVisible, setPopupVisible] = useState(false);
 
   const [position, setPosition] = useState<Position>({ latitude: 0, longitude: 0 });
   const [change, setChange] = useState(totalPrice);
@@ -80,6 +78,8 @@ const Checkout: React.FC = () => {
     console.log(`
       Your food will be delivered at: ${position.latitude}, ${position.longitude}.
     `);
+
+    setPopupVisible(true);
   };
 
   useLayoutEffect(() => {
@@ -113,23 +113,7 @@ const Checkout: React.FC = () => {
               {destinationOption === 'CURRENT_LOCATION' &&
                 position.latitude !== 0 &&
                 position.longitude !== 0 && (
-                  <MapContainer
-                    center={[position.latitude, position.longitude]}
-                    zoom={16}
-                    dragging={false}
-                    scrollWheelZoom={false}
-                    style={{ width: '100%', height: 247, borderRadius: '5px', zIndex: 3 }}
-                  >
-                    <ChangeCenter position={position} />
-                    <TileLayer
-                      url={`https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`}
-                    />
-                    <Marker
-                      interactive={false}
-                      icon={mapIcon}
-                      position={[position.latitude, position.longitude]}
-                    />
-                  </MapContainer>
+                  <Map position={position} />
               )}
               {destinationOption === 'ADDRESS' && (
                 <ZipCodeForm position={position} setPosition={setPosition}/>
@@ -192,6 +176,7 @@ const Checkout: React.FC = () => {
         </RightColumn>
       </Wrapper>
       <MobileBag />
+      {popupVisible && <Popup />}
     </Container>
   );
 };

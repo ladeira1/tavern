@@ -5,7 +5,6 @@ import colors from '../../assets/colors';
 export const Container = styled.div`
   height: 100%;
   min-height: 92vh;
-  max-height: 92vh;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -19,12 +18,11 @@ export const Container = styled.div`
 export const Wrapper = styled.main`
   max-width: 1200px;
   width: 95%;
-  height: 100%;
   border-radius: 10px;
   display: flex;
   flex-direction: row;
   overflow-x: hidden;
-  margin: calc(8vh + 2%) auto 8% auto;
+  margin: 8vh auto 15px auto;
   font-size: 10px;
 
   ::-webkit-scrollbar {

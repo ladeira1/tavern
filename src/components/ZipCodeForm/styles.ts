@@ -16,11 +16,10 @@ export const Button = styled.button`
   margin-left: 3%;
   margin-bottom: 15px;
   height: 60px;
-  width: 40%;
+  width: 50%;
   border: 1px solid ${colors.white};
   border-radius: 5px;
   background-color: transparent;
-  float: right;
 
   color: ${colors.text};
   font-family: 'Oswald', sans-serif;
@@ -34,4 +33,9 @@ export const Button = styled.button`
 
 export const InputWrapper = styled.div<{ width: string }>`
   width: ${props => props.width};
+`;
+export const Text = styled.h3`
+  font-size: 1.6em;
+  font-family: 'Oswald', sans-serif;
+  color: ${colors.checkoutComment};
 `;

@@ -1,13 +1,10 @@
 import React, { useState, useLayoutEffect } from 'react';
-import { MapContainer, TileLayer, Marker } from 'react-leaflet';
-import { Container, Row, Button, InputWrapper } from './styles';
+import { Container, Row, Button, InputWrapper, Text } from './styles';
 
 import FormTextInput from '../FormTextInput';
-import mapIcon from '../../assets/mapIcon';
+import Map from '../Map';
 
 import mapbox from '../../services/mapbox';
-
-import ChangeCenter from '../ChangeCenter';
 
 import { Position } from '../../models/Position';
 
@@ -84,27 +81,14 @@ const ZipCodeForm: React.FC<{
           />
         </InputWrapper>
       </Row>
-      {/* <Row style={{ marginBottom: 15 }}> */}
-      <Button onClick={handleSetDestinationPosition}>Confirm</Button>
-      {/* </Row> */}
+      <Row>
+        <Text>
+          * Please inform the address you want your food to be delivered at
+        </Text>
+        <Button onClick={handleSetDestinationPosition}>Confirm</Button>
+      </Row>
       {customPosition.latitude !== 0 && customPosition.longitude !== 0 && (
-        <MapContainer
-          center={[customPosition.latitude, customPosition.longitude]}
-          zoom={16}
-          scrollWheelZoom={false}
-          dragging={false}
-          style={{ width: '100%', height: 247, borderRadius: '5px', zIndex: 3 }}
-        >
-          <ChangeCenter position={customPosition} />
-          <TileLayer
-            url={`https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`}
-          />
-          <Marker
-            interactive={false}
-            icon={mapIcon}
-            position={[customPosition.latitude, customPosition.longitude]}
-          />
-        </MapContainer>
+        <Map position={customPosition} />
       )}
     </Container>
   );
