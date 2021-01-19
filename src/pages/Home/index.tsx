@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Container, Wrapper, LeftColumn, RightColumn } from './styles';
 import { useBag } from '../../contexts/Bag';
-
 import Header from '../../components/Header';
 import NewItems from '../../components/NewItems';
 import Items from '../../components/Items';
@@ -13,6 +13,8 @@ import ItemInterface from '../../models/ItemInterface';
 import firebase from '../../services/firebase';
 
 const Home: React.FC = () => {
+  const history = useHistory();
+
   const { readStoragedItems } = useBag();
   const [burgers, setBurgers] = useState<ItemInterface[]>(
     {} as ItemInterface[],
@@ -54,7 +56,7 @@ const Home: React.FC = () => {
         </LeftColumn>
 
         <RightColumn>
-          <Bag />
+          <Bag action={() => history.push('/checkout')} />
         </RightColumn>
       </Wrapper>
       <MobileBag />

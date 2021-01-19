@@ -35,7 +35,7 @@ const Checkout: React.FC = () => {
   const { readStoragedItems, totalPrice } = useBag();
 
   const [destinationOption, setDestinationOption] = useState<Destination>(
-    'CURRENT_LOCATION',
+    'ADDRESS',
   );
   const [paymentMethodOption, setPaymentMethodOption] = useState<PaymentMethod>(
     'CASH',
@@ -73,12 +73,6 @@ const Checkout: React.FC = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    // eslint-disable-next-line no-console
-    console.log(`
-      Your food will be delivered at: ${position.latitude}, ${position.longitude}.
-    `);
-
     setPopupVisible(true);
   };
 
@@ -98,16 +92,16 @@ const Checkout: React.FC = () => {
               <Subtitle>Select destination</Subtitle>
               <OptionsContainer>
                 <Option
-                  isCurrent={destinationOption === 'CURRENT_LOCATION'}
-                  onClick={() => handleDestinationChange('CURRENT_LOCATION')}
-                >
-                  Current location
-                </Option>
-                <Option
                   isCurrent={destinationOption === 'ADDRESS'}
                   onClick={() => handleDestinationChange('ADDRESS')}
                 >
                   Address
+                </Option>
+                <Option
+                  isCurrent={destinationOption === 'CURRENT_LOCATION'}
+                  onClick={() => handleDestinationChange('CURRENT_LOCATION')}
+                >
+                  Current location
                 </Option>
               </OptionsContainer>
               {destinationOption === 'CURRENT_LOCATION' &&
@@ -172,11 +166,11 @@ const Checkout: React.FC = () => {
           </Form>
         </LeftColumn>
         <RightColumn>
-          <Bag />
+          <Bag action={() => setPopupVisible(true)} />
         </RightColumn>
       </Wrapper>
       <MobileBag />
-      {popupVisible && <Popup />}
+      {popupVisible && <Popup setPopupVisible={setPopupVisible} />}
     </Container>
   );
 };
