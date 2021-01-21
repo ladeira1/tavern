@@ -85,7 +85,9 @@ const ZipCodeForm: React.FC<{
         <Text>
           * Please inform the address you want your food to be delivered at
         </Text>
-        <Button onClick={handleSetDestinationPosition}>Confirm</Button>
+        <Button type="button" onClick={handleSetDestinationPosition}>
+          Confirm
+        </Button>
       </Row>
       {customPosition.latitude !== 0 && customPosition.longitude !== 0 && (
         <Map position={customPosition} />

@@ -35,6 +35,7 @@ export const Wrapper = styled.main`
 
   @media screen and (max-width: 1144px) {
     width: 100%;
+    margin-bottom: 75px;
   }
 
   @media screen and (max-width: 820px) {
@@ -130,13 +131,6 @@ export const Option = styled.span<{ isCurrent: boolean }>`
     cursor: ${props => (props.isCurrent ? 'auto' : 'pointer')};
     color: ${colors.white};
   }
-`;
-export const MapContainer = styled.div`
-  min-height: 300px;
-  width: 100%;
-  border-radius: 5px;
-  /* will soon be changed */
-  background: red;
 `;
 export const PaymentOptionsContainer = styled.section`
   display: flex;

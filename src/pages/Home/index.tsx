@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Container, Wrapper, LeftColumn, RightColumn } from './styles';
+import BubbleLoader from '../../components/BubbleLoader';
+import { useLoading } from '../../contexts/Loading';
+import {
+  Container,
+  Wrapper,
+  LeftColumn,
+  RightColumn,
+  LoadingWrapper,
+} from './styles';
 import { useBag } from '../../contexts/Bag';
 import Header from '../../components/Header';
 import NewItems from '../../components/NewItems';
@@ -12,7 +20,15 @@ import ItemInterface from '../../models/ItemInterface';
 
 import firebase from '../../services/firebase';
 
+const Loading: React.FC = () => (
+  <LoadingWrapper>
+    <BubbleLoader color="#fff" />
+  </LoadingWrapper>
+);
+
 const Home: React.FC = () => {
+  const { loading, setLoading } = useLoading();
+
   const history = useHistory();
 
   const { readStoragedItems } = useBag();
@@ -29,6 +45,7 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     async function getItems() {
+      setLoading(true);
       const items = await firebase.getItems();
 
       if (items.length) {
@@ -37,6 +54,7 @@ const Home: React.FC = () => {
         setDrinks(items.filter(item => item.type === 'drink'));
         setNewItems(items.slice(0, 8));
       }
+      setLoading(false);
     }
 
     getItems();
@@ -47,17 +65,23 @@ const Home: React.FC = () => {
     <Container>
       <Header />
       <Wrapper>
-        <LeftColumn>
-          <NewItems items={newItems} />
-          <Items items={burgers} title="Burgers" />
-          <Items items={sideDishes} title="Sides" />
-          <Items items={drinks} title="Drinks" />
-          <div className="empty" />
-        </LeftColumn>
+        {loading ? (
+          <Loading />
+        ) : (
+          <>
+            <LeftColumn>
+              <NewItems items={newItems} />
+              <Items items={burgers} title="Burgers" />
+              <Items items={sideDishes} title="Sides" />
+              <Items items={drinks} title="Drinks" />
+              <div className="empty" />
+            </LeftColumn>
 
-        <RightColumn>
-          <Bag action={() => history.push('/checkout')} />
-        </RightColumn>
+            <RightColumn>
+              <Bag action={() => history.push('/checkout')} />
+            </RightColumn>
+          </>
+        )}
       </Wrapper>
       <MobileBag />
     </Container>

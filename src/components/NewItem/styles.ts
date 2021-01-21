@@ -40,11 +40,11 @@ export const Wrapper = styled.main`
     min-width: 180px;
   }
 `;
-export const Image = styled.img`
+export const Image = styled.img<{ isLoaded: boolean }>`
   width: 100%;
   max-height: 50%;
   flex: 3;
-  display: flex;
+  display: ${props => (props.isLoaded ? 'flex' : 'none')};
   border-radius: 10px;
   width: 100%;
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import Header from '../../components/Header';
+import Button from '../../components/Button';
 import {
   Container,
   Wrapper,
@@ -9,7 +10,6 @@ import {
   UserIcon,
   MailIcon,
   LockIcon,
-  SubmitButton,
   Title,
   LinkElement,
 } from '../../shared/styles/formStyles';
@@ -82,9 +82,7 @@ const Register: React.FC = () => {
               placeholder="Confirm your password"
               type="password"
             />
-            <SubmitButton type="submit">
-              <h2 className="buttonText">Create Account</h2>
-            </SubmitButton>
+            <Button message="Create Account" />
             <LinkElement to="/login">
               Already have an account? Log in!
             </LinkElement>

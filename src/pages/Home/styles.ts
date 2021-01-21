@@ -53,3 +53,10 @@ export const RightColumn = styled.article`
     display: none;
   }
 `;
+export const LoadingWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+`;

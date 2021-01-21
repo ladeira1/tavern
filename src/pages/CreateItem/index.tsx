@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import Header from '../../components/Header';
 import FormTextInput from '../../components/FormTextInput';
+import Button from '../../components/Button';
 import {
   Container,
   Wrapper,
   Title,
   Form,
-  SubmitButton,
   FoodIcon,
   DollarIcon,
   ImageIcon,
@@ -25,8 +25,10 @@ import {
   Select,
 } from './styles';
 import firebase from '../../services/firebase';
+import { useLoading } from '../../contexts/Loading';
 
 const CreateItem: React.FC = () => {
+  const { setLoading } = useLoading();
   const [name, setName] = useState('');
   const [image, setImage] = useState<File | null>(null);
   const [details, setDetails] = useState('');
@@ -37,11 +39,14 @@ const CreateItem: React.FC = () => {
   const [textAreaSelected, setTextAreaSelected] = useState(false);
   const [typeSelected, setTypeSelected] = useState(false);
 
-  const handleCreateItem = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleCreateItem = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setLoading(true);
     if (image !== null) {
-      firebase.createItem(name, details, Number(price), type, image);
+      await firebase.createItem(name, details, Number(price), type, image);
     }
+
+    setLoading(false);
   };
 
   const handleSetImage = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -129,9 +134,7 @@ const CreateItem: React.FC = () => {
               </Select>
             </Label>
 
-            <SubmitButton type="submit">
-              <h2 className="buttonText">Create item</h2>
-            </SubmitButton>
+            <Button message="Create item" />
           </Form>
         </Content>
       </Wrapper>

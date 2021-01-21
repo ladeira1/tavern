@@ -9,11 +9,11 @@ import {
   Form,
   MailIcon,
   LockIcon,
-  SubmitButton,
   Title,
   LinkElement,
 } from '../../shared/styles/formStyles';
 import FormTextInput from '../../components/FormTextInput';
+import Button from '../../components/Button';
 
 import { useAuth } from '../../contexts/Auth';
 
@@ -57,9 +57,7 @@ const Login: React.FC = () => {
               placeholder="Password"
               type="password"
             />
-            <SubmitButton type="submit">
-              <h2 className="buttonText">Login</h2>
-            </SubmitButton>
+            <Button message="Login" />
             <LinkElement to="/register">
               Don't have an account? Create one!
             </LinkElement>
