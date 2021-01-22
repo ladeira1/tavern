@@ -29,6 +29,8 @@ export const Wrapper = styled.main`
     display: none;
   }
 
+  scrollbar-width: none;
+
   @media screen and (max-width: 1144px) {
     width: 100%;
   }

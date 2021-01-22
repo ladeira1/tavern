@@ -48,6 +48,8 @@ export const ItemsWrapper = styled.section`
   ::-webkit-scrollbar-thumb:hover {
     background: ${colors.scrollHover};
   }
+
+  scrollbar-color: ${colors.line} transparent;
 `;
 export const Footer = styled.footer`
   flex: 1;

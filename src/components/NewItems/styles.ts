@@ -42,6 +42,8 @@ export const Wrapper = styled.section`
     background: ${colors.scrollHover};
   }
 
+  scrollbar-color: ${colors.line} transparent;
+
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
   -khtml-user-select: none; /* Konqueror HTML */
