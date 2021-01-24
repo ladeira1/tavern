@@ -71,6 +71,7 @@ const CreateItem: React.FC = () => {
       type,
       image,
     );
+    // eslint-disable-next-line no-console
     console.log(result);
 
     setLoading(false);

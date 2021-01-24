@@ -19,7 +19,7 @@ export const Container = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  overflow-y: hidden;
+  /* overflow-y: hidden; */
 `;
 export const Wrapper = styled.div`
   width: 100vw;
@@ -28,7 +28,7 @@ export const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 auto;
+  margin: 8vh auto 0 auto;
 
   @media screen and (min-height: 800px) {
     padding-top: 5vh;
@@ -57,7 +57,8 @@ export const Form = styled.form`
   flex-direction: column;
   padding: 4%;
   width: 100%;
-  max-height: 70vh;
+  max-height: 79vh;
+  margin-top: 5%;
 
   @media screen and (min-width: 620px) {
     width: 90%;
@@ -134,8 +135,8 @@ export const Title = styled.h1`
   font-family: 'Oswald', sans-serif;
   font-size: 34px;
   text-align: center;
-  margin-bottom: 20px;
   max-height: 10%;
+  min-height: 10%;
   z-index: 10;
 
   @media screen and (min-width: 370px) {

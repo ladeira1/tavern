@@ -9,6 +9,9 @@ export const Content = styled.section`
   flex-direction: column;
   align-items: center;
   max-width: 1200px;
+  overflow-y: auto;
+  height: 100%;
+  margin-bottom: 10px;
 
   @media screen and (min-width: 1080px) {
     flex-direction: row;
@@ -40,6 +43,7 @@ export const ImageLabel = styled.label<{ hasImage: boolean }>`
 export const ImageContainer = styled.div`
   position: relative;
   width: 100%;
+  max-height: 400px;
   background: ${colors.textInput};
   display: flex;
   justify-content: center;
