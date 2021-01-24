@@ -22,6 +22,19 @@ const AuthProvider: React.FC = ({ children }) => {
     passwordConfirmation: string,
   ): Promise<AuthReturnInterface> => {
     setLoading(true);
+
+    if (email === '') {
+      setLoading(false);
+      return { type: 'ERROR', message: 'You must type a valid e-mail' };
+    }
+    if (name === '') {
+      setLoading(false);
+      return { type: 'ERROR', message: 'You must type a valid name' };
+    }
+    if (password === '') {
+      setLoading(false);
+      return { type: 'ERROR', message: 'You must type a valid password' };
+    }
     if (password !== passwordConfirmation) {
       setLoading(false);
       return { type: 'ERROR', message: 'Passwords must match' };
@@ -43,6 +56,7 @@ const AuthProvider: React.FC = ({ children }) => {
     password: string,
   ): Promise<AuthReturnInterface> => {
     setLoading(true);
+
     if (email === '') {
       setLoading(false);
       return { type: 'ERROR', message: 'You must type a valid e-mail' };

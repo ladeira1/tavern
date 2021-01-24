@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React, { useState, useLayoutEffect } from 'react';
 import { Container, Row, Button, InputWrapper, Text } from './styles';
 
@@ -6,7 +7,7 @@ import Map from '../Map';
 
 import mapbox from '../../services/mapbox';
 
-import { Position } from '../../models/Position';
+import Position from '../../models/Position';
 
 const ZipCodeForm: React.FC<{
   position: Position;
@@ -32,8 +33,13 @@ const ZipCodeForm: React.FC<{
       cityName,
       state,
     );
-    setCustomPosition(result);
-    setPosition(result);
+
+    if (result.type === 'ERROR') {
+      return;
+    }
+
+    setCustomPosition(result.body!);
+    setPosition(result.body!);
   };
 
   useLayoutEffect(() => {

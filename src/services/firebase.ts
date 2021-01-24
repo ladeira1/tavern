@@ -6,6 +6,7 @@ import 'firebase/storage';
 
 import firebaseConfig from './firebaseConfig';
 import ItemInterface from '../models/ItemInterface';
+import ItemResponse from '../models/ItemResponse';
 import AuthResponse from '../models/AuthResponse';
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
@@ -20,20 +21,46 @@ export default {
     price: number,
     type: string,
     image: File,
-  ): Promise<void> => {
+  ): Promise<ItemResponse> => {
+    // check if item does not exist
+    const existingItem = await db
+      .collection('items')
+      .where('name', '==', name)
+      .get();
+
+    if (existingItem) {
+      return { type: 'ERROR', message: 'Item already exists' };
+    }
+
     // create item
-    await db.collection('items').add({
-      name,
-      details,
-      price,
-      imageUrl: '',
-      type,
-    });
+    const result = await db
+      .collection('items')
+      .add({
+        name,
+        details,
+        price,
+        imageUrl: '',
+        type,
+      })
+      .catch(err => ({ error: String(err.code) }));
+
+    if ('error' in result) {
+      return { type: 'ERROR', message: result.error };
+    }
 
     // get item
     const items: ItemInterface[] = [];
-    const result = await db.collection('items').where('name', '==', name).get();
-    result.forEach(item => {
+    const itemsResult = await db
+      .collection('items')
+      .where('name', '==', name)
+      .get()
+      .catch(err => ({ error: String(err.code) }));
+
+    if ('error' in itemsResult) {
+      return { type: 'ERROR', message: itemsResult.error };
+    }
+
+    itemsResult.forEach(item => {
       items.push({
         id: item.id,
         name: item.data().name,
@@ -46,16 +73,27 @@ export default {
 
     // upload image
     const storageRef = storage.ref('items').child(items[0].id);
-    await storageRef.put(image);
+    const imageResult = await storageRef
+      .put(image)
+      .catch(err => ({ error: String(err.code) }));
+
+    if ('error' in imageResult) {
+      return { type: 'ERROR', message: imageResult.error };
+    }
 
     // update item image
-    await storageRef.getDownloadURL().then(async storagedImage => {
-      items.forEach(async item => {
-        await db.collection('items').doc(item.id).update({
-          imageUrl: storagedImage,
+    await storageRef
+      .getDownloadURL()
+      .then(async storagedImage => {
+        items.forEach(async item => {
+          await db.collection('items').doc(item.id).update({
+            imageUrl: storagedImage,
+          });
         });
-      });
-    });
+      })
+      .catch(err => ({ error: String(err.code) }));
+
+    return { type: 'SUCCESS', message: 'Item succesfully created' };
   },
 
   getItems: async (): Promise<ItemInterface[]> => {

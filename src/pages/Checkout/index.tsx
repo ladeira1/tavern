@@ -26,7 +26,7 @@ import MobileBag from '../../components/MobileBag';
 import Map from '../../components/Map';
 import ZipCodeForm from '../../components/ZipCodeForm';
 import Popup from '../../components/Popup';
-import { Position } from '../../models/Position';
+import Position from '../../models/Position';
 
 type Destination = 'CURRENT_LOCATION' | 'ADDRESS';
 type PaymentMethod = 'CASH' | 'CREDIT_CARD';

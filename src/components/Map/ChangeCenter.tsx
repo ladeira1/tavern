@@ -1,6 +1,6 @@
 import React from 'react';
 import { useMap } from 'react-leaflet';
-import { Position } from '../../models/Position';
+import Position from '../../models/Position';
 
 const ChangeCenter: React.FC<{
   position: Position;

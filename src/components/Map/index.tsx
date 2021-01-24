@@ -1,6 +1,6 @@
 import React from 'react';
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
-import { Position } from '../../models/Position';
+import Position from '../../models/Position';
 import mapIcon from '../../assets/mapIcon';
 
 import ChangeCenter from './ChangeCenter';

@@ -42,9 +42,36 @@ const CreateItem: React.FC = () => {
   const handleCreateItem = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
-    if (image !== null) {
-      await firebase.createItem(name, details, Number(price), type, image);
+
+    // it will set error messages in a near future
+    if (name === '') {
+      setLoading(false);
+      return;
     }
+    if (!image) {
+      setLoading(false);
+      return;
+    }
+    if (details === '') {
+      setLoading(false);
+      return;
+    }
+    if (price === '') {
+      setLoading(false);
+      return;
+    }
+    if (type === '') {
+      setLoading(false);
+      return;
+    }
+    const result = await firebase.createItem(
+      name,
+      details,
+      Number(price),
+      type,
+      image,
+    );
+    console.log(result);
 
     setLoading(false);
   };
