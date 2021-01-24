@@ -10,7 +10,7 @@ export const Content = styled.section`
   align-items: center;
   max-width: 1200px;
   overflow-y: auto;
-  height: 100%;
+  height: 98%;
   margin-bottom: 10px;
 
   @media screen and (min-width: 1080px) {

@@ -42,7 +42,7 @@ export default {
         imageUrl: '',
         type,
       })
-      .catch(err => ({ error: String(err.code) }));
+      .catch(err => ({ error: String(err.message) }));
 
     if ('error' in result) {
       return { type: 'ERROR', message: result.error };
@@ -138,7 +138,7 @@ export default {
           },
         };
       })
-      .catch(err => ({ type: 'ERROR', message: String(err.code) }));
+      .catch(err => ({ type: 'ERROR', message: String(err.message) }));
 
     if (!result) {
       return { type: 'ERROR', message: 'Account not created' };
@@ -170,7 +170,7 @@ export default {
           },
         };
       })
-      .catch(err => ({ type: 'ERROR', message: String(err.code) }));
+      .catch(err => ({ type: 'ERROR', message: String(err.message) }));
 
     if (!result) {
       return { type: 'ERROR', message: 'Account not found' };

@@ -19,7 +19,6 @@ export const Container = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  /* overflow-y: hidden; */
 `;
 export const Wrapper = styled.div`
   width: 100vw;
@@ -57,7 +56,6 @@ export const Form = styled.form`
   flex-direction: column;
   padding: 4%;
   width: 100%;
-  max-height: 79vh;
   margin-top: 5%;
 
   @media screen and (min-width: 620px) {
