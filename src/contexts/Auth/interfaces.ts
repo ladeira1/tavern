@@ -18,6 +18,6 @@ export interface AuthInterface {
 }
 
 export interface AuthReturnInterface {
-  result: 'SUCCESS' | 'ERROR';
+  type: 'SUCCESS' | 'ERROR';
   message?: string;
 }

@@ -16,9 +16,11 @@ import FormTextInput from '../../components/FormTextInput';
 import Button from '../../components/Button';
 
 import { useAuth } from '../../contexts/Auth';
+import { useLoading } from '../../contexts/Loading';
 
 const Login: React.FC = () => {
   const { isLogged, login } = useAuth();
+  const { setLoading } = useLoading();
 
   if (isLogged) {
     return <Redirect to="/" />;
@@ -33,6 +35,7 @@ const Login: React.FC = () => {
     const response = await login(email, password);
     // eslint-disable-next-line no-console
     console.log(response);
+    setLoading(false);
     setEmail('');
     setPassword('');
   };

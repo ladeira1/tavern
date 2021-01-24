@@ -6,6 +6,7 @@ import 'firebase/storage';
 
 import firebaseConfig from './firebaseConfig';
 import ItemInterface from '../models/ItemInterface';
+import AuthResponse from '../models/AuthResponse';
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 const db = firebaseApp.firestore();
@@ -79,8 +80,8 @@ export default {
     email: string,
     name: string,
     password: string,
-  ): Promise<{ uid: string; name: string; email: string } | null> => {
-    const result = auth
+  ): Promise<AuthResponse> => {
+    const result = await auth
       .createUserWithEmailAndPassword(email, password)
       .then(async r => {
         if (r.user === null) {
@@ -90,18 +91,25 @@ export default {
         const { uid } = r.user;
 
         await db.collection('users').doc(uid).set({ name });
-        return { uid, name, email };
+        return {
+          type: 'SUCCESS',
+          body: {
+            uid,
+            name,
+            email,
+          },
+        };
       })
-      .catch(() => null);
+      .catch(err => ({ type: 'ERROR', message: String(err.code) }));
 
+    if (!result) {
+      return { type: 'ERROR', message: 'Account not created' };
+    }
     return result;
   },
 
-  login: async (
-    email: string,
-    password: string,
-  ): Promise<{ uid: string; name: string; email: string } | null> => {
-    const result = auth
+  login: async (email: string, password: string): Promise<AuthResponse> => {
+    const result = await auth
       .signInWithEmailAndPassword(email, password)
       .then(async r => {
         if (r.user === null) {
@@ -115,9 +123,20 @@ export default {
           return null;
         }
 
-        return { uid, name: user.data.name, email };
+        return {
+          type: 'SUCCESS',
+          body: {
+            uid,
+            name: user.data.name,
+            email,
+          },
+        };
       })
-      .catch(() => null);
+      .catch(err => ({ type: 'ERROR', message: String(err.code) }));
+
+    if (!result) {
+      return { type: 'ERROR', message: 'Account not found' };
+    }
 
     return result;
   },

@@ -16,9 +16,11 @@ import {
 import FormTextInput from '../../components/FormTextInput';
 
 import { useAuth } from '../../contexts/Auth';
+import { useLoading } from '../../contexts/Loading';
 
 const Register: React.FC = () => {
   const { isLogged, register } = useAuth();
+  const { setLoading } = useLoading();
 
   if (isLogged) {
     return <Redirect to="/" />;
@@ -42,6 +44,7 @@ const Register: React.FC = () => {
     );
     // eslint-disable-next-line no-console
     console.log(response);
+    setLoading(false);
     setEmail('');
     setName('');
     setPassword('');
