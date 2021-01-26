@@ -34,7 +34,6 @@ const variants = {
 };
 
 const BagItem: React.FC<{ bagItem: BagItemInterface }> = ({ bagItem }) => {
-  console.log(bagItem.item.id);
   const { addCommentToItem, lowerBagItemQuantity, addItemToBag } = useBag();
 
   const [commentPopup, setCommentPopup] = useState(false);
