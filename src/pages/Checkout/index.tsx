@@ -26,6 +26,8 @@ import MobileBag from '../../components/MobileBag';
 import Map from '../../components/Map';
 import ZipCodeForm from '../../components/ZipCodeForm';
 import Popup from '../../components/Popup';
+import ErrorPopup from '../../components/ErrorPopup';
+
 import Position from '../../models/Position';
 
 type Destination = 'CURRENT_LOCATION' | 'ADDRESS';
@@ -44,6 +46,7 @@ const Checkout: React.FC = () => {
 
   const [position, setPosition] = useState<Position>({ latitude: 0, longitude: 0 });
   const [change, setChange] = useState(totalPrice);
+  const [error, setError] = useState({ shown: false, message: '' });
 
   const getUserLocation = async () => {
     navigator.geolocation.getCurrentPosition(location => {
@@ -73,6 +76,18 @@ const Checkout: React.FC = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (position.latitude === 0 && position.longitude === 0) {
+      setError({ shown: true, message: 'Invalid location' });
+      setTimeout(() => setError({ shown: false, message: '' }), 4000);
+      return;
+    }
+
+    if (paymentMethodOption === 'CASH' && change < totalPrice) {
+      setError({ shown: true, message: 'The change value must not be smaller the total value of the purchase' });
+      setTimeout(() => setError({ shown: false, message: '' }), 4000);
+      return;
+    }
+
     setPopupVisible(true);
   };
 
@@ -84,6 +99,7 @@ const Checkout: React.FC = () => {
   return (
     <Container>
       <Header />
+      <ErrorPopup error={error} />
       <Wrapper>
         <LeftColumn>
           <Form onSubmit={handleSubmit}>
@@ -110,7 +126,7 @@ const Checkout: React.FC = () => {
                   <Map position={position} />
               )}
               {destinationOption === 'ADDRESS' && (
-                <ZipCodeForm position={position} setPosition={setPosition}/>
+                <ZipCodeForm position={position} setPosition={setPosition} setError={setError}/>
               )}
             </ItemContainer>
             <ItemContainer>
@@ -144,7 +160,8 @@ const Checkout: React.FC = () => {
                     <Price
                       className="editable"
                       type="number"
-                      value={change.toFixed(2)}
+                      value={change}
+                      placeholder="0"
                       onChange={e => setChange(Number(e.target.value))}
                     />
                   </Text>

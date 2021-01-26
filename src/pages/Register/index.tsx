@@ -13,7 +13,9 @@ import {
   Title,
   LinkElement,
 } from '../../shared/styles/formStyles';
+
 import FormTextInput from '../../components/FormTextInput';
+import ErrorPopup from '../../components/ErrorPopup';
 
 import { useAuth } from '../../contexts/Auth';
 import { useLoading } from '../../contexts/Loading';
@@ -30,6 +32,7 @@ const Register: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
+  const [error, setError] = useState({ shown: false, message: '' });
 
   const handleCreateAccount = async (
     event: React.FormEvent<HTMLFormElement>,
@@ -42,8 +45,13 @@ const Register: React.FC = () => {
       password,
       passwordConfirmation,
     );
-    // eslint-disable-next-line no-console
-    console.log(response);
+
+    if (response.type === 'ERROR') {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      setError({ shown: true, message: response.message! });
+      setTimeout(() => setError({ shown: false, message: '' }), 4000);
+    }
+
     setLoading(false);
     setEmail('');
     setName('');
@@ -54,6 +62,7 @@ const Register: React.FC = () => {
   return (
     <Container>
       <Header />
+      <ErrorPopup error={error} />
       <Wrapper>
         <Content>
           <Form onSubmit={handleCreateAccount}>

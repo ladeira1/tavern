@@ -52,7 +52,7 @@ const Home: React.FC = () => {
         setBurgers(items.filter(item => item.type === 'burger'));
         setSideDishes(items.filter(item => item.type === 'sideDish'));
         setDrinks(items.filter(item => item.type === 'drink'));
-        setNewItems(items.slice(0, 8));
+        setNewItems(items.slice(0, 9));
       }
       setLoading(false);
     }

@@ -16,4 +16,6 @@ export default {
   red: '#c51010',
   paymentOptions: '#1b1b1d',
   checkoutComment: '#7b7b7c',
+  whitePopup:
+    'linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0.7) 100%)',
 };

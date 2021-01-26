@@ -8,11 +8,13 @@ import Map from '../Map';
 import mapbox from '../../services/mapbox';
 
 import Position from '../../models/Position';
+import Error from '../../models/Error';
 
 const ZipCodeForm: React.FC<{
   position: Position;
   setPosition: React.Dispatch<React.SetStateAction<Position>>;
-}> = ({ position, setPosition }) => {
+  setError: React.Dispatch<React.SetStateAction<Error>>;
+}> = ({ position, setPosition, setError }) => {
   const [state, setState] = useState('');
   const [street, setStreet] = useState('');
   const [cityName, setCityName] = useState('');
@@ -27,19 +29,21 @@ const ZipCodeForm: React.FC<{
       return;
     }
 
-    const result = await mapbox.searchByAddress(
+    const response = await mapbox.searchByAddress(
       houseNumber,
       street,
       cityName,
       state,
     );
 
-    if (result.type === 'ERROR') {
-      return;
+    if (response.type === 'ERROR') {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      setError({ shown: true, message: response.message! });
+      setTimeout(() => setError({ shown: false, message: '' }), 4000);
     }
 
-    setCustomPosition(result.body!);
-    setPosition(result.body!);
+    setCustomPosition(response.body!);
+    setPosition(response.body!);
   };
 
   useLayoutEffect(() => {

@@ -23,12 +23,18 @@ export default {
     image: File,
   ): Promise<ItemResponse> => {
     // check if item does not exist
-    const existingItem = await db
+    const itemExists = await db
       .collection('items')
       .where('name', '==', name)
-      .get();
+      .get()
+      .then(item => {
+        if (item.empty) return false;
 
-    if (existingItem) {
+        return true;
+      })
+      .catch(() => null);
+
+    if (itemExists) {
       return { type: 'ERROR', message: 'Item already exists' };
     }
 

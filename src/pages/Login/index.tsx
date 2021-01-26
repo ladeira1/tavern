@@ -12,8 +12,10 @@ import {
   Title,
   LinkElement,
 } from '../../shared/styles/formStyles';
+
 import FormTextInput from '../../components/FormTextInput';
 import Button from '../../components/Button';
+import ErrorPopup from '../../components/ErrorPopup';
 
 import { useAuth } from '../../contexts/Auth';
 import { useLoading } from '../../contexts/Loading';
@@ -28,13 +30,19 @@ const Login: React.FC = () => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState({ shown: false, message: '' });
 
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const response = await login(email, password);
-    // eslint-disable-next-line no-console
-    console.log(response);
+
+    if (response.type === 'ERROR') {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      setError({ shown: true, message: response.message! });
+      setTimeout(() => setError({ shown: false, message: '' }), 4000);
+    }
+
     setLoading(false);
     setEmail('');
     setPassword('');
@@ -42,7 +50,8 @@ const Login: React.FC = () => {
 
   return (
     <Container>
-      <Header />\
+      <Header />
+      <ErrorPopup error={error} />
       <Wrapper>
         <Content>
           <Form onSubmit={handleLogin}>
