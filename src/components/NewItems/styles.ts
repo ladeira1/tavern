@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import ScrollContainer from 'react-indiana-drag-scroll';
 import colors from '../../assets/colors';
 
 export const Container = styled.div`
@@ -19,30 +20,13 @@ export const Title = styled.h1`
   font-size: 2.7em;
   color: ${colors.text};
 `;
-export const Wrapper = styled.section`
+
+export const Wrapper = styled(ScrollContainer)`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   border-radius: 10px;
-  overflow-x: scroll;
-
-  ::-webkit-scrollbar {
-    height: 8px;
-  }
-  ::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: ${colors.line};
-    border-radius: 10px;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: ${colors.scrollHover};
-  }
-
-  scrollbar-color: ${colors.line} transparent;
 
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */

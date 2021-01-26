@@ -30,9 +30,9 @@ export const Container = styled.div<{ isExpanded: boolean }>`
   }
 
   @media screen and (min-width: 600px) {
-    width: 50%;
-    left: 25%;
-    right: 25%;
+    width: 70%;
+    left: 15%;
+    right: 15%;
   }
 `;
 export const Header = styled.header`

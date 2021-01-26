@@ -13,6 +13,7 @@ import {
   CheckoutButton,
   CheckoutTitle,
 } from './styles';
+
 import BagItem from '../BagItem';
 
 const Bag: React.FC<{action: () => void}> = ({ action }) => {
@@ -26,7 +27,8 @@ const Bag: React.FC<{action: () => void}> = ({ action }) => {
   };
 
   return (
-    <Container>
+    <>
+      <Container>
       <Wrapper>
         <Title>Your bag</Title>
         <ItemsWrapper>
@@ -45,6 +47,7 @@ const Bag: React.FC<{action: () => void}> = ({ action }) => {
         </Footer>
       </Wrapper>
     </Container>
+    </>
   );
 };
 

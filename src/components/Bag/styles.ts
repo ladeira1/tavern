@@ -13,6 +13,10 @@ export const Container = styled.div`
   position: fixed;
 
   font-size: 10px;
+
+  @media screen and (max-width: 1144px) {
+    display: none;
+  }
 `;
 export const Wrapper = styled.div`
   flex: 1;
