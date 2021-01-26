@@ -7,7 +7,7 @@ import 'firebase/storage';
 import firebaseConfig from './firebaseConfig';
 import ItemInterface from '../models/ItemInterface';
 import ItemResponse from '../models/ItemResponse';
-import AuthResponse from '../models/AuthResponse';
+import AuthResponse, { success, error } from '../models/AuthResponse';
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 const db = firebaseApp.firestore();
@@ -35,7 +35,7 @@ export default {
       .catch(() => null);
 
     if (itemExists) {
-      return { type: 'ERROR', message: 'Item already exists' };
+      return { type: error, message: 'Item already exists' };
     }
 
     // create item
@@ -51,7 +51,7 @@ export default {
       .catch(err => ({ error: String(err.message) }));
 
     if ('error' in result) {
-      return { type: 'ERROR', message: result.error };
+      return { type: error, message: result.error };
     }
 
     // get item
@@ -63,7 +63,7 @@ export default {
       .catch(err => ({ error: String(err.code) }));
 
     if ('error' in itemsResult) {
-      return { type: 'ERROR', message: itemsResult.error };
+      return { type: error, message: itemsResult.error };
     }
 
     itemsResult.forEach(item => {
@@ -84,7 +84,7 @@ export default {
       .catch(err => ({ error: String(err.code) }));
 
     if ('error' in imageResult) {
-      return { type: 'ERROR', message: imageResult.error };
+      return { type: error, message: imageResult.error };
     }
 
     // update item image
@@ -99,7 +99,7 @@ export default {
       })
       .catch(err => ({ error: String(err.code) }));
 
-    return { type: 'SUCCESS', message: 'Item succesfully created' };
+    return { type: success, message: 'Item succesfully created' };
   },
 
   getItems: async (): Promise<ItemInterface[]> => {
@@ -136,7 +136,7 @@ export default {
 
         await db.collection('users').doc(uid).set({ name });
         return {
-          type: 'SUCCESS',
+          type: success,
           body: {
             uid,
             name,
@@ -144,11 +144,12 @@ export default {
           },
         };
       })
-      .catch(err => ({ type: 'ERROR', message: String(err.message) }));
+      .catch(err => ({ type: error, message: String(err.message) }));
 
     if (!result) {
-      return { type: 'ERROR', message: 'Account not created' };
+      return { type: error, message: 'Account not created' };
     }
+
     return result;
   },
 
@@ -168,7 +169,7 @@ export default {
         }
 
         return {
-          type: 'SUCCESS',
+          type: success,
           body: {
             uid,
             name: user.data.name,
@@ -176,10 +177,10 @@ export default {
           },
         };
       })
-      .catch(err => ({ type: 'ERROR', message: String(err.message) }));
+      .catch(err => ({ type: error, message: String(err.message) }));
 
     if (!result) {
-      return { type: 'ERROR', message: 'Account not found' };
+      return { type: error, message: 'Account not found' };
     }
 
     return result;

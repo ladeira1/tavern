@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import PositionResponse from '../models/PositionResponse';
+import PositionResponse, { success, error } from '../models/PositionResponse';
 
 const getFormattedString = (text: string) => text.replace(/\s/g, '%20');
 
@@ -21,11 +21,11 @@ export default {
     const position = result.data.features[0];
 
     if (!position) {
-      return { type: 'ERROR', message: 'Invalid place' };
+      return { type: error, message: 'Invalid place' };
     }
 
     return {
-      type: 'SUCCESS',
+      type: success,
       body: {
         latitude: position.center[1].toFixed(4),
         longitude: position.center[0].toFixed(4),

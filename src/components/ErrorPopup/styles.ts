@@ -9,7 +9,9 @@ export const Container = styled(motion.div)`
   left: 5%;
   width: 90vw;
   height: 13%;
+  min-height: 80px;
   background: ${colors.whitePopup};
+  box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.37);
   border-radius: 10px;
   padding: 10px 2%;
   font-size: 10px;

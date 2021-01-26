@@ -40,10 +40,11 @@ const ZipCodeForm: React.FC<{
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       setError({ shown: true, message: response.message! });
       setTimeout(() => setError({ shown: false, message: '' }), 4000);
+      return;
     }
 
-    setCustomPosition(response.body!);
-    setPosition(response.body!);
+    setCustomPosition(response.body);
+    setPosition(response.body);
   };
 
   useLayoutEffect(() => {
