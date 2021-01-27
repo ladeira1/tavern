@@ -15,6 +15,7 @@ export const Background = styled.div`
 `;
 export const Container = styled(motion.div)`
   height: 30%;
+  min-height: 350px;
   width: 90%;
   background-color: rgba(0, 0, 0, 0.7);
   border-radius: 10px;

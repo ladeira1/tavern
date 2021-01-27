@@ -76,7 +76,6 @@ const Checkout: React.FC = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log('a');
 
     if (position.latitude === 0 && position.longitude === 0) {
       setError({ shown: true, message: 'Invalid location' });
@@ -94,7 +93,6 @@ const Checkout: React.FC = () => {
   };
 
   useLayoutEffect(() => {
-    getUserLocation();
     readStoragedItems();
   }, []);
 

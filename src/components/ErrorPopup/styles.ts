@@ -36,10 +36,16 @@ export const Container = styled(motion.div)`
     width: 60vw;
   }
 
+  @media screen and(min-width: 1300px) {
+    right: 25%;
+    left: 25%;
+    width: 50%;
+  }
+
   @media screen and (min-width: 2000px) {
-    right: 26%;
-    left: 26%;
-    width: 48vw;
+    right: 30%;
+    left: 30%;
+    width: 40vw;
   }
 `;
 export const Title = styled.h2`
