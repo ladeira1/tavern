@@ -4,7 +4,6 @@ import colors from '../../assets/colors';
 export const Background = styled.div`
   height: 100%;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
   z-index: 99;
   display: flex;
   justify-content: center;
@@ -14,10 +13,10 @@ export const Background = styled.div`
   top: 0;
 `;
 export const Container = styled.div`
-  height: 40%;
+  height: 30%;
   width: 90%;
-  background-color: ${colors.background};
-  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
   padding: 1% 2%;
   font-size: 9px;
   display: flex;
@@ -35,46 +34,66 @@ export const Container = styled.div`
     width: 70%;
   }
 
-  @media screen and (min-width: 1200px) {
+  @media screen and (min-width: 1450px) {
     width: 50%;
   }
 `;
 export const Title = styled.h2`
   font-family: 'Oswald', sans-serif;
-  font-size: 3.3em;
-  color: ${colors.text};
-  margin-bottom: 0.5em;
+  font-size: 2.5em;
+  color: ${colors.white};
+  text-align: center;
+  margin-bottom: 1em;
 
-  @media screen and (max-width: 410px) {
-    font-size: 2.5em;
+  @media screen and (min-width: 410px) {
+    font-size: 3.6em;
   }
 `;
 export const Text = styled.h3`
-  font-family: 'Roboto Slab', sans-serif;
+  font-family: 'Ubuntu', sans-serif;
   font-size: 2em;
-  color: ${colors.checkoutComment};
+  color: ${colors.text};
+  opacity: 0.9;
 `;
 export const ButtonWrapper = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: flex-end;
   flex: 1;
+
+  @media screen and (min-width: 650px) {
+    justify-content: flex-end;
+  }
 `;
 export const Button = styled.button`
-  margin-left: 3%;
   margin-bottom: 15px;
   height: 60px;
-  width: 50%;
+  width: 100%;
+  min-width: 300px;
   border: 1px solid ${colors.white};
   border-radius: 5px;
-  background-color: transparent;
+  background-color: ${colors.white};
 
-  color: ${colors.text};
+  color: ${colors.black};
   font-family: 'Oswald', sans-serif;
-  font-size: 2em;
+  font-weight: bold;
+  font-size: 2.2em;
+  transition: all ease 0.2s;
 
   :hover {
     box-shadow: 0 0 5px rgba(255, 255, 255, 0.4);
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.8);
+
+    @media screen and (min-width: 650px) {
+      transform: scale(1.05);
+    }
+
+    @media screen and (min-width: 800px) {
+      transform: scale(1.1);
+    }
+  }
+
+  @media screen and (min-width: 650px) {
+    width: 40%;
   }
 `;
