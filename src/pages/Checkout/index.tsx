@@ -76,6 +76,8 @@ const Checkout: React.FC = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    console.log('a');
+
     if (position.latitude === 0 && position.longitude === 0) {
       setError({ shown: true, message: 'Invalid location' });
       setTimeout(() => setError({ shown: false, message: '' }), 4000);
@@ -187,7 +189,7 @@ const Checkout: React.FC = () => {
         </RightColumn>
       </Wrapper>
       <MobileBag />
-      {popupVisible && <Popup setPopupVisible={setPopupVisible} />}
+      <Popup isVisible={popupVisible} setPopupVisible={setPopupVisible} />
     </Container>
   );
 };

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 import colors from '../../assets/colors';
 
 export const Background = styled.div`
@@ -12,7 +13,7 @@ export const Background = styled.div`
   left: 0;
   top: 0;
 `;
-export const Container = styled.div`
+export const Container = styled(motion.div)`
   height: 30%;
   width: 90%;
   background-color: rgba(0, 0, 0, 0.7);
