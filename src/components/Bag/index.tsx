@@ -16,14 +16,18 @@ import {
 
 import BagItem from '../BagItem';
 
-const Bag: React.FC<{action: () => void}> = ({ action }) => {
+const Bag: React.FC<{action?: () => void, isEnabled?: boolean}> = ({ action, isEnabled }) => {
   const {
     bagItems,
     totalPrice,
   } = useBag();
 
+  const isButtonDisabled = bagItems.length === 0;
+
   const handleCheckout = () => {
-    action();
+    if (action) {
+      action();
+    }
   };
 
   return (
@@ -41,9 +45,12 @@ const Bag: React.FC<{action: () => void}> = ({ action }) => {
         </ItemsWrapper>
         <Footer>
           <Price>{totalPrice.toFixed(2)}</Price>
-          <CheckoutButton onClick={handleCheckout}>
-            <CheckoutTitle>Checkout</CheckoutTitle>
-          </CheckoutButton>
+          {isEnabled &&
+            <CheckoutButton type="button" onClick={handleCheckout} disabled={isButtonDisabled}>
+              <CheckoutTitle>Checkout</CheckoutTitle>
+            </CheckoutButton>
+          }
+
         </Footer>
       </Wrapper>
     </Container>

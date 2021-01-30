@@ -32,6 +32,8 @@ const Login: React.FC = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState({ shown: false, message: '' });
 
+  const isButtonDisabled = !email || !password;
+
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -69,7 +71,7 @@ const Login: React.FC = () => {
               placeholder="Password"
               type="password"
             />
-            <Button message="Login" />
+            <Button message="Login" disabled={isButtonDisabled} />
             <LinkElement to="/register">
               Don't have an account? Create one!
             </LinkElement>

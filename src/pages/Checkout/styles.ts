@@ -199,8 +199,8 @@ export const Price = styled.input`
   width: 10%;
   min-width: 70px;
 `;
-export const CheckoutButton = styled.button`
-  background: ${colors.text};
+export const CheckoutButton = styled.button<{disabled: boolean}>`
+  background-color: ${props => (props.disabled ? colors.white : colors.text)};
   width: 100%;
   height: 60px;
   border-radius: 5px;
@@ -208,10 +208,12 @@ export const CheckoutButton = styled.button`
   justify-content: center;
   align-items: center;
   transition: all ease 0.2s;
-  transform: scale(0.99);
+  transform: scale(0.95);
+  margin-bottom: 10px;
 
   :hover {
-    transform: scale(1);
+    transform: ${props => (props.disabled ? 'scale(0.95)' : 'scale(1)')};
+    cursor: ${props => (props.disabled ? 'not-allowed' : 'pointer')};
   }
 `;
 export const CheckoutTitle = styled.h2`

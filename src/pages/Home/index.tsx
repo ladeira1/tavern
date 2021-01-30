@@ -78,12 +78,12 @@ const Home: React.FC = () => {
             </LeftColumn>
 
             <RightColumn>
-              <Bag action={() => history.push('/checkout')} />
+              <Bag action={() => history.push('/checkout')} isEnabled />
             </RightColumn>
           </>
         )}
       </Wrapper>
-      <MobileBag />
+      <MobileBag action={() => history.push('/checkout')} isEnabled />
     </Container>
   );
 };

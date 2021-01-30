@@ -47,6 +47,8 @@ const CreateItem: React.FC = () => {
   const [typeSelected, setTypeSelected] = useState(false);
   const [error, setError] = useState({ shown: false, message: '' });
 
+  const isButtonDisabled = !name || !image || !details || !price || !type;
+
   const handleCreateItem = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
@@ -190,7 +192,7 @@ const CreateItem: React.FC = () => {
               </Select>
             </Label>
 
-            <Button message="Create item" />
+            <Button message="Create item" disabled={isButtonDisabled} />
           </Form>
         </Content>
       </Wrapper>

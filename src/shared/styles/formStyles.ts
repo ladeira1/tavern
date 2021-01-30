@@ -112,8 +112,8 @@ export const ListIcon = styled(FiList).attrs({
   margin: 2.5% 2%;
   color: ${props => (props.selected ? colors.white : colors.formSecondary)};
 `;
-export const SubmitButton = styled.button`
-  background: ${colors.white};
+export const SubmitButton = styled.button<{ disabled: boolean }>`
+  background: ${props => (props.disabled ? colors.text : colors.white)};
   min-height: 60px;
   margin-top: 50px;
   border-radius: 5px;
@@ -126,7 +126,8 @@ export const SubmitButton = styled.button`
   }
 
   :hover {
-    transform: scale(1.05);
+    transform: ${props => (props.disabled ? 'scale(1)' : 'scale(1.05)')};
+    cursor: ${props => (props.disabled ? 'not-allowed' : 'hover')};
   }
 `;
 export const Title = styled.h1`

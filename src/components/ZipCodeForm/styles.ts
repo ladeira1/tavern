@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import styled from 'styled-components';
 import colors from '../../assets/colors';
 
@@ -12,7 +13,7 @@ export const Row = styled.div`
   display: flex;
   justify-content: space-between;
 `;
-export const Button = styled.button`
+export const Button = styled.button<{ disabled: boolean }>`
   margin-left: 3%;
   margin-bottom: 15px;
   height: 60px;
@@ -27,7 +28,8 @@ export const Button = styled.button`
 
   :hover {
     box-shadow: 0 0 5px rgba(255, 255, 255, 0.4);
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: ${props => (props.disabled ? 'transparent' : 'rgba(255, 255, 255, 0.2)')};
+    cursor: ${props => (props.disabled ? 'not-allowed' : 'hover')};
   }
 `;
 

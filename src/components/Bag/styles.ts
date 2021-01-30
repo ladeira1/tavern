@@ -68,18 +68,23 @@ export const Price = styled.h1`
   font-size: 1.8em;
   margin-bottom: 8px;
 `;
-export const CheckoutButton = styled.div`
-  background: ${colors.text};
+export const CheckoutButton = styled.button<{ disabled: boolean }>`
+  background-color: ${colors.text};
   width: 100%;
-  height: 40px;
+  height: 50px;
   border-radius: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  :hover {
+    background-color: ${props => (props.disabled ? colors.text : colors.white)};
+    cursor: ${props => (props.disabled ? 'not-allowed' : 'pointer')};
+  }
 `;
 export const CheckoutTitle = styled.h2`
   color: ${colors.black};
   font-family: 'Oswald', sans-serif;
-  font-size: 2em;
+  font-size: 1.6em;
   font-weight: 400;
 `;

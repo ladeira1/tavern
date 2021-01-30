@@ -48,6 +48,10 @@ const Checkout: React.FC = () => {
   const [change, setChange] = useState(totalPrice);
   const [error, setError] = useState({ shown: false, message: '' });
 
+  const isButtonDisabled = position.latitude === 0
+  || position.longitude === 0
+  || change < totalPrice;
+
   const getUserLocation = async () => {
     navigator.geolocation.getCurrentPosition(location => {
       const { latitude, longitude } = location.coords;
@@ -177,16 +181,16 @@ const Checkout: React.FC = () => {
                 </PaymentInformation>
               )}
             </ItemContainer>
-            <CheckoutButton type="submit">
+            <CheckoutButton type="submit" disabled={isButtonDisabled}>
               <CheckoutTitle>Checkout</CheckoutTitle>
             </CheckoutButton>
           </Form>
         </LeftColumn>
         <RightColumn>
-          <Bag action={() => setPopupVisible(true)} />
+          <Bag isEnabled={false} />
         </RightColumn>
       </Wrapper>
-      <MobileBag />
+      <MobileBag isEnabled={false} />
       <Popup isVisible={popupVisible} setPopupVisible={setPopupVisible} />
     </Container>
   );

@@ -34,6 +34,9 @@ const Register: React.FC = () => {
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [error, setError] = useState({ shown: false, message: '' });
 
+  const isButtonDisabled =
+    !name || !email || !password || !passwordConfirmation;
+
   const handleCreateAccount = async (
     event: React.FormEvent<HTMLFormElement>,
   ) => {
@@ -94,7 +97,7 @@ const Register: React.FC = () => {
               placeholder="Confirm your password"
               type="password"
             />
-            <Button message="Create Account" />
+            <Button message="Create Account" disabled={isButtonDisabled} />
             <LinkElement to="/login">
               Already have an account? Log in!
             </LinkElement>

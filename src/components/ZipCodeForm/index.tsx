@@ -24,6 +24,8 @@ const ZipCodeForm: React.FC<{
     longitude: 0,
   });
 
+  const isButtonDisabled = !state || !street || !cityName || !houseNumber;
+
   const handleSetDestinationPosition = async () => {
     if (!houseNumber || !street || !cityName || !state) {
       return;
@@ -96,7 +98,11 @@ const ZipCodeForm: React.FC<{
         <Text>
           * Please inform the address you want your food to be delivered at
         </Text>
-        <Button type="button" onClick={handleSetDestinationPosition}>
+        <Button
+          type="button"
+          onClick={handleSetDestinationPosition}
+          disabled={isButtonDisabled}
+        >
           Confirm
         </Button>
       </Row>

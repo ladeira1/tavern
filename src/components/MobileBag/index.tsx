@@ -12,12 +12,23 @@ import {
   CheckoutTitle,
 } from './styles';
 
-const MobileBag: React.FC = () => {
+const MobileBag: React.FC<{ action?: () => void; isEnabled?: boolean }> = ({
+  action,
+  isEnabled,
+}) => {
   const { bagItems, totalPrice } = useBag();
   const [show, setShow] = useState(false);
 
+  const isButtonDisabled = bagItems.length === 0;
+
   const handleShowOrCollapseBag = () => {
     if (bagItems.length) setShow(!show);
+  };
+
+  const handleAction = () => {
+    if (action) {
+      action();
+    }
   };
 
   useEffect(() => {
@@ -41,9 +52,15 @@ const MobileBag: React.FC = () => {
                 <BagItem bagItem={bagItem} key={bagItem.item.id} />
               ))}
           </ItemsWrapper>
-          <CheckoutButton to="/checkout">
-            <CheckoutTitle>Checkout</CheckoutTitle>
-          </CheckoutButton>
+          {isEnabled && (
+            <CheckoutButton
+              onClick={handleAction}
+              type="button"
+              disabled={isButtonDisabled}
+            >
+              <CheckoutTitle>Checkout</CheckoutTitle>
+            </CheckoutButton>
+          )}
         </AnimatePresence>
       )}
     </Container>
