@@ -138,7 +138,12 @@ const CreateItem: React.FC = () => {
             <ImageLabel htmlFor="image" hasImage={!!image}>
               <ImageIcon />
               <span>Image</span>
-              <Input type="file" id="image" onChange={handleSetImage} />
+              <Input
+                type="file"
+                id="image"
+                onChange={handleSetImage}
+                accept=".png, .jpg, .jpeg"
+              />
             </ImageLabel>
             {previewImage && (
               <ImageContainer>
