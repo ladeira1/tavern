@@ -53,7 +53,7 @@ export const ImageContainer = styled.div`
   padding: 0 5% 5% 5%;
   position: relative;
 `;
-export const Image = styled.img`
+export const ImageItem = styled.img`
   width: 100%;
 `;
 export const XIcon = styled(FiX).attrs({

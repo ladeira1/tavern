@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable import/no-duplicates */
 import firebase from 'firebase/app';
 import 'firebase/firebase-firestore';
@@ -8,6 +9,7 @@ import firebaseConfig from './firebaseConfig';
 import ItemInterface from '../models/ItemInterface';
 import ItemResponse from '../models/ItemResponse';
 import AuthResponse, { success, error } from '../models/AuthResponse';
+import GetItemResponse from '../models/GetItemResponse';
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 const db = firebaseApp.firestore();
@@ -118,6 +120,34 @@ export default {
     });
 
     return items;
+  },
+
+  getItem: async (id: string): Promise<GetItemResponse> => {
+    const result = await db
+      .collection('items')
+      .doc(id)
+      .get()
+      .then(i => {
+        const item = i.data();
+        return {
+          type: success,
+          item: {
+            id,
+            name: String(item!.name),
+            price: Number(item!.price),
+            details: String(item!.details),
+            imageUrl: String(item!.imageUrl),
+            type: String(item!.type),
+          },
+        };
+      })
+      .catch(err => ({ type: error, message: err.message }));
+
+    if (!result) {
+      return { type: error, message: 'Item not found' };
+    }
+
+    return result;
   },
 
   createAccount: async (
