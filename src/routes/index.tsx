@@ -18,6 +18,7 @@ const Routes: React.FC = () => (
       <Route path="/register" component={Register} />
       <Route path="/checkout" component={Checkout} />
       <PrivateRoute path="/item" component={CreateItem} />
+      {/* Change to PrivateRoute once tests are finished */}
       <Route path="/update/item/:id" component={UpdateItem} />
     </Switch>
   </BrowserRouter>

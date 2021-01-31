@@ -34,7 +34,9 @@ const UpdateItem: React.FC = () => {
     return null;
   }
 
-  return <ItemForm item={item} text="Update this item" />;
+  return (
+    <ItemForm item={item} text="Update this item" buttonText="Update Item" />
+  );
 };
 
 export default UpdateItem;

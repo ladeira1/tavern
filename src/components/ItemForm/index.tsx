@@ -33,11 +33,12 @@ import { useLoading } from '../../contexts/Loading';
 import ItemInterface from '../../models/ItemInterface';
 
 interface ItemForm {
-  text?: string;
+  text: string;
+  buttonText: string;
   item?: ItemInterface;
 }
 
-const ItemForm: React.FC<ItemForm> = ({ text, item }) => {
+const ItemForm: React.FC<ItemForm> = ({ text, buttonText, item }) => {
   const history = useHistory();
 
   const { setLoading } = useLoading();
@@ -227,7 +228,7 @@ const ItemForm: React.FC<ItemForm> = ({ text, item }) => {
               </Select>
             </Label>
 
-            <Button message="Create item" disabled={isButtonDisabled} />
+            <Button message={buttonText} disabled={isButtonDisabled} />
           </Form>
         </Content>
       </Wrapper>
