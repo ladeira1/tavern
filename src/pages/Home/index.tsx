@@ -54,6 +54,7 @@ const Home: React.FC = () => {
         setDrinks(items.filter(item => item.type === 'drink'));
         setNewItems(items.slice(0, 9));
       }
+
       setLoading(false);
     }
 

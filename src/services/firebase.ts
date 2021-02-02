@@ -16,94 +16,93 @@ const db = firebaseApp.firestore();
 const storage = firebase.storage();
 const auth = firebase.auth();
 
-export default {
-  createItem: async (
-    name: string,
-    details: string,
-    price: number,
-    type: string,
-    image: File,
-  ): Promise<ItemResponse> => {
-    // check if item does not exist
-    const itemExists = await db
-      .collection('items')
-      .where('name', '==', name)
-      .get()
-      .then(item => {
-        if (item.empty) return false;
+const createItem = async (
+  name: string,
+  details: string,
+  price: number,
+  type: string,
+  image: File,
+): Promise<ItemResponse> => {
+  // check if item does not exist
+  const itemExists = await db
+    .collection('items')
+    .where('name', '==', name)
+    .get()
+    .then(item => {
+      if (item.empty) return false;
 
-        return true;
-      })
-      .catch(() => null);
+      return true;
+    })
+    .catch(() => null);
 
-    if (itemExists) {
-      return { type: error, message: 'Item already exists' };
-    }
+  if (itemExists) {
+    return { type: error, message: 'Item already exists' };
+  }
 
-    // create item
-    const result = await db
-      .collection('items')
-      .add({
-        name,
-        details,
-        price,
-        imageUrl: '',
-        type,
-      })
-      .catch(err => ({ error: String(err.message) }));
+  // create item
+  const result = await db
+    .collection('items')
+    .add({
+      name,
+      details,
+      price,
+      imageUrl: '',
+      type,
+    })
+    .catch(err => ({ error: String(err.message) }));
 
-    if ('error' in result) {
-      return { type: error, message: result.error };
-    }
+  if ('error' in result) {
+    return { type: error, message: result.error };
+  }
 
-    // get item
-    const items: ItemInterface[] = [];
-    const itemsResult = await db
-      .collection('items')
-      .where('name', '==', name)
-      .get()
-      .catch(err => ({ error: String(err.code) }));
+  // get item
+  const items: ItemInterface[] = [];
+  const itemsResult = await db
+    .collection('items')
+    .where('name', '==', name)
+    .get()
+    .catch(err => ({ error: String(err.code) }));
 
-    if ('error' in itemsResult) {
-      return { type: error, message: itemsResult.error };
-    }
+  if ('error' in itemsResult) {
+    return { type: error, message: itemsResult.error };
+  }
 
-    itemsResult.forEach(item => {
-      items.push({
-        id: item.id,
-        name: item.data().name,
-        price: item.data().price,
-        details: item.data().details,
-        imageUrl: item.data().imageUrl,
-        type: item.data().type,
-      });
+  itemsResult.forEach(item => {
+    items.push({
+      id: item.id,
+      name: item.data().name,
+      price: item.data().price,
+      details: item.data().details,
+      imageUrl: item.data().imageUrl,
+      type: item.data().type,
     });
+  });
 
-    // upload image
-    const storageRef = storage.ref('items').child(items[0].id);
-    const imageResult = await storageRef
-      .put(image)
-      .catch(err => ({ error: String(err.code) }));
+  // upload image
+  const storageRef = storage.ref('items').child(items[0].id);
+  const imageResult = await storageRef
+    .put(image)
+    .catch(err => ({ error: String(err.code) }));
 
-    if ('error' in imageResult) {
-      return { type: error, message: imageResult.error };
-    }
+  if ('error' in imageResult) {
+    return { type: error, message: imageResult.error };
+  }
 
-    // update item image
-    await storageRef
-      .getDownloadURL()
-      .then(async storagedImage => {
-        items.forEach(async item => {
-          await db.collection('items').doc(item.id).update({
-            imageUrl: storagedImage,
-          });
+  // update item image
+  await storageRef
+    .getDownloadURL()
+    .then(async storagedImage => {
+      items.forEach(async item => {
+        await db.collection('items').doc(item.id).update({
+          imageUrl: storagedImage,
         });
-      })
-      .catch(err => ({ error: String(err.code) }));
+      });
+    })
+    .catch(err => ({ error: String(err.code) }));
 
-    return { type: success, message: 'Item succesfully created' };
-  },
-
+  return { type: success, message: 'Item succesfully created' };
+};
+export default {
   getItems: async (): Promise<ItemInterface[]> => {
     const items: ItemInterface[] = [];
     const result = await db.collection('items').get();
@@ -148,6 +147,10 @@ export default {
     }
 
     return result;
+  },
+
+  updateItem: async (item: ItemInterface): Promise<void> => {
+    const currentItem = await getItem(item);
   },
 
   createAccount: async (

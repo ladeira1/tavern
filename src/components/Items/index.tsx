@@ -42,11 +42,11 @@ const Items: React.FC<ItemsProps> = ({
               collapsed: { opacity: 0, height: 0 },
             }}
             transition={{
-              duration: 0.3,
-              ease: [0.04, 0.62, 0.23, 0.98],
+              duration: 0.5,
+              ease: [0.9, 0.62, 0.23, 0.98],
             }}
           >
-            {items.slice(4).length && (
+            {items.length && (
               items.slice(4).map(item => (
                 <Item item={item} />
               ))

@@ -127,10 +127,11 @@ const ItemForm: React.FC<ItemForm> = ({ text, buttonText, item }) => {
     await handleCreateItem();
   };
 
-  const handleSetImage = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSetImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files) return;
 
     const selectedImage = event.target.files[0];
+
     setImage(selectedImage);
     setPreviewImage(URL.createObjectURL(selectedImage));
   };

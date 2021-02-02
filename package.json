@@ -24,7 +24,6 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-icons": "^4.1.0",
-    "react-indiana-drag-scroll": "^1.8.0",
     "react-leaflet": "^3.0.5",
     "react-loading": "^2.0.3",
     "react-router-dom": "^5.2.0",

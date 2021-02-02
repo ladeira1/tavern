@@ -4,7 +4,8 @@ import { motion } from 'framer-motion';
 import colors from '../../assets/colors';
 
 export const Container = styled(motion.div)`
-  background: transparent;
+  background: 'transparent';
+  border-radius: 10px;
   width: 100%;
   height: 150px;
   display: flex;
@@ -59,10 +60,10 @@ export const ImageWrapper = styled.section`
   max-width: 40%;
   max-height: 100%;
   overflow: hidden;
-
-  img {
-    width: 100%;
-  }
+`;
+export const Img = styled.img`
+  width: 100%;
+  object-fit: cover;
 `;
 export const RightSide = styled.section`
   width: 60%;

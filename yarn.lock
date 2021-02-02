@@ -9969,6 +9969,11 @@ react-icons@^4.1.0:
   resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-4.1.0.tgz#9ca9bcbf2e3aee8e86e378bb9d465842947bbfc3"
   integrity sha512-FCXBg1JbbR0vWALXIxmFAfozHdVIJmmwCD81Jk0EKOt7Ax4AdBNcaRkWhR0NaKy9ugJgoY3fFvo0PHpte55pXg==
 
+react-image-file-resizer@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/react-image-file-resizer/-/react-image-file-resizer-0.4.0.tgz#041881bd38f9031f051b49f08fbd36ec226c84b4"
+  integrity sha512-no0m3/YfgT+WxWwDynM4OwruUas3FrokE9QHkANuPL8Ihk8SK/ienHE3l+WW1fFouYoVSNMgvDtQYoQknvVavg==
+
 react-indiana-drag-scroll@^1.8.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/react-indiana-drag-scroll/-/react-indiana-drag-scroll-1.8.0.tgz#d82237c1b3aefd3c0bb47d9380abfde130d68ecf"

@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ItemInterface from '../../models/ItemInterface';
 import { useBag } from '../../contexts/Bag';
-import BubbleLoader from '../BubbleLoader';
 import {
   Container,
   ContentWrapper,
@@ -12,10 +11,10 @@ import {
   Footer,
   Price,
   AddButton,
+  Img,
 } from './styles';
 
 const Item: React.FC<{ item: ItemInterface }> = ({ item }) => {
-  const [loading, setLoading] = useState(true);
   const { addItemToBag } = useBag();
 
   const handleAddToBag = () => {
@@ -28,17 +27,11 @@ const Item: React.FC<{ item: ItemInterface }> = ({ item }) => {
         open: { scale: 1 },
         collapsed: { scale: 0 },
       }}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: 0.5 }}
     >
       <ContentWrapper>
         <ImageWrapper>
-          {loading && <BubbleLoader color="#fff" />}
-          <img
-            src={item.imageUrl}
-            onLoad={() => setLoading(false)}
-            alt="Item"
-            style={{ display: loading ? 'none' : 'block' }}
-          />
+          <Img src={item.imageUrl} alt="Item" loading="lazy" />
         </ImageWrapper>
         <RightSide>
           <Title>{item.name}</Title>
