@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React, { useLayoutEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import {
@@ -31,6 +32,7 @@ import ErrorPopup from '../ErrorPopup';
 import firebase from '../../services/firebase';
 import { useLoading } from '../../contexts/Loading';
 import ItemInterface from '../../models/ItemInterface';
+import ItemResponse from '../../models/ItemResponse';
 
 interface ItemForm {
   text: string;
@@ -54,21 +56,40 @@ const ItemForm: React.FC<ItemForm> = ({ text, buttonText, item }) => {
   const [typeSelected, setTypeSelected] = useState(false);
   const [error, setError] = useState({ shown: false, message: '' });
 
-  const isButtonDisabled = !name || !image || !details || !price || !type;
+  const isButtonDisabled = !name || !details || !price;
 
-  const handleCreateItem = async () => {
-    setLoading(true);
-
+  const handleCreateItem = async (): Promise<ItemResponse> => {
     // it will set error messages in a near future
-    if (name === '') {
-      setLoading(false);
-      setError({ shown: true, message: 'You must type a valid name.' });
-      setTimeout(() => setError({ shown: false, message: '' }), 4000);
-      return;
-    }
     if (!image) {
       setLoading(false);
       setError({ shown: true, message: 'You must insert a valid image.' });
+      setTimeout(() => setError({ shown: false, message: '' }), 4000);
+      return { type: 'ERROR', message: 'Invalid image' };
+    }
+
+    return firebase.createItem(name, details, Number(price), type, image);
+  };
+
+  const handleUpdateItem = async (): Promise<ItemResponse> => {
+    const updatedItem: ItemInterface = {
+      id: item!.id,
+      name,
+      price: Number(price),
+      details,
+      imageUrl: item!.imageUrl,
+      type,
+    };
+
+    return firebase.updateItem(updatedItem, image);
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setLoading(true);
+
+    if (name === '') {
+      setLoading(false);
+      setError({ shown: true, message: 'You must type a valid name.' });
       setTimeout(() => setError({ shown: false, message: '' }), 4000);
       return;
     }
@@ -84,20 +105,14 @@ const ItemForm: React.FC<ItemForm> = ({ text, buttonText, item }) => {
       setTimeout(() => setError({ shown: false, message: '' }), 4000);
       return;
     }
-    if (type === '') {
+    if (!type) {
       setLoading(false);
       setError({ shown: true, message: 'You must select a valid type' });
       setTimeout(() => setError({ shown: false, message: '' }), 4000);
       return;
     }
 
-    const response = await firebase.createItem(
-      name,
-      details,
-      Number(price),
-      type,
-      image,
-    );
+    const response = item ? await handleUpdateItem() : await handleCreateItem();
 
     if (response.type === 'ERROR') {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -110,21 +125,6 @@ const ItemForm: React.FC<ItemForm> = ({ text, buttonText, item }) => {
     if (response.type === 'SUCCESS') {
       history.push('/');
     }
-  };
-
-  const handleUpdateItem = async () => {
-    // eslint-disable-next-line no-console
-    console.log('a');
-  };
-
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (item) {
-      await handleUpdateItem();
-      return;
-    }
-
-    await handleCreateItem();
   };
 
   const handleSetImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -222,6 +222,7 @@ const ItemForm: React.FC<ItemForm> = ({ text, buttonText, item }) => {
                 selected={typeSelected}
                 value={type}
                 onChange={e => setType(e.target.value)}
+                placeholder={type}
               >
                 <option value="burger">Burger</option>
                 <option value="sideDish">Side Dish</option>
