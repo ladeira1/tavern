@@ -16,7 +16,7 @@ const db = firebaseApp.firestore();
 const storage = firebase.storage();
 const auth = firebase.auth();
 
-const createItem = async (
+export const createItem = async (
   name: string,
   details: string,
   price: number,
@@ -48,6 +48,7 @@ const createItem = async (
       price,
       imageUrl: '',
       type,
+      updatedAt: new Date(),
     })
     .catch(err => ({ error: String(err.message) }));
 
@@ -103,9 +104,12 @@ const createItem = async (
   return { type: success, message: 'Item succesfully created' };
 };
 
-const getItems = async (): Promise<ItemInterface[]> => {
+export const getItems = async (): Promise<ItemInterface[]> => {
   const items: ItemInterface[] = [];
-  const result = await db.collection('items').get();
+  const result = await db
+    .collection('items')
+    .orderBy('updatedAt', 'desc')
+    .get();
 
   result.forEach(item => {
     items.push({
@@ -121,7 +125,7 @@ const getItems = async (): Promise<ItemInterface[]> => {
   return items;
 };
 
-const getItem = async (id: string): Promise<GetItemResponse> => {
+export const getItem = async (id: string): Promise<GetItemResponse> => {
   const result = await db
     .collection('items')
     .doc(id)
@@ -149,7 +153,7 @@ const getItem = async (id: string): Promise<GetItemResponse> => {
   return result;
 };
 
-const updateItem = async (
+export const updateItem = async (
   updatedItem: ItemInterface,
   image: File | null,
 ): Promise<ItemResponse> => {
@@ -161,7 +165,7 @@ const updateItem = async (
   const updatedResult = await db
     .collection('items')
     .doc(updatedItem.id)
-    .update(updatedItem)
+    .update({ ...updatedItem, updatedAt: new Date() })
     .catch(err => ({ error: String(err.message) }));
 
   if (updatedResult) {
@@ -197,7 +201,21 @@ const updateItem = async (
   return { type: success, message: 'Item succesfully created' };
 };
 
-const createAccount = async (
+export const deleteItem = async (id: string): Promise<ItemResponse> => {
+  const result = await db
+    .collection('items')
+    .doc(id)
+    .delete()
+    .catch(err => ({ type: error, message: String(err.message) }));
+
+  if (result) {
+    return result;
+  }
+
+  return { type: success, message: 'Item succesfully deleted' };
+};
+
+export const createAccount = async (
   email: string,
   name: string,
   password: string,
@@ -230,7 +248,7 @@ const createAccount = async (
   return result;
 };
 
-const login = async (
+export const signIn = async (
   email: string,
   password: string,
 ): Promise<AuthResponse> => {
@@ -264,13 +282,4 @@ const login = async (
   }
 
   return result;
-};
-
-export default {
-  createItem,
-  getItems,
-  getItem,
-  updateItem,
-  createAccount,
-  login,
 };

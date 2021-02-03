@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React, { useContext, useState, createContext } from 'react';
-import firebase from '../../services/firebase';
+import { createAccount, signIn } from '../../services/firebase';
 import { useLoading } from '../Loading';
 
 import {
@@ -40,7 +40,7 @@ const AuthProvider: React.FC = ({ children }) => {
       return { type: 'ERROR', message: 'Passwords must match' };
     }
 
-    const result = await firebase.createAccount(email, name, password);
+    const result = await createAccount(email, name, password);
 
     if (result.type === 'ERROR') {
       return { type: 'ERROR', message: result.message };
@@ -66,7 +66,7 @@ const AuthProvider: React.FC = ({ children }) => {
       return { type: 'ERROR', message: 'You must type a valid password' };
     }
 
-    const result = await firebase.login(email, password);
+    const result = await signIn(email, password);
 
     if (result.type === 'ERROR') {
       return { type: 'ERROR', message: result.message };

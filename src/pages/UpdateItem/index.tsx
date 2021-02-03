@@ -3,7 +3,7 @@ import { useParams, useHistory } from 'react-router-dom';
 
 import ItemForm from '../../components/ItemForm';
 import ItemInterface from '../../models/ItemInterface';
-import firebase from '../../services/firebase';
+import { getItem } from '../../services/firebase';
 
 const UpdateItem: React.FC = () => {
   const history = useHistory();
@@ -11,9 +11,9 @@ const UpdateItem: React.FC = () => {
 
   const [item, setItem] = useState<ItemInterface | null>(null);
 
-  const getItem = async () => {
+  const getDatabaseItem = async () => {
     if (id) {
-      const result = await firebase.getItem(id);
+      const result = await getItem(id);
       if (result.type === 'ERROR') {
         history.push('/');
         return;
@@ -23,7 +23,7 @@ const UpdateItem: React.FC = () => {
   };
 
   useLayoutEffect(() => {
-    getItem();
+    getDatabaseItem();
   }, []);
   if (!item) {
     return null;

@@ -44,6 +44,12 @@ export const Content = styled.section`
     text-decoration: none;
   }
 
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  scrollbar-width: none;
+
   @media screen and (min-width: 1080px) {
     flex-direction: row;
   }
@@ -115,7 +121,7 @@ export const ListIcon = styled(FiList).attrs({
 export const SubmitButton = styled.button<{ disabled: boolean }>`
   background: ${props => (props.disabled ? colors.text : colors.white)};
   min-height: 60px;
-  margin-top: 50px;
+  margin-top: 10px;
   border-radius: 5px;
   transition: all ease 0.2s;
 
@@ -127,7 +133,7 @@ export const SubmitButton = styled.button<{ disabled: boolean }>`
 
   :hover {
     transform: ${props => (props.disabled ? 'scale(1)' : 'scale(1.05)')};
-    cursor: ${props => (props.disabled ? 'not-allowed' : 'hover')};
+    cursor: ${props => (props.disabled ? 'not-allowed' : 'pointer')};
   }
 `;
 export const Title = styled.h1`

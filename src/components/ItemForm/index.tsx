@@ -22,6 +22,7 @@ import {
   Label,
   DetailsInput,
   Select,
+  DeleteButton,
 } from './styles';
 
 import Header from '../Header';
@@ -29,7 +30,7 @@ import FormTextInput from '../FormTextInput';
 import Button from '../Button';
 import ErrorPopup from '../ErrorPopup';
 
-import firebase from '../../services/firebase';
+import { createItem, updateItem, deleteItem } from '../../services/firebase';
 import { useLoading } from '../../contexts/Loading';
 import ItemInterface from '../../models/ItemInterface';
 import ItemResponse from '../../models/ItemResponse';
@@ -67,7 +68,7 @@ const ItemForm: React.FC<ItemForm> = ({ text, buttonText, item }) => {
       return { type: 'ERROR', message: 'Invalid image' };
     }
 
-    return firebase.createItem(name, details, Number(price), type, image);
+    return createItem(name, details, Number(price), type, image);
   };
 
   const handleUpdateItem = async (): Promise<ItemResponse> => {
@@ -80,7 +81,7 @@ const ItemForm: React.FC<ItemForm> = ({ text, buttonText, item }) => {
       type,
     };
 
-    return firebase.updateItem(updatedItem, image);
+    return updateItem(updatedItem, image);
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -139,6 +140,20 @@ const ItemForm: React.FC<ItemForm> = ({ text, buttonText, item }) => {
   const handleRemoveImage = () => {
     setImage(null);
     setPreviewImage(null);
+  };
+
+  const handleDeleteItem = async () => {
+    if (item) {
+      const response = await deleteItem(item.id);
+
+      if (response.type === 'error') {
+        setError({ shown: true, message: response.message });
+        setTimeout(() => setError({ shown: false, message: '' }), 4000);
+        return;
+      }
+
+      history.push('/');
+    }
   };
 
   useLayoutEffect(() => {
@@ -229,8 +244,12 @@ const ItemForm: React.FC<ItemForm> = ({ text, buttonText, item }) => {
                 <option value="drink">Drink</option>
               </Select>
             </Label>
-
             <Button message={buttonText} disabled={isButtonDisabled} />
+            {item && (
+              <DeleteButton onClick={handleDeleteItem}>
+                Delete item
+              </DeleteButton>
+            )}
           </Form>
         </Content>
       </Wrapper>

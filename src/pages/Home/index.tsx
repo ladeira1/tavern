@@ -18,7 +18,7 @@ import MobileBag from '../../components/MobileBag';
 
 import ItemInterface from '../../models/ItemInterface';
 
-import firebase from '../../services/firebase';
+import { getItems } from '../../services/firebase';
 
 const Loading: React.FC = () => (
   <LoadingWrapper>
@@ -44,9 +44,9 @@ const Home: React.FC = () => {
   );
 
   useEffect(() => {
-    async function getItems() {
+    const getDatabaseItems = async () => {
       setLoading(true);
-      const items = await firebase.getItems();
+      const items = await getItems();
 
       if (items.length) {
         setBurgers(items.filter(item => item.type === 'burger'));
@@ -56,9 +56,8 @@ const Home: React.FC = () => {
       }
 
       setLoading(false);
-    }
-
-    getItems();
+    };
+    getDatabaseItems();
     readStoragedItems();
   }, []);
 

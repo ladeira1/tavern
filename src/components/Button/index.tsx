@@ -3,14 +3,21 @@ import { useLoading } from '../../contexts/Loading';
 import BubbleLoader from '../BubbleLoader';
 import { SubmitButton } from '../../shared/styles/formStyles';
 
-const Button: React.FC<{ message: string; disabled: boolean }> = ({
+interface Button {
+  message: string;
+  disabled?: boolean;
+  type?: 'button' | 'submit' | 'reset';
+}
+
+const Button: React.FC<Button> = ({
   message,
-  disabled,
+  disabled = false,
+  type = 'submit',
 }) => {
   const { loading } = useLoading();
 
   return (
-    <SubmitButton type="submit" disabled={disabled}>
+    <SubmitButton type={type} disabled={disabled}>
       {loading ? (
         <BubbleLoader color="#000" />
       ) : (

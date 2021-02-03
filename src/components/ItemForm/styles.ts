@@ -13,6 +13,12 @@ export const Content = styled.section`
   height: 98%;
   margin-bottom: 10px;
 
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  scrollbar-width: none;
+
   @media screen and (min-width: 1080px) {
     flex-direction: row;
   }
@@ -127,5 +133,22 @@ export const Select = styled.select<{selected: boolean}>`
 
   :focus {
     outline-width: 0;
+  }
+`;
+export const DeleteButton = styled.button`
+  background: ${colors.red};
+  min-height: 60px;
+  margin-top: 10px;
+  border-radius: 5px;
+  transition: all ease 0.2s;
+
+  font-size: 22px;
+  font-family: 'Oswald', sans-serif;
+  font-weight: bold;
+  color: ${colors.black};
+
+  :hover {
+    transform: scale(1.05);
+    cursor: 'pointer';
   }
 `;
