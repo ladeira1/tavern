@@ -24,6 +24,8 @@ export const Container = styled(motion.div)`
   display: flex;
   flex-direction: column;
 
+  backdrop-filter: blur(5px);
+
   @media screen and (min-width: 650px) {
     width: 80%;
   }
@@ -59,7 +61,7 @@ export const Text = styled.h3`
 `;
 export const ButtonWrapper = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: flex-end;
   flex: 1;
 
@@ -70,8 +72,7 @@ export const ButtonWrapper = styled.div`
 export const Button = styled.button`
   margin-bottom: 15px;
   height: 60px;
-  width: 100%;
-  min-width: 300px;
+  flex: 1;
   border: 1px solid ${colors.white};
   border-radius: 5px;
   background-color: ${colors.white};

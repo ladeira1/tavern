@@ -9,10 +9,12 @@ import {
   Button,
 } from './styles';
 
-const Popup: React.FC<{
+interface Popup {
   isVisible: boolean;
   setPopupVisible: React.Dispatch<React.SetStateAction<boolean>>;
-}> = ({ isVisible, setPopupVisible }) => {
+}
+
+const Popup: React.FC<Popup> = ({ isVisible, setPopupVisible }) => {
   const handleClosePopup = () => {
     setPopupVisible(false);
   };

@@ -191,7 +191,10 @@ const Checkout: React.FC = () => {
         </RightColumn>
       </Wrapper>
       <MobileBag isEnabled={false} />
-      <Popup isVisible={popupVisible} setPopupVisible={setPopupVisible} />
+      <Popup
+        isVisible={popupVisible}
+        setPopupVisible={setPopupVisible}
+      />
     </Container>
   );
 };

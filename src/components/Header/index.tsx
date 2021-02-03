@@ -35,14 +35,16 @@ const Header: React.FC = () => {
           <Title>TAVERN</Title>
         </Link>
         <Buttons>
-          <Link to="/item">Create Item</Link>
-          <Link to="/update" style={{ marginLeft: '3em' }}>
-            Update item
-          </Link>
           {isLogged ? (
-            <div className="auth" onClick={handleLogout}>
-              Logout
-            </div>
+            <>
+              <Link to="/item">Create Item</Link>
+              <Link to="/update" style={{ marginLeft: '3em' }}>
+                Update item
+              </Link>
+              <div className="auth" onClick={handleLogout}>
+                Logout
+              </div>
+            </>
           ) : (
             <Link to="/login" className="auth">
               login
@@ -59,12 +61,14 @@ const Header: React.FC = () => {
 
       <Settings isClicked={isOpen}>
         <ButtonArea isLogged={isLogged}>
-          <Link to="/item">Create Item</Link>
-          <Link to="/update">Update item</Link>
           {isLogged ? (
-            <button type="button" onClick={handleLogout} className="auth">
-              Logout
-            </button>
+            <>
+              <Link to="/item">Create Item</Link>
+              <Link to="/update">Update item</Link>
+              <button type="button" onClick={handleLogout} className="auth">
+                Logout
+              </button>
+            </>
           ) : (
             <Link to="/login" className="auth">
               login

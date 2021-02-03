@@ -1,5 +1,20 @@
 import React from 'react';
+import { Container, Wrapper } from './styles';
 
-const SelectItem: React.FC = () => <div>Select Item</div>;
+import Header from '../../components/Header';
+
+const SelectItem: React.FC = () => {
+  // eslint-disable-next-line no-console
+  console.log('a');
+
+  return (
+    <Container>
+      <Header />
+      <Wrapper>
+        <h1>oi</h1>
+      </Wrapper>
+    </Container>
+  );
+};
 
 export default SelectItem;
