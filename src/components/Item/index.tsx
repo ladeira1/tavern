@@ -1,5 +1,4 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 import ItemInterface from '../../models/ItemInterface';
 import { useBag } from '../../contexts/Bag';
 import {
@@ -16,33 +15,10 @@ import {
 } from './styles';
 
 const Item: React.FC<{ item: ItemInterface }> = ({ item }) => {
-  const history = useHistory();
-
   const { addItemToBag } = useBag();
-
-  let isHolding = false;
 
   const handleAddToBag = () => {
     addItemToBag(item);
-  };
-
-  const handleMouseDown = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-  ) => {
-    event.preventDefault();
-    isHolding = true;
-    setTimeout(() => {
-      if (isHolding) {
-        history.push(`/update/item/${item.id}`);
-      }
-    }, 1500);
-  };
-
-  const handleMouseUp = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-  ) => {
-    event.preventDefault();
-    isHolding = false;
   };
 
   return (
@@ -53,7 +29,7 @@ const Item: React.FC<{ item: ItemInterface }> = ({ item }) => {
       }}
       transition={{ duration: 0.5 }}
     >
-      <ContentWrapper onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
+      <ContentWrapper>
         <ImageWrapper>
           <Img src={item.imageUrl} alt="Item" loading="lazy" />
         </ImageWrapper>

@@ -7,6 +7,7 @@ import Home from '../pages/Home';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import Checkout from '../pages/Checkout';
+import SelectItem from '../pages/SelectItem';
 import CreateItem from '../pages/CreateItem';
 import UpdateItem from '../pages/UpdateItem';
 
@@ -17,6 +18,7 @@ const Routes: React.FC = () => (
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
       <Route path="/checkout" component={Checkout} />
+      <PrivateRoute path="/update" component={SelectItem} />
       <PrivateRoute path="/item" component={CreateItem} />
       <PrivateRoute path="/update/item/:id" component={UpdateItem} />
     </Switch>

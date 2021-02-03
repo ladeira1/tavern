@@ -30,7 +30,7 @@ export const Wrapper = styled.article`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  font-size: 7px;
+  font-size: 6px;
   text-align: center;
 
   @media screen and (min-width: 810px) {
@@ -39,10 +39,11 @@ export const Wrapper = styled.article`
 
   @media screen and (min-width: 540px) {
     width: 95%;
+    font-size: 8px;
   }
 
   @media screen and (min-width: 380px) {
-    font-size: 8px;
+    font-size: 7px;
   }
 `;
 
