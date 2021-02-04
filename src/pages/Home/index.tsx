@@ -19,7 +19,6 @@ import MobileBag from '../../components/MobileBag';
 import ItemInterface from '../../models/ItemInterface';
 
 import { getItems } from '../../services/firebase';
-import Popup from '../../components/Popup';
 
 const Loading: React.FC = () => (
   <LoadingWrapper>
