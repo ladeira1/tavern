@@ -76,15 +76,6 @@ export const XIcon = styled(FiX).attrs({
     cursor: pointer;
   }
 `;
-export const Label = styled.label<{selected: boolean, height: string}>`
-  width: 100%;
-  height: ${props => props.height};
-  background: ${colors.textInput};
-  margin-bottom: 15px;
-  display: flex;
-  border-radius: 5px;
-  border: ${props => (props.selected ? '3px' : 0)} solid ${props => (props.selected ? colors.white : 'transparent')};
-`;
 export const DetailsInput = styled.textarea<{selected: boolean}>`
   width: 100%;
   min-height: 60px;
@@ -118,18 +109,6 @@ export const DetailsInput = styled.textarea<{selected: boolean}>`
   ::-webkit-scrollbar {
     display: none;
   }
-
-  :focus {
-    outline-width: 0;
-  }
-`;
-export const Select = styled.select<{selected: boolean}>`
-  background: ${colors.textInput};
-  width: 100%;
-  color: ${props => (props.selected ? colors.white : colors.formSecondary)};
-  font-size: 18px;
-  border-radius: 5px;
-  margin-right: 10px;
 
   :focus {
     outline-width: 0;

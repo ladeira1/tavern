@@ -10,7 +10,7 @@ import {
   DollarIcon,
   ImageIcon,
   EditIcon,
-  ListIcon,
+  Label,
 } from '../../shared/styles/formStyles';
 import {
   Content,
@@ -19,14 +19,13 @@ import {
   ImageLabel,
   ImageItem,
   XIcon,
-  Label,
   DetailsInput,
-  Select,
   DeleteButton,
 } from './styles';
 
 import Header from '../Header';
 import FormTextInput from '../FormTextInput';
+import FormSelectInput from '../FormSelectInput';
 import Button from '../Button';
 import ErrorPopup from '../ErrorPopup';
 
@@ -41,6 +40,12 @@ interface ItemForm {
   item?: ItemInterface;
 }
 
+const selectOptions = [
+  { type: 'burger', text: 'Burger' },
+  { type: 'sideDish', text: 'Side dish' },
+  { type: 'drink', text: 'Drink' },
+];
+
 const ItemForm: React.FC<ItemForm> = ({ text, buttonText, item }) => {
   const history = useHistory();
 
@@ -54,7 +59,6 @@ const ItemForm: React.FC<ItemForm> = ({ text, buttonText, item }) => {
 
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   const [textAreaSelected, setTextAreaSelected] = useState(false);
-  const [typeSelected, setTypeSelected] = useState(false);
   const [error, setError] = useState({ shown: false, message: '' });
 
   const isButtonDisabled = !name || !details || !price;
@@ -223,27 +227,12 @@ const ItemForm: React.FC<ItemForm> = ({ text, buttonText, item }) => {
               placeholder="Price"
               type="number"
             />
-
-            <Label
-              htmlFor="type"
-              onFocus={() => setTypeSelected(true)}
-              onBlur={() => setTypeSelected(false)}
-              selected={typeSelected}
-              height="60px"
-            >
-              <ListIcon selected={typeSelected} />
-              <Select
-                id="type"
-                selected={typeSelected}
-                value={type}
-                onChange={e => setType(e.target.value)}
-                placeholder={type}
-              >
-                <option value="burger">Burger</option>
-                <option value="sideDish">Side Dish</option>
-                <option value="drink">Drink</option>
-              </Select>
-            </Label>
+            <FormSelectInput
+              placeholder={type}
+              options={selectOptions}
+              value={type}
+              setValue={setType}
+            />
             <Button message={buttonText} disabled={isButtonDisabled} />
             {item && (
               <DeleteButton onClick={handleDeleteItem}>

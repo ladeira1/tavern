@@ -115,7 +115,7 @@ export const EditIcon = styled(FiEdit).attrs({
 export const ListIcon = styled(FiList).attrs({
   size: 34,
 })<{ selected: boolean }>`
-  margin: 2.5% 2%;
+  margin: auto 2%;
   color: ${props => (props.selected ? colors.white : colors.formSecondary)};
 `;
 export const SubmitButton = styled.button<{ disabled: boolean }>`
@@ -178,4 +178,26 @@ export const LinkElement = styled(Link)`
     transform: scale(1.05);
     opacity: 1;
   }
+`;
+export const Select = styled.select<{ selected: boolean }>`
+  background: ${colors.textInput};
+  width: 100%;
+  color: ${props => (props.selected ? colors.white : colors.formSecondary)};
+  font-size: 18px;
+  border-radius: 5px;
+  margin-right: 10px;
+
+  :focus {
+    outline-width: 0;
+  }
+`;
+export const Label = styled.label<{ selected: boolean; height: string }>`
+  width: 100%;
+  height: ${props => props.height};
+  background: ${colors.textInput};
+  margin-bottom: 15px;
+  display: flex;
+  border-radius: 5px;
+  border: ${props => (props.selected ? '3px' : 0)} solid
+    ${props => (props.selected ? colors.white : 'transparent')};
 `;
