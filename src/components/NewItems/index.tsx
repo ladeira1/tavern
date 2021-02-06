@@ -16,7 +16,7 @@ const NewItems: React.FC<{ items: ItemInterface[] }> = ({ items }) => (
       <ItemsContainer>
         <ItemsWrapper>
           {items.length &&
-            items?.map(item => <NewItem key={item.id} item={item} />)}
+            items?.map(item => <NewItem key={item.id} item={item} addToCart />)}
         </ItemsWrapper>
       </ItemsContainer>
     </Wrapper>

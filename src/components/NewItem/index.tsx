@@ -13,7 +13,10 @@ import {
   Price,
 } from './styles';
 
-const NewItem: React.FC<{ item: ItemInterface }> = ({ item }) => {
+const NewItem: React.FC<{ item: ItemInterface; addToCart: boolean }> = ({
+  item,
+  addToCart,
+}) => {
   const { addItemToBag } = useBag();
 
   const handleAddToBag = () => {
@@ -27,8 +30,10 @@ const NewItem: React.FC<{ item: ItemInterface }> = ({ item }) => {
         <Name>{item?.name}</Name>
         <Details>{item?.details}</Details>
       </Main>
-      <Footer>
-        <AddButton onClick={handleAddToBag} />
+      <Footer
+        style={{ justifyContent: addToCart ? 'space-between' : 'flex-end' }}
+      >
+        {addToCart && <AddButton onClick={handleAddToBag} />}
         <Price>{item.price}</Price>
       </Footer>
     </Wrapper>

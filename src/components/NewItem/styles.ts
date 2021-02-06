@@ -3,8 +3,8 @@ import { FiPlus } from 'react-icons/fi';
 import colors from '../../assets/colors';
 
 export const Wrapper = styled.main`
-  min-width: 250px;
-  max-width: 250px;
+  min-width: 300px;
+  max-width: 300px;
   height: 300px;
   display: flex;
   flex-direction: column;
@@ -33,6 +33,7 @@ export const Wrapper = styled.main`
     min-width: 230px;
     margin-left: 5px;
     margin-right: 5px;
+    max-width: 100%;
   }
 
   @media screen and (max-width: 550px) {

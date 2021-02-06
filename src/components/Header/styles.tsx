@@ -3,6 +3,7 @@ import colors from '../../assets/colors';
 
 export const Container = styled.main<{ logged: boolean }>`
   width: 100vw;
+  max-width: 100vw;
   height: 8vh;
   max-height: 8vh;
   min-height: 70px;
@@ -10,6 +11,7 @@ export const Container = styled.main<{ logged: boolean }>`
   overflow: hidden;
   position: absolute;
   z-index: 99;
+
   .auth {
     color: ${props => (props.logged ? colors.red : colors.green)};
     font-family: 'Ubuntu';
