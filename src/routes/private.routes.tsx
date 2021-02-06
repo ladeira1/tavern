@@ -12,7 +12,7 @@ const PrivateRoute: React.FC<RouteInterface> = ({ path, component }) => {
   const { isLogged } = useAuth();
 
   if (!isLogged) {
-    return <Redirect to="/login" />;
+    return <Redirect to="/" />;
   }
 
   return <Route path={path} component={component} />;

@@ -38,7 +38,7 @@ const Header: React.FC = () => {
           {isLogged ? (
             <>
               <Link to="/item">Create Item</Link>
-              <Link to="/update" style={{ marginLeft: '3em' }}>
+              <Link to="/select" style={{ marginLeft: '3em' }}>
                 Update item
               </Link>
               <div className="auth" onClick={handleLogout}>
@@ -64,7 +64,7 @@ const Header: React.FC = () => {
           {isLogged ? (
             <>
               <Link to="/item">Create Item</Link>
-              <Link to="/update">Update item</Link>
+              <Link to="/select">Update item</Link>
               <button type="button" onClick={handleLogout} className="auth">
                 Logout
               </button>

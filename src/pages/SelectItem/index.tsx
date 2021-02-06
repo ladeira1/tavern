@@ -1,4 +1,5 @@
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import {
   Container,
   Wrapper,
@@ -6,10 +7,11 @@ import {
   FilterContainer,
   FilterWrapper,
   ItemsWrapper,
+  ItemWrapper,
 } from './styles';
 import { FoodIcon } from '../../shared/styles/formStyles';
 
-import { getItems } from '../../services/firebase';
+import { getItems, getFilteredByTextItems } from '../../services/firebase';
 
 import Header from '../../components/Header';
 import FormTextInput from '../../components/FormTextInput';
@@ -24,12 +26,24 @@ const selectOptions = [
 ];
 
 const SelectItem: React.FC = () => {
+  const history = useHistory();
   const [filterText, setFilterText] = useState('');
   const [filterType, setFilterType] = useState('burger');
   const [items, setItems] = useState<ItemInterface[]>({} as ItemInterface[]);
 
+  const handleSelectItem = (id: string) => {
+    history.push(`/update/item/${id}`);
+  };
+
+  const handleSearchForTextFilteredItem = async () => {
+    const result = await getFilteredByTextItems(filterText, filterType);
+    if (result) {
+      setItems(result);
+    }
+  };
+
   const getDatabaseItems = async () => {
-    const result = await getItems();
+    const result = await getItems(filterType);
 
     if (result.length) {
       setItems(result);
@@ -38,7 +52,11 @@ const SelectItem: React.FC = () => {
 
   useLayoutEffect(() => {
     getDatabaseItems();
-  }, []);
+  }, [filterType]);
+
+  useEffect(() => {
+    handleSearchForTextFilteredItem();
+  }, [filterText]);
 
   return (
     <Container>
@@ -69,7 +87,12 @@ const SelectItem: React.FC = () => {
         <ItemsWrapper>
           {items.length &&
             items.map(item => (
-              <NewItem key={item.id} item={item} addToCart={false} />
+              <ItemWrapper
+                key={item.id}
+                onClick={() => handleSelectItem(item.id)}
+              >
+                <NewItem item={item} addToCart={false} />
+              </ItemWrapper>
             ))}
         </ItemsWrapper>
       </Wrapper>

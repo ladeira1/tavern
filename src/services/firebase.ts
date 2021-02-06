@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable import/no-duplicates */
 import firebase from 'firebase/app';
@@ -104,11 +105,36 @@ export const createItem = async (
   return { type: success, message: 'Item succesfully created' };
 };
 
-export const getItems = async (): Promise<ItemInterface[]> => {
+export const getItems = async (type?: string): Promise<ItemInterface[]> => {
   const items: ItemInterface[] = [];
-  const result = await db
-    .collection('items')
-    .orderBy('updatedAt', 'desc')
+
+  const result = type
+    ? await db
+      .collection('items')
+      .orderBy('updatedAt', 'desc')
+      .where('type', '==', type)
+      .get()
+    : await db.collection('items').orderBy('updatedAt', 'desc').get();
+
+  result.forEach(item => {
+    items.push({
+      id: item.id,
+      name: item.data().name,
+      price: item.data().price,
+      details: item.data().details,
+      imageUrl: item.data().imageUrl,
+      type: item.data().type,
+    });
+  });
+
+  return items;
+};
+
+export const getFilteredByTextItems = async(
+  text: string, type: string,
+): Promise<ItemInterface[]> => {
+  const items: ItemInterface[] = [];
+  const result = await db.collection('items').where('name', '>=', text).where('name', '<=', `${text}\uf8ff`).where('type', '==', type)
     .get();
 
   result.forEach(item => {

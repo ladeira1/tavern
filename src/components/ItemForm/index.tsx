@@ -186,7 +186,7 @@ const ItemForm: React.FC<ItemForm> = ({ text, buttonText, item }) => {
               type="text"
             />
 
-            <ImageLabel htmlFor="image" hasImage={!!image}>
+            <ImageLabel htmlFor="image" hasImage={!!previewImage}>
               <ImageIcon />
               <span>Image</span>
               <Input
@@ -202,7 +202,6 @@ const ItemForm: React.FC<ItemForm> = ({ text, buttonText, item }) => {
                 <XIcon onClick={handleRemoveImage} />
               </ImageContainer>
             )}
-
             <Label
               htmlFor="details"
               onFocus={() => setTextAreaSelected(true)}

@@ -61,6 +61,7 @@ export const FilterContainer = styled.div`
   margin-top: 2%;
   justify-content: space-between;
   align-items: flex-start;
+  border-bottom: 1px solid ${colors.formSecondary};
 
   .first {
     width: 90%;
@@ -100,11 +101,25 @@ export const ItemsWrapper = styled.section`
   max-width: 90%;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(1, minmax(280px, 1fr));
   grid-column-gap: 10px;
   grid-row-gap: 10px;
 
   @media screen and (min-width: 610px) {
     max-width: 100%;
   }
+
+  @media screen and (min-width: 635px) {
+    grid-template-columns: repeat(2, minmax(280px, 1fr));
+  }
+
+  @media screen and (min-width: 942px) {
+    grid-template-columns: repeat(3, minmax(280px, 1fr));
+  }
+
+  @media screen and (min-width: 1235px) {
+    grid-template-columns: repeat(4, minmax(280px, 1fr));
+  }
 `;
+
+export const ItemWrapper = styled.div``;

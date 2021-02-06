@@ -3,8 +3,8 @@ import { FiPlus } from 'react-icons/fi';
 import colors from '../../assets/colors';
 
 export const Wrapper = styled.main`
-  min-width: 300px;
-  max-width: 300px;
+  min-width: 100%;
+  max-width: 100%;
   height: 300px;
   display: flex;
   flex-direction: column;
@@ -18,6 +18,11 @@ export const Wrapper = styled.main`
   transition: all ease 0.2s;
   opacity: 0.95;
 
+  @media screen and (min-width: 497px) {
+    min-width: 350px;
+    max-width: 350px;
+  }
+
   @media screen and (min-width: 650px) {
     :hover {
       transform: scale(0.95);
@@ -26,19 +31,11 @@ export const Wrapper = styled.main`
     }
   }
 
-  @media screen and (max-width: 650px) {
+  @media screen and (min-width: 650px) {
     font-size: 9px;
-    transform: scale(1);
-    max-height: 240px;
-    min-width: 230px;
-    margin-left: 5px;
-    margin-right: 5px;
-    max-width: 100%;
-  }
-
-  @media screen and (max-width: 550px) {
-    max-height: 220px;
-    min-width: 180px;
+    min-width: 300px;
+    max-width: 300px;
+    transform: scale(0.9);
   }
 `;
 export const Image = styled.img`

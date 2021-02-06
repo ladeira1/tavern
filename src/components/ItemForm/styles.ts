@@ -32,6 +32,7 @@ export const ImageLabel = styled.label<{ hasImage: boolean }>`
   background: ${colors.textInput};
   margin-bottom: ${props => (props.hasImage ? 0 : '15px')};
   display: flex;
+  flex-direction: row;
   align-items: center;
   border-radius: 5px 5px ${props => (props.hasImage ? 0 : '5px')} ${props => (props.hasImage ? 0 : '5px')};
 
@@ -47,9 +48,9 @@ export const ImageLabel = styled.label<{ hasImage: boolean }>`
   }
 `;
 export const ImageContainer = styled.div`
+flex: 1;
   position: relative;
-  width: 100%;
-  max-height: 400px;
+  max-height: 250px;
   background: ${colors.textInput};
   display: flex;
   justify-content: center;
