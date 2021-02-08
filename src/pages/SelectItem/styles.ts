@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import styled from 'styled-components';
 import colors from '../../assets/colors';
 
@@ -97,29 +98,20 @@ export const FilterWrapper = styled.section`
   color: ${colors.formSecondary};
   line-height: 2em;
 `;
-export const ItemsWrapper = styled.section`
-  max-width: 90%;
+export const ItemsWrapper = styled.section<{ quantity: number }>`
+  max-width: 100%;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(1, minmax(280px, 1fr));
-  grid-column-gap: 10px;
-  grid-row-gap: 10px;
 
-  @media screen and (min-width: 610px) {
-    max-width: 100%;
-  }
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 
-  @media screen and (min-width: 635px) {
-    grid-template-columns: repeat(2, minmax(280px, 1fr));
-  }
-
-  @media screen and (min-width: 942px) {
-    grid-template-columns: repeat(3, minmax(280px, 1fr));
-  }
-
-  @media screen and (min-width: 1235px) {
-    grid-template-columns: repeat(4, minmax(280px, 1fr));
+  @media screen and (min-width: 650px) {
+    justify-content: ${props => (props.quantity >= 4 ? 'space-between' : 'flex-start')};
   }
 `;
 
-export const ItemWrapper = styled.div``;
+export const ItemWrapper = styled.div`
+  width: fit-content;
+  height: fit-content;
+`;

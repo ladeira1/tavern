@@ -84,7 +84,7 @@ const SelectItem: React.FC = () => {
             />
           </FilterWrapper>
         </FilterContainer>
-        <ItemsWrapper>
+        <ItemsWrapper quantity={items.length}>
           {items.length &&
             items.map(item => (
               <ItemWrapper

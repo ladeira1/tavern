@@ -134,7 +134,11 @@ export const getFilteredByTextItems = async(
   text: string, type: string,
 ): Promise<ItemInterface[]> => {
   const items: ItemInterface[] = [];
-  const result = await db.collection('items').where('name', '>=', text).where('name', '<=', `${text}\uf8ff`).where('type', '==', type)
+  const result = await
+  db.collection('items')
+    .where('name', '>=', text)
+    .where('name', '<=', `${text}\uf8ff`)
+    .where('type', '==', type)
     .get();
 
   result.forEach(item => {
