@@ -20,7 +20,7 @@ const Routes: React.FC = () => (
       <Route path="/checkout" component={Checkout} />
       <PrivateRoute path="/select" component={SelectItem} />
       <PrivateRoute path="/item" component={CreateItem} />
-      <PrivateRoute path="/update/item/:id" component={UpdateItem} />
+      <Route path="/update/item/:id" component={UpdateItem} />
     </Switch>
   </BrowserRouter>
 );

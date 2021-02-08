@@ -60,7 +60,7 @@ export const Form = styled.form`
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  padding: 4%;
+  padding: 4% 4% 2% 4%;
   width: 100%;
   margin-top: 5%;
 

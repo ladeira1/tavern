@@ -132,3 +132,14 @@ export const DeleteButton = styled.button`
     cursor: 'pointer';
   }
 `;
+export const ConfirmMessage = styled.div`
+  margin-top: 10px;
+  text-align: center;
+  min-height: 20px;
+
+  span {
+    font-size: 1em;
+    font-family: 'Ubuntu', sans-serif;
+    color: ${colors.formSecondary};
+  }
+`;

@@ -21,6 +21,7 @@ import {
   XIcon,
   DetailsInput,
   DeleteButton,
+  ConfirmMessage,
 } from './styles';
 
 import Header from '../Header';
@@ -39,6 +40,8 @@ interface ItemForm {
   buttonText: string;
   item?: ItemInterface;
 }
+
+type ActionName = 'create' | 'update' | 'delete';
 
 const selectOptions = [
   { type: 'burger', text: 'Burger' },
@@ -60,6 +63,10 @@ const ItemForm: React.FC<ItemForm> = ({ text, buttonText, item }) => {
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   const [textAreaSelected, setTextAreaSelected] = useState(false);
   const [error, setError] = useState({ shown: false, message: '' });
+
+  const [actionName, setActionName] = useState<ActionName>('create');
+  const [confirmSubmit, setConfirmSubmit] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(false);
 
   const isButtonDisabled = !name || !details || !price;
 
@@ -88,9 +95,22 @@ const ItemForm: React.FC<ItemForm> = ({ text, buttonText, item }) => {
     return updateItem(updatedItem, image);
   };
 
+  const handleSetImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (!event.target.files) return;
+
+    const selectedImage = event.target.files[0];
+
+    setImage(selectedImage);
+    setPreviewImage(URL.createObjectURL(selectedImage));
+  };
+
+  const handleRemoveImage = () => {
+    setImage(null);
+    setPreviewImage(null);
+  };
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setLoading(true);
 
     if (name === '') {
       setLoading(false);
@@ -117,7 +137,29 @@ const ItemForm: React.FC<ItemForm> = ({ text, buttonText, item }) => {
       return;
     }
 
-    const response = item ? await handleUpdateItem() : await handleCreateItem();
+    let response;
+
+    if (item) {
+      if (!confirmSubmit) {
+        setConfirmSubmit(true);
+        setActionName('update');
+        setTimeout(() => setConfirmSubmit(false), 2000);
+        return;
+      }
+
+      setLoading(true);
+      response = await handleUpdateItem();
+    } else {
+      if (!confirmSubmit) {
+        setConfirmSubmit(true);
+        setActionName('create');
+        setTimeout(() => setConfirmSubmit(false), 2000);
+        return;
+      }
+
+      setLoading(true);
+      response = await handleCreateItem();
+    }
 
     if (response.type === 'ERROR') {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -132,22 +174,15 @@ const ItemForm: React.FC<ItemForm> = ({ text, buttonText, item }) => {
     }
   };
 
-  const handleSetImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (!event.target.files) return;
-
-    const selectedImage = event.target.files[0];
-
-    setImage(selectedImage);
-    setPreviewImage(URL.createObjectURL(selectedImage));
-  };
-
-  const handleRemoveImage = () => {
-    setImage(null);
-    setPreviewImage(null);
-  };
-
   const handleDeleteItem = async () => {
     if (item) {
+      if (!confirmDelete) {
+        setConfirmDelete(true);
+        setActionName('delete');
+        setTimeout(() => setConfirmDelete(false), 2000);
+        return;
+      }
+
       const response = await deleteItem(item.id);
 
       if (response.type === 'error') {
@@ -234,10 +269,15 @@ const ItemForm: React.FC<ItemForm> = ({ text, buttonText, item }) => {
             />
             <Button message={buttonText} disabled={isButtonDisabled} />
             {item && (
-              <DeleteButton onClick={handleDeleteItem}>
+              <DeleteButton onClick={handleDeleteItem} type="button">
                 Delete item
               </DeleteButton>
             )}
+            <ConfirmMessage>
+              {(confirmDelete || confirmSubmit) && (
+                <span>Press it again to {actionName} item</span>
+              )}
+            </ConfirmMessage>
           </Form>
         </Content>
       </Wrapper>
