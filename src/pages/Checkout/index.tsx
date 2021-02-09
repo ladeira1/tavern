@@ -33,6 +33,21 @@ import Position from '../../models/Position';
 type Destination = 'CURRENT_LOCATION' | 'ADDRESS';
 type PaymentMethod = 'CASH' | 'CREDIT_CARD';
 
+const Geolocation: React.FC<{allowed: boolean, position: Position}> = ({ allowed, position }) => {
+  if (allowed) {
+    return <Map position={position} />;
+  }
+
+  return (
+  <div style={{ textAlign: 'center' }}>
+    <Text>
+      Please allow us to access your location and refresh
+      the page in order to use this functionality
+      </Text>
+  </div>
+  );
+};
+
 const Checkout: React.FC = () => {
   const { readStoragedItems, totalPrice } = useBag();
 
@@ -47,6 +62,7 @@ const Checkout: React.FC = () => {
   const [position, setPosition] = useState<Position>({ latitude: 0, longitude: 0 });
   const [change, setChange] = useState(totalPrice);
   const [error, setError] = useState({ shown: false, message: '' });
+  const [geolocationAllowed, setGeolocationAllowed] = useState(false);
 
   const isButtonDisabled = position.latitude === 0
   || position.longitude === 0
@@ -56,7 +72,8 @@ const Checkout: React.FC = () => {
     navigator.geolocation.getCurrentPosition(location => {
       const { latitude, longitude } = location.coords;
       setPosition({ latitude, longitude });
-    });
+      setGeolocationAllowed(true);
+    }, () => { setGeolocationAllowed(false); });
   };
 
   const handleDestinationChange = (option: Destination) => {
@@ -125,10 +142,8 @@ const Checkout: React.FC = () => {
                 </Option>
               </OptionsContainer>
               {destinationOption === 'CURRENT_LOCATION' &&
-                position.latitude !== 0 &&
-                position.longitude !== 0 && (
-                  <Map position={position} />
-              )}
+                <Geolocation allowed={geolocationAllowed} position={position} />
+              }
               {destinationOption === 'ADDRESS' && (
                 <ZipCodeForm position={position} setPosition={setPosition} setError={setError}/>
               )}
