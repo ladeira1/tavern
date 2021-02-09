@@ -1,6 +1,6 @@
 # About this project
 
-Tavern is a Burgerstore website that has been developed as part of my personal portfolio.
+Tavern is a Burger Store website that has been developed as part of my personal portfolio.
 
 I'd be happy if you could provide me with any feedback about the project, structure, code or anything that could make it better. Also, feel free to send as many Pull Requests as you want.
 

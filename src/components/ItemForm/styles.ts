@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 import { FiX } from 'react-icons/fi';
 import colors from '../../assets/colors';
 
@@ -34,7 +35,14 @@ export const ImageLabel = styled.label<{ hasImage: boolean }>`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   border-radius: 5px 5px ${props => (props.hasImage ? 0 : '5px')} ${props => (props.hasImage ? 0 : '5px')};
+  padding: 0 2%;
+
+  .left {
+    display: flex;
+    align-items: center;
+  }
 
   span {
     color: ${colors.formSecondary};
@@ -64,14 +72,11 @@ export const ImageItem = styled.img`
   width: 100%;
 `;
 export const XIcon = styled(FiX).attrs({
-  size: 36,
+  size: 32,
 })`
-  color: ${colors.red};
+  color: ${colors.formSecondary};
   opacity: 0.8;
   z-index: 2;
-  position: absolute;
-  top: 5%;
-  right: 10%;
 
   :hover {
     cursor: pointer;
@@ -136,10 +141,9 @@ export const ConfirmMessage = styled.div`
   margin-top: 10px;
   text-align: center;
   min-height: 20px;
-
-  span {
+`;
+export const Message = styled(motion.span)`
     font-size: 1em;
     font-family: 'Ubuntu', sans-serif;
     color: ${colors.formSecondary};
-  }
 `;

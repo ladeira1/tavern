@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React, { useLayoutEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 import {
   Container,
   Wrapper,
@@ -22,6 +23,7 @@ import {
   DetailsInput,
   DeleteButton,
   ConfirmMessage,
+  Message,
 } from './styles';
 
 import Header from '../Header';
@@ -222,8 +224,12 @@ const ItemForm: React.FC<ItemForm> = ({ text, buttonText, item }) => {
             />
 
             <ImageLabel htmlFor="image" hasImage={!!previewImage}>
-              <ImageIcon />
-              <span>Image</span>
+              <div className="left">
+                <ImageIcon />
+                <span>Image</span>
+              </div>
+
+              {previewImage && <XIcon onClick={handleRemoveImage} />}
               <Input
                 type="file"
                 id="image"
@@ -234,7 +240,6 @@ const ItemForm: React.FC<ItemForm> = ({ text, buttonText, item }) => {
             {previewImage && (
               <ImageContainer>
                 <ImageItem src={previewImage} alt="Item" />
-                <XIcon onClick={handleRemoveImage} />
               </ImageContainer>
             )}
             <Label
@@ -273,11 +278,23 @@ const ItemForm: React.FC<ItemForm> = ({ text, buttonText, item }) => {
                 Delete item
               </DeleteButton>
             )}
-            <ConfirmMessage>
-              {(confirmDelete || confirmSubmit) && (
-                <span>Press it again to {actionName} item</span>
-              )}
-            </ConfirmMessage>
+            <AnimatePresence initial={false}>
+              <ConfirmMessage>
+                {(confirmDelete || confirmSubmit) && (
+                  <Message
+                    initial={{ opacity: 0, y: 90, scale: 0.3 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{
+                      opacity: 0,
+                      scale: 0.5,
+                      transition: { duration: 0.2 },
+                    }}
+                  >
+                    Press it again to {actionName} item
+                  </Message>
+                )}
+              </ConfirmMessage>
+            </AnimatePresence>
           </Form>
         </Content>
       </Wrapper>
