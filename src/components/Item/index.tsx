@@ -27,7 +27,7 @@ const Item: React.FC<{ item: ItemInterface }> = ({ item }) => {
         open: { scale: 1 },
         collapsed: { scale: 0 },
       }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.2 }}
     >
       <ContentWrapper>
         <ImageWrapper>

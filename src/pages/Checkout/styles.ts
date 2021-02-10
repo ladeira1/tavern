@@ -11,6 +11,12 @@ export const Container = styled.div`
   overflow-x: hidden;
   overflow-y: scroll;
 
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  scrollbar-width: none;
+
   @media screen and (min-width: 1144px) {
     min-height: 100vh;
   }

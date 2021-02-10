@@ -42,7 +42,7 @@ const Items: React.FC<ItemsProps> = ({
               collapsed: { opacity: 0, height: 0 },
             }}
             transition={{
-              duration: 0.5,
+              duration: 0.3,
               ease: [0.9, 0.62, 0.23, 0.98],
             }}
           >

@@ -43,7 +43,7 @@ const Geolocation: React.FC<{allowed: boolean, position: Position}> = ({ allowed
     <Text>
       Please allow us to access your location and refresh
       the page in order to use this functionality
-      </Text>
+    </Text>
   </div>
   );
 };
