@@ -1,3 +1,7 @@
+<br />
+<img align="center" src="https://github.com/ladeira1/tavern/blob/main/docs/introduction.gif?raw=true">
+<br />
+
 # About this project
 
 Tavern is a Burger Store website that has been developed as part of my personal portfolio.

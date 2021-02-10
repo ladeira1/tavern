@@ -168,12 +168,12 @@ const Checkout: React.FC = () => {
               </PaymentOptionsContainer>
               {paymentMethodOption === 'CREDIT_CARD' && (
                 <PaymentInformation>
-                  <Text>Value: {totalPrice}</Text>
+                  <Text>Value: {totalPrice.toFixed(2)}</Text>
                 </PaymentInformation>
               )}
               {paymentMethodOption === 'CASH' && (
                 <PaymentInformation>
-                  <Text>Value: {totalPrice}</Text>
+                  <Text>Value: {totalPrice.toFixed(2)}</Text>
                   <Text>
                     Change for:
                     <Price
