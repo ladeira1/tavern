@@ -49,6 +49,28 @@ export const ImageLabel = styled.label<{ hasImage: boolean }>`
     font-family: 'Ubuntu', sans-serif;
     font-size: 18px;
     margin-left: 10px;
+
+    @media screen and (max-width: 560px) {
+    font-size: 13px;
+  }
+
+  ::-webkit-input-placeholder {
+    font-size: 18px;
+    font-family: 'Ubuntu', sans-serif;
+
+    @media screen and (max-width: 560px) {
+      font-size: 13px;
+    }
+  }
+
+  ::-moz-placeholder {
+    font-size: 18px;
+    font-family: 'Ubuntu', sans-serif;
+
+    @media screen and (max-width: 560px) {
+      font-size: 13px;
+    }
+  }
   }
 
   :hover {
@@ -118,6 +140,28 @@ export const DetailsInput = styled.textarea<{selected: boolean}>`
 
   :focus {
     outline-width: 0;
+  }
+
+  @media screen and (max-width: 560px) {
+    font-size: 13px;
+  }
+
+  ::-webkit-input-placeholder {
+    font-size: 18px;
+    font-family: 'Ubuntu', sans-serif;
+
+    @media screen and (max-width: 560px) {
+      font-size: 13px;
+    }
+  }
+
+  ::-moz-placeholder {
+    font-size: 18px;
+    font-family: 'Ubuntu', sans-serif;
+
+    @media screen and (max-width: 560px) {
+      font-size: 13px;
+    }
   }
 `;
 export const DeleteButton = styled.button`

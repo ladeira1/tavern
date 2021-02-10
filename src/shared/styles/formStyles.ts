@@ -190,6 +190,28 @@ export const Select = styled.select<{ selected: boolean }>`
   :focus {
     outline-width: 0;
   }
+
+  @media screen and (max-width: 560px) {
+    font-size: 13px;
+  }
+
+  ::-webkit-input-placeholder {
+    font-size: 18px;
+    font-family: 'Ubuntu', sans-serif;
+
+    @media screen and (max-width: 560px) {
+      font-size: 13px;
+    }
+  }
+
+  ::-moz-placeholder {
+    font-size: 18px;
+    font-family: 'Ubuntu', sans-serif;
+
+    @media screen and (max-width: 560px) {
+      font-size: 13px;
+    }
+  }
 `;
 export const Label = styled.label<{ selected: boolean; height: string }>`
   width: 100%;
