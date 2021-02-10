@@ -9,8 +9,10 @@ import 'firebase/storage';
 import firebaseConfig from './firebaseConfig';
 import ItemInterface from '../models/ItemInterface';
 import ItemResponse from '../models/ItemResponse';
-import AuthResponse, { success, error } from '../models/AuthResponse';
+import AuthResponse from '../models/AuthResponse';
 import GetItemResponse from '../models/GetItemResponse';
+import SUCCESS from '../models/SuccessType';
+import ERROR from '../models/ErrorType';
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 const db = firebaseApp.firestore();
@@ -37,7 +39,7 @@ export const createItem = async (
     .catch(() => null);
 
   if (itemExists) {
-    return { type: error, message: 'Item already exists' };
+    return { type: ERROR, message: 'Item already exists' };
   }
 
   // create item
@@ -54,7 +56,7 @@ export const createItem = async (
     .catch(err => ({ error: String(err.message) }));
 
   if ('error' in result) {
-    return { type: error, message: result.error };
+    return { type: ERROR, message: result.error };
   }
 
   // get item
@@ -66,7 +68,7 @@ export const createItem = async (
     .catch(err => ({ error: String(err.code) }));
 
   if ('error' in itemsResult) {
-    return { type: error, message: itemsResult.error };
+    return { type: ERROR, message: itemsResult.error };
   }
 
   itemsResult.forEach(item => {
@@ -87,7 +89,7 @@ export const createItem = async (
     .catch(err => ({ error: String(err.code) }));
 
   if ('error' in imageResult) {
-    return { type: error, message: imageResult.error };
+    return { type: ERROR, message: imageResult.error };
   }
 
   // update item image
@@ -102,7 +104,7 @@ export const createItem = async (
     })
     .catch(err => ({ error: String(err.code) }));
 
-  return { type: success, message: 'Item succesfully created' };
+  return { type: SUCCESS, message: 'Item succesfully created' };
 };
 
 export const getItems = async (type?: string): Promise<ItemInterface[]> => {
@@ -163,7 +165,7 @@ export const getItem = async (id: string): Promise<GetItemResponse> => {
     .then(i => {
       const item = i.data();
       return {
-        type: success,
+        type: SUCCESS,
         item: {
           id,
           name: String(item!.name),
@@ -174,10 +176,10 @@ export const getItem = async (id: string): Promise<GetItemResponse> => {
         },
       };
     })
-    .catch(err => ({ type: error, message: err.message }));
+    .catch(err => ({ type: ERROR, message: err.message }));
 
   if (!result) {
-    return { type: error, message: 'Item not found' };
+    return { type: ERROR, message: 'Item not found' };
   }
 
   return result;
@@ -188,7 +190,7 @@ export const updateItem = async (
   image: File | null,
 ): Promise<ItemResponse> => {
   const searchResult = await getItem(updatedItem.id);
-  if (searchResult.type === error) {
+  if (searchResult.type === ERROR) {
     return searchResult;
   }
 
@@ -199,7 +201,7 @@ export const updateItem = async (
     .catch(err => ({ error: String(err.message) }));
 
   if (updatedResult) {
-    return { type: error, message: updatedResult.error };
+    return { type: ERROR, message: updatedResult.error };
   }
 
   if (image) {
@@ -210,7 +212,7 @@ export const updateItem = async (
       .catch(err => ({ error: String(err.code) }));
 
     if ('error' in imageResult) {
-      return { type: error, message: imageResult.error };
+      return { type: ERROR, message: imageResult.error };
     }
 
     // update item image
@@ -224,11 +226,11 @@ export const updateItem = async (
       .catch(err => ({ error: String(err.code) }));
 
     if (updateResult) {
-      return { type: error, message: 'Could not update image' };
+      return { type: ERROR, message: 'Could not update image' };
     }
   }
 
-  return { type: success, message: 'Item succesfully created' };
+  return { type: SUCCESS, message: 'Item succesfully created' };
 };
 
 export const deleteItem = async (id: string): Promise<ItemResponse> => {
@@ -236,13 +238,13 @@ export const deleteItem = async (id: string): Promise<ItemResponse> => {
     .collection('items')
     .doc(id)
     .delete()
-    .catch(err => ({ type: error, message: String(err.message) }));
+    .catch(err => ({ type: ERROR, message: String(err.message) }));
 
   if (result) {
     return result;
   }
 
-  return { type: success, message: 'Item succesfully deleted' };
+  return { type: SUCCESS, message: 'Item succesfully deleted' };
 };
 
 export const createAccount = async (
@@ -261,7 +263,7 @@ export const createAccount = async (
 
       await db.collection('users').doc(uid).set({ name });
       return {
-        type: success,
+        type: SUCCESS,
         body: {
           uid,
           name,
@@ -269,10 +271,10 @@ export const createAccount = async (
         },
       };
     })
-    .catch(err => ({ type: error, message: String(err.message) }));
+    .catch(err => ({ type: ERROR, message: String(err.message) }));
 
   if (!result) {
-    return { type: error, message: 'Account not created' };
+    return { type: ERROR, message: 'Account not created' };
   }
 
   return result;
@@ -297,7 +299,7 @@ export const signIn = async (
       }
 
       return {
-        type: success,
+        type: SUCCESS,
         body: {
           uid,
           name: user.data.name,
@@ -305,10 +307,10 @@ export const signIn = async (
         },
       };
     })
-    .catch(err => ({ type: error, message: String(err.message) }));
+    .catch(err => ({ type: ERROR, message: String(err.message) }));
 
   if (!result) {
-    return { type: error, message: 'Account not found' };
+    return { type: ERROR, message: 'Account not found' };
   }
 
   return result;

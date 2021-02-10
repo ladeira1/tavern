@@ -1,14 +1,11 @@
-type SUCCESS = 'SUCCESS';
-type ERROR = 'ERROR';
-
-export const success: SUCCESS = 'SUCCESS';
-export const error: ERROR = 'ERROR';
+import { Success } from './SuccessType';
+import { Error } from './ErrorType';
 
 type AuthResponse =
   | {
-      type: SUCCESS;
+      type: Success;
       body: { uid: string; name: string; email: string };
     }
-  | { type: ERROR; message: string };
+  | { type: Error; message: string };
 
 export default AuthResponse;

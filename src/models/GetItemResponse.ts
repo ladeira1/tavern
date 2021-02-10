@@ -1,16 +1,12 @@
 import ItemInterface from './ItemInterface';
-
-type SUCCESS = 'SUCCESS';
-type ERROR = 'ERROR';
-
-export const success: SUCCESS = 'SUCCESS';
-export const error: ERROR = 'ERROR';
+import { Success } from './SuccessType';
+import { Error } from './ErrorType';
 
 type GetItemResponse =
   | {
-      type: SUCCESS;
+      type: Success;
       item: ItemInterface;
     }
-  | { type: ERROR; message: string };
+  | { type: Error; message: string };
 
 export default GetItemResponse;
