@@ -3,6 +3,7 @@ import colors from '../../assets/colors';
 
 export const Container = styled.div`
   background: ${colors.bag};
+  min-width: 200px;
   max-width: 350px;
   width: 90%;
   max-height: 70vh;
