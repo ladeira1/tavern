@@ -17,13 +17,14 @@ import {
   Content,
   Input,
   ImageContainer,
-  ImageLabel,
+  ImageWrapper,
   ImageItem,
   XIcon,
   DetailsInput,
   DeleteButton,
   ConfirmMessage,
   Message,
+  ImageLabel,
 } from './styles';
 
 import Header from '../Header';
@@ -59,7 +60,7 @@ const ItemForm: React.FC<ItemForm> = ({ text, buttonText, item }) => {
   const [name, setName] = useState('');
   const [image, setImage] = useState<File | null>(null);
   const [details, setDetails] = useState('');
-  const [price, setPrice] = useState('0');
+  const [price, setPrice] = useState('');
   const [type, setType] = useState('burger');
 
   const [previewImage, setPreviewImage] = useState<string | null>(null);
@@ -223,20 +224,20 @@ const ItemForm: React.FC<ItemForm> = ({ text, buttonText, item }) => {
               type="text"
             />
 
-            <ImageLabel htmlFor="image" hasImage={!!previewImage}>
-              <div className="left">
+            <ImageWrapper hasImage={!!previewImage}>
+              <ImageLabel htmlFor="image">
                 <ImageIcon />
-                <span>Image</span>
-              </div>
+                <Input
+                  type="file"
+                  id="image"
+                  onChange={handleSetImage}
+                  accept=".png, .jpg, .jpeg"
+                />
+                Image
+              </ImageLabel>
 
               {previewImage && <XIcon onClick={handleRemoveImage} />}
-              <Input
-                type="file"
-                id="image"
-                onChange={handleSetImage}
-                accept=".png, .jpg, .jpeg"
-              />
-            </ImageLabel>
+            </ImageWrapper>
             {previewImage && (
               <ImageContainer>
                 <ImageItem src={previewImage} alt="Item" />

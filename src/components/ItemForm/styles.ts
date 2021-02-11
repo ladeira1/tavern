@@ -27,7 +27,7 @@ export const Content = styled.section`
 export const Input = styled.input`
   display: none;
 `;
-export const ImageLabel = styled.label<{ hasImage: boolean }>`
+export const ImageWrapper = styled.div<{ hasImage: boolean }>`
   height: 60px;
   width: 100%;
   background: ${colors.textInput};
@@ -37,22 +37,7 @@ export const ImageLabel = styled.label<{ hasImage: boolean }>`
   align-items: center;
   justify-content: space-between;
   border-radius: 5px 5px ${props => (props.hasImage ? 0 : '5px')} ${props => (props.hasImage ? 0 : '5px')};
-  padding: 0 2%;
-
-  .left {
-    display: flex;
-    align-items: center;
-  }
-
-  span {
-    color: ${colors.formSecondary};
-    font-family: 'Ubuntu', sans-serif;
-    font-size: 18px;
-    margin-left: 10px;
-
-    @media screen and (max-width: 560px) {
-    font-size: 13px;
-  }
+  padding-right: 2%;
 
   ::-webkit-input-placeholder {
     font-size: 18px;
@@ -71,11 +56,25 @@ export const ImageLabel = styled.label<{ hasImage: boolean }>`
       font-size: 13px;
     }
   }
-  }
+`;
+
+export const ImageLabel = styled.label`
+  display: flex;
+  align-items: center;
+  color: ${colors.formSecondary};
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 18px;
+  margin-left: 10px;
 
   :hover {
     cursor: pointer;
   }
+
+  @media screen and (max-width: 560px) {
+    font-size: 13px;
+  }
+
+  flex: 1;
 `;
 export const ImageContainer = styled.div`
 flex: 1;
