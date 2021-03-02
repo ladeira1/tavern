@@ -179,7 +179,7 @@ const Checkout: React.FC = () => {
                     <Price
                       className="editable"
                       type="number"
-                      value={change}
+                      value={change.toFixed(2)}
                       placeholder="0"
                       onChange={e => setChange(Number(e.target.value))}
                     />
